@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */; };
+		22BEFABB2839F42F0081E75A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFABA2839F42F0081E75A /* ContentView.swift */; };
+		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
+		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
+		22BEFACA2839F4310081E75A /* SimpleLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAC92839F4310081E75A /* SimpleLoggerTests.swift */; };
+		22BEFAD42839F4310081E75A /* SimpleLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD32839F4310081E75A /* SimpleLoggerUITests.swift */; };
+		22BEFAD62839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22BEFAC62839F4310081E75A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22BEFAAD2839F42F0081E75A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BEFAB42839F42F0081E75A;
+			remoteInfo = SimpleLogger;
+		};
+		22BEFAD02839F4310081E75A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22BEFAAD2839F42F0081E75A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BEFAB42839F42F0081E75A;
+			remoteInfo = SimpleLogger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		22BEFAB52839F42F0081E75A /* SimpleLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerApp.swift; sourceTree = "<group>"; };
+		22BEFABA2839F42F0081E75A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		22BEFABC2839F4310081E75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22BEFABF2839F4310081E75A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		22BEFAC52839F4310081E75A /* SimpleLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFAC92839F4310081E75A /* SimpleLoggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerTests.swift; sourceTree = "<group>"; };
+		22BEFACF2839F4310081E75A /* SimpleLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFAD32839F4310081E75A /* SimpleLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerUITests.swift; sourceTree = "<group>"; };
+		22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22BEFAB22839F42F0081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC22839F4310081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACC2839F4310081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22BEFAAC2839F42F0081E75A = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB72839F42F0081E75A /* SimpleLogger */,
+				22BEFAC82839F4310081E75A /* SimpleLoggerTests */,
+				22BEFAD22839F4310081E75A /* SimpleLoggerUITests */,
+				22BEFAB62839F42F0081E75A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22BEFAB62839F42F0081E75A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB52839F42F0081E75A /* SimpleLogger.app */,
+				22BEFAC52839F4310081E75A /* SimpleLoggerTests.xctest */,
+				22BEFACF2839F4310081E75A /* SimpleLoggerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22BEFAB72839F42F0081E75A /* SimpleLogger */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */,
+				22BEFABA2839F42F0081E75A /* ContentView.swift */,
+				22BEFABC2839F4310081E75A /* Assets.xcassets */,
+				22BEFABE2839F4310081E75A /* Preview Content */,
+			);
+			path = SimpleLogger;
+			sourceTree = "<group>";
+		};
+		22BEFABE2839F4310081E75A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFABF2839F4310081E75A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22BEFAC82839F4310081E75A /* SimpleLoggerTests */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAC92839F4310081E75A /* SimpleLoggerTests.swift */,
+			);
+			path = SimpleLoggerTests;
+			sourceTree = "<group>";
+		};
+		22BEFAD22839F4310081E75A /* SimpleLoggerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAD32839F4310081E75A /* SimpleLoggerUITests.swift */,
+				22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */,
+			);
+			path = SimpleLoggerUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22BEFAB42839F42F0081E75A /* SimpleLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFAD92839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLogger" */;
+			buildPhases = (
+				22BEFAB12839F42F0081E75A /* Sources */,
+				22BEFAB22839F42F0081E75A /* Frameworks */,
+				22BEFAB32839F42F0081E75A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleLogger;
+			productName = SimpleLogger;
+			productReference = 22BEFAB52839F42F0081E75A /* SimpleLogger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22BEFAC42839F4310081E75A /* SimpleLoggerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFADC2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLoggerTests" */;
+			buildPhases = (
+				22BEFAC12839F4310081E75A /* Sources */,
+				22BEFAC22839F4310081E75A /* Frameworks */,
+				22BEFAC32839F4310081E75A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BEFAC72839F4310081E75A /* PBXTargetDependency */,
+			);
+			name = SimpleLoggerTests;
+			productName = SimpleLoggerTests;
+			productReference = 22BEFAC52839F4310081E75A /* SimpleLoggerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		22BEFACE2839F4310081E75A /* SimpleLoggerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFADF2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLoggerUITests" */;
+			buildPhases = (
+				22BEFACB2839F4310081E75A /* Sources */,
+				22BEFACC2839F4310081E75A /* Frameworks */,
+				22BEFACD2839F4310081E75A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BEFAD12839F4310081E75A /* PBXTargetDependency */,
+			);
+			name = SimpleLoggerUITests;
+			productName = SimpleLoggerUITests;
+			productReference = 22BEFACF2839F4310081E75A /* SimpleLoggerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22BEFAAD2839F42F0081E75A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					22BEFAB42839F42F0081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22BEFAC42839F4310081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 22BEFAB42839F42F0081E75A;
+					};
+					22BEFACE2839F4310081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 22BEFAB42839F42F0081E75A;
+					};
+				};
+			};
+			buildConfigurationList = 22BEFAB02839F42F0081E75A /* Build configuration list for PBXProject "SimpleLogger" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22BEFAAC2839F42F0081E75A;
+			productRefGroup = 22BEFAB62839F42F0081E75A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22BEFAB42839F42F0081E75A /* SimpleLogger */,
+				22BEFAC42839F4310081E75A /* SimpleLoggerTests */,
+				22BEFACE2839F4310081E75A /* SimpleLoggerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22BEFAB32839F42F0081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */,
+				22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC32839F4310081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACD2839F4310081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22BEFAB12839F42F0081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFABB2839F42F0081E75A /* ContentView.swift in Sources */,
+				22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC12839F4310081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFACA2839F4310081E75A /* SimpleLoggerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACB2839F4310081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFAD62839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift in Sources */,
+				22BEFAD42839F4310081E75A /* SimpleLoggerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22BEFAC72839F4310081E75A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BEFAB42839F42F0081E75A /* SimpleLogger */;
+			targetProxy = 22BEFAC62839F4310081E75A /* PBXContainerItemProxy */;
+		};
+		22BEFAD12839F4310081E75A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BEFAB42839F42F0081E75A /* SimpleLogger */;
+			targetProxy = 22BEFAD02839F4310081E75A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22BEFAD72839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		22BEFAD82839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22BEFADA2839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22BEFADB2839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"SimpleLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22BEFADD2839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLoggerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleLogger.app/SimpleLogger";
+			};
+			name = Debug;
+		};
+		22BEFADE2839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLoggerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleLogger.app/SimpleLogger";
+			};
+			name = Release;
+		};
+		22BEFAE02839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLoggerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SimpleLogger;
+			};
+			name = Debug;
+		};
+		22BEFAE12839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimpleLoggerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SimpleLogger;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22BEFAB02839F42F0081E75A /* Build configuration list for PBXProject "SimpleLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFAD72839F4310081E75A /* Debug */,
+				22BEFAD82839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFAD92839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFADA2839F4310081E75A /* Debug */,
+				22BEFADB2839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFADC2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLoggerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFADD2839F4310081E75A /* Debug */,
+				22BEFADE2839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFADF2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimpleLoggerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFAE02839F4310081E75A /* Debug */,
+				22BEFAE12839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22BEFAAD2839F42F0081E75A /* Project object */;
+}
