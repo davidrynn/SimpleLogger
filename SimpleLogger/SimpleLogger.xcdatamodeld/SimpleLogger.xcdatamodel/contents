@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21D62" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="EntryEntity" representedClassName="EntryEntity" syncable="YES">
+        <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="logData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LogEntity" inverseName="entryEntities" inverseEntity="LogEntity"/>
+    </entity>
+    <entity name="LogEntity" representedClassName="LogEntity" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="usesIntervals" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="entryEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryEntity" inverseName="logData" inverseEntity="EntryEntity"/>
+    </entity>
+    <elements>
+        <element name="LogEntity" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="EntryEntity" positionX="-54" positionY="0" width="128" height="89"/>
+    </elements>
+</model>

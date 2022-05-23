@@ -8,12 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */; };
-		22BEFABB2839F42F0081E75A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFABA2839F42F0081E75A /* ContentView.swift */; };
 		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
 		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
 		22BEFACA2839F4310081E75A /* SimpleLoggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAC92839F4310081E75A /* SimpleLoggerTests.swift */; };
 		22BEFAD42839F4310081E75A /* SimpleLoggerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD32839F4310081E75A /* SimpleLoggerUITests.swift */; };
 		22BEFAD62839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */; };
+		22BEFAE32839F5810081E75A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE22839F5810081E75A /* DataController.swift */; };
+		22BEFAE6283AC06C0081E75A /* SimpleLogger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE4283AC06C0081E75A /* SimpleLogger.xcdatamodeld */; };
+		22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9D4283AC3A30015FB43 /* MainView.swift */; };
+		22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9EE283ACC800015FB43 /* MainRow.swift */; };
+		22CCA9F5283ACEE70015FB43 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9F4283ACEE70015FB43 /* Log.swift */; };
+		22CCA9F7283ACF160015FB43 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9F6283ACF160015FB43 /* Entry.swift */; };
+		22CCAA02283AD0540015FB43 /* LogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */; };
+		22CCAA03283AD0540015FB43 /* LogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */; };
+		22CCAA06283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */; };
+		22CCAA07283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */; };
+		22CCAA09283ADE850015FB43 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA08283ADE850015FB43 /* LogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +46,6 @@
 /* Begin PBXFileReference section */
 		22BEFAB52839F42F0081E75A /* SimpleLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerApp.swift; sourceTree = "<group>"; };
-		22BEFABA2839F42F0081E75A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		22BEFABC2839F4310081E75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BEFABF2839F4310081E75A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22BEFAC52839F4310081E75A /* SimpleLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +53,17 @@
 		22BEFACF2839F4310081E75A /* SimpleLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAD32839F4310081E75A /* SimpleLoggerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerUITests.swift; sourceTree = "<group>"; };
 		22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		22BEFAE22839F5810081E75A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleLogger.xcdatamodel; sourceTree = "<group>"; };
+		22CCA9D4283AC3A30015FB43 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		22CCA9EE283ACC800015FB43 /* MainRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRow.swift; sourceTree = "<group>"; };
+		22CCA9F4283ACEE70015FB43 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		22CCA9F6283ACF160015FB43 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		22CCAA08283ADE850015FB43 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +114,11 @@
 		22BEFAB72839F42F0081E75A /* SimpleLogger */ = {
 			isa = PBXGroup;
 			children = (
+				22CCA9D3283AC3740015FB43 /* Views */,
+				22CCA9D2283AC33F0015FB43 /* Models */,
 				22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */,
-				22BEFABA2839F42F0081E75A /* ContentView.swift */,
+				22BEFAE22839F5810081E75A /* DataController.swift */,
+				22BEFAE4283AC06C0081E75A /* SimpleLogger.xcdatamodeld */,
 				22BEFABC2839F4310081E75A /* Assets.xcassets */,
 				22BEFABE2839F4310081E75A /* Preview Content */,
 			);
@@ -125,6 +148,29 @@
 				22BEFAD52839F4310081E75A /* SimpleLoggerUITestsLaunchTests.swift */,
 			);
 			path = SimpleLoggerUITests;
+			sourceTree = "<group>";
+		};
+		22CCA9D2283AC33F0015FB43 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */,
+				22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */,
+				22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */,
+				22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */,
+				22CCA9F4283ACEE70015FB43 /* Log.swift */,
+				22CCA9F6283ACF160015FB43 /* Entry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		22CCA9D3283AC3740015FB43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22CCA9D4283AC3A30015FB43 /* MainView.swift */,
+				22CCA9EE283ACC800015FB43 /* MainRow.swift */,
+				22CCAA08283ADE850015FB43 /* LogView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,8 +303,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BEFABB2839F42F0081E75A /* ContentView.swift in Sources */,
+				22CCA9F7283ACF160015FB43 /* Entry.swift in Sources */,
+				22CCA9F5283ACEE70015FB43 /* Log.swift in Sources */,
+				22CCAA02283AD0540015FB43 /* LogEntity+CoreDataClass.swift in Sources */,
+				22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */,
+				22CCAA07283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */,
+				22CCAA06283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift in Sources */,
+				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
+				22BEFAE32839F5810081E75A /* DataController.swift in Sources */,
 				22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */,
+				22BEFAE6283AC06C0081E75A /* SimpleLogger.xcdatamodeld in Sources */,
+				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
+				22CCAA03283AD0540015FB43 /* LogEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +639,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		22BEFAE4283AC06C0081E75A /* SimpleLogger.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */,
+			);
+			currentVersion = 22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */;
+			path = SimpleLogger.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 22BEFAAD2839F42F0081E75A /* Project object */;
 }
