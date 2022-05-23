@@ -32,6 +32,15 @@ extension LogEntity {
             a.startDate > b.startDate
         }
     }
+    
+    func createGrouping() -> [DateComponents: [EntryEntity]]{
+        guard let entries = entryEntities, let entryArray = Array(entries) as? [EntryEntity] else { return [:] }
+        let groupDic = Dictionary(grouping: entryArray) { entry -> DateComponents in
+            let dateComp = Calendar.current.dateComponents([.day, .year, .month], from: (entry.start)!)
+            return dateComp
+        }
+        return groupDic
+    }
 
 }
 

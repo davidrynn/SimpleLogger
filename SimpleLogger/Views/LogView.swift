@@ -10,6 +10,14 @@ import SwiftUI
 struct LogView: View {
     @Environment(\.managedObjectContext) var moc
     @State var log: LogEntity?
+    var logDictionary: [DateComponents : [EntryEntity]] {
+        get {
+            guard let dict = log?.createGrouping() else {
+                return [:]
+            }
+            return dict
+        }
+    }
     let formatter: DateFormatter
     let isNew: Bool
     @State var usesIntervals: Bool
@@ -62,21 +70,33 @@ struct LogView: View {
                 didStart = false
                 add()
             } label: {
-                    Text(didStart && usesIntervals ? buttonText + "..." : buttonText)
+                Text(didStart && usesIntervals ? buttonText + "..." : buttonText)
                     .animation(didStart ? .easeIn(duration: 1).repeatForever() : .default, value: didStart)
             }
             .buttonStyle(.bordered)
             
             List {
-                ForEach(log?.entries ?? []) { entry in
-                    VStack {
-                        Text(entry.startDate, formatter: formatter)
-                        if let endDate = entry.endDate {
-                            Text(endDate, formatter: formatter)
+                ForEach(logDictionary.sorted(by: { $0.key < $1.key }), id: \.key) { key, entries in
+                    Section(header: Text(getSectionText(key))) {
+                        let sorted = entries.sorted(by: { $0.start ?? Date() < $1.start ?? Date() })
+                        ForEach(entries.sorted(by: { $0.start ?? Date() < $1.start ?? Date() }), id: \.self) { entry in
+                            VStack {
+                                if let date = entry.start {
+                                    Text(date, formatter: formatter)
+                                    if let endDate = entry.end {
+                                        Text(endDate, formatter: formatter)
+                                    }
+                                }
+                            }
                         }
+                        .onDelete(perform: { offsets in
+                            let entriesToDelete = offsets.compactMap { index in
+                                return sorted[index]
+                            }
+                            delete(entriesToDelete)
+                        })
                     }
                 }
-                .onDelete(perform: delete)
             }
             .navigationTitle(name)
             .toolbar {
@@ -91,7 +111,7 @@ struct LogView: View {
                 }
             }
         }
-
+        
     }
     
     func updateUseIntervals() {
@@ -124,21 +144,33 @@ struct LogView: View {
         }
     }
     
-    func delete(_ offsets: IndexSet) {
-        //Get ids from non-CoreData object
-        let entryIdsToDelete = offsets.compactMap { index in
-            return log?.entries[index].id
-        }
-        //Get coredata objects based on ids
-        let entrySetToDelete = log?.entryEntities?.filter { item in
-            guard let entry = item as? EntryEntity else { return false }
-            return entryIdsToDelete.contains(where: { $0 == entry.id })
-            
-        }
-        if let entrySetToDelete = entrySetToDelete {
-            let entrySet = NSSet(array: entrySetToDelete)
-            log?.removeFromEntryEntities(entrySet)
+    private func delete(_ entries: [EntryEntity]) {
+        entries.forEach { entry in
+            log?.removeFromEntryEntities(entry)
         }
         save()
+    }
+    
+    private func getSectionText(_ dateComponents: DateComponents) -> String {
+        let day: String
+        if let keyDay = dateComponents.day {
+            day = String(keyDay)
+        } else {
+            day = "no day"
+        }
+        let month: String
+        if let keyMonth = dateComponents.month {
+            month = String(keyMonth)
+        } else {
+            month = "no month"
+        }
+        let year: String
+        if let keyYear = dateComponents.year {
+            year = String(keyYear)
+        } else {
+            year = "no month"
+        }
+        
+        return "\(month), \(day), \(year)"
     }
 }

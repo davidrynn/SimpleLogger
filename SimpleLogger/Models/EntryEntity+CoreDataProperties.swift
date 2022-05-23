@@ -23,6 +23,24 @@ extension EntryEntity {
 
 }
 
-extension EntryEntity : Identifiable {
+extension EntryEntity : Identifiable, Comparable {
+    
+    public static func < (lhs: EntryEntity, rhs: EntryEntity) -> Bool {
+        if let lhsStart = lhs.start, let rhsStart = rhs.start {
+            return lhsStart < rhsStart
+        }
+        return false
+    }
 
+}
+
+extension DateComponents: Comparable {
+    public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
+                if let lhsDay = lhs.day, let rhsDay = rhs.day {
+                    return lhsDay < rhsDay
+                }
+        return false
+    }
+    
+    
 }

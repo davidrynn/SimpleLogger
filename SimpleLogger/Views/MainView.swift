@@ -45,7 +45,6 @@ struct MainView: View {
                         }
                     }
                     .onDelete(perform: delete)
-                    .onMove(perform: move)
                 }
             }
             .navigationTitle("logs")
@@ -59,9 +58,6 @@ struct MainView: View {
             }
         }
         
-    }
-    func move(from source: IndexSet, to destination: Int) {
-        $logs.move(fromOffsets: source, toOffset: destination)
     }
     
     func delete(at offsets: IndexSet) {
@@ -96,12 +92,3 @@ struct MainView_Previews: PreviewProvider {
         MainView()
     }
 }
-
-struct LogNameEntryForm: View {
-    var body: some View {
-        Form(content: {}
-        )
-    }
-}
-
-
