@@ -20,16 +20,16 @@ struct LogView: View {
     }
     let formatter: DateFormatter
     let isNew: Bool
+    @State var currentEntry: EntryEntity?
+    @State var isEditing: Bool = false
     @State var usesIntervals: Bool
     @State var name: String
     @State var startDate: Date = Date()
     @State var stopDate: Date = Date()
-    @State var didStart: Bool = false
     var buttonText: String {
-        if usesIntervals && didStart {
+        if usesIntervals && currentEntry != nil {
             return "Stop"
-        }
-        if usesIntervals && !didStart {
+        } else if usesIntervals {
             return "Start"
         }
         return "Add"
@@ -38,6 +38,13 @@ struct LogView: View {
     init(log: LogEntity?) {
         if let log = log {
             _log = State(initialValue: log)
+            let currentEntry = log.entryEntities?.first { item in
+                if let entry = item as? EntryEntity {
+                    return entry.intervalStarted
+                }
+                return false
+            }
+            _currentEntry = State(initialValue: currentEntry as? EntryEntity)
             isNew = false
             _usesIntervals = State(initialValue: log.usesIntervals)
         } else {
@@ -53,33 +60,17 @@ struct LogView: View {
     
     var body: some View {
         VStack {
-            if isNew && name.isEmpty {
+            if (isNew && name.isEmpty) || isEditing {
                 Form {
                     TextField("Please enter new name", text: $name)
                 }
             }
-            Button {
-                startDate = Date()
-                if usesIntervals && !didStart {
-                    didStart = true
-                    return
-                }
-                if usesIntervals && didStart {
-                    stopDate = Date()
-                }
-                didStart = false
-                add()
-            } label: {
-                Text(didStart && usesIntervals ? buttonText + "..." : buttonText)
-                    .animation(didStart ? .easeIn(duration: 1).repeatForever() : .default, value: didStart)
-            }
-            .buttonStyle(.bordered)
             
             List {
-                ForEach(logDictionary.sorted(by: { $0.key < $1.key }), id: \.key) { key, entries in
+                ForEach(logDictionary.sorted(by: { $0.key > $1.key }), id: \.key) { key, entries in
                     Section(header: Text(getSectionText(key))) {
-                        let sorted = entries.sorted(by: { $0.start ?? Date() < $1.start ?? Date() })
-                        ForEach(entries.sorted(by: { $0.start ?? Date() < $1.start ?? Date() }), id: \.self) { entry in
+                        let sorted = entries.sorted(by: { $0.start ?? Date() > $1.start ?? Date() })
+                        ForEach(sorted, id: \.self) { entry in
                             VStack {
                                 if let date = entry.start {
                                     Text(date, formatter: formatter)
@@ -98,9 +89,25 @@ struct LogView: View {
                     }
                 }
             }
-            .navigationTitle(name)
+            
+            Button {
+                startDate = Date()
+                if usesIntervals && currentEntry == nil {
+                    startInterval()
+                    return
+                } else if usesIntervals && currentEntry != nil {
+                    endInterval()
+                    return
+                }
+                add()
+            } label: {
+                Text(currentEntry != nil && usesIntervals ? buttonText + "..." : buttonText)
+                    .animation(currentEntry != nil ? .easeIn(duration: 1).repeatForever() : .default, value: currentEntry)
+            }
+            .buttonStyle(.bordered)
+            .navigationBarTitle(name, displayMode: .automatic)
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup(placement: .bottomBar) {
                     Toggle(isOn: $usesIntervals) {
                         Text("Use Intervals")
                     }
@@ -108,29 +115,70 @@ struct LogView: View {
                         updateUseIntervals()
                     }
                     .toggleStyle(.switch)
+                    Spacer()
+                    Toggle(isOn: $isEditing) {
+                        Text("Edit")
+                    }
+                    .onChange(of: isEditing) { _ in
+                        saveName()
+                        save()
+                    }
+                    .toggleStyle(.switch)
                 }
             }
         }
-        
+
     }
     
-    func updateUseIntervals() {
+    private func updateUseIntervals() {
         log?.usesIntervals = usesIntervals
-        didStart = false
         save()
     }
     
-    func add() {
+    private func createNewLog() {
+        let newLog = LogEntity(context: moc)
+        newLog.id = UUID()
+        newLog.name = name
+        newLog.usesIntervals = usesIntervals
+        self.log = newLog
+    }
+    
+    private func startInterval() {
+        guard currentEntry == nil else {
+            endInterval()
+            return
+        }
+        let newEntry = createNewEntry()
+        newEntry.intervalStarted = true
+        currentEntry = newEntry
+        if log == nil {
+            createNewLog()
+        }
+        log?.addToEntryEntities(newEntry)
+        save()
+    }
+    
+    private func endInterval() {
+        guard let currentEntry = currentEntry, let _ = log else {
+            return
+        }
+        currentEntry.intervalStarted = false
+        currentEntry.end = Date()
+        save()
+        self.currentEntry = nil
+    }
+    
+    private func createNewEntry() -> EntryEntity {
         let newEntry = EntryEntity(context: moc)
         newEntry.start = startDate
-        newEntry.end = usesIntervals ? stopDate : nil
         newEntry.id = UUID()
+        return newEntry
+    }
+    
+    private func add() {
+        let newEntry = createNewEntry()
         if log == nil {
-            let newLog = LogEntity(context: moc)
-            newLog.id = UUID()
-            newLog.name = name
-            newLog.usesIntervals = usesIntervals
-            self.log = newLog
+            createNewLog()
         }
         log?.addToEntryEntities(newEntry)
         save()
@@ -148,6 +196,11 @@ struct LogView: View {
         entries.forEach { entry in
             log?.removeFromEntryEntities(entry)
         }
+        save()
+    }
+    
+    private func saveName() {
+        log?.name = name
         save()
     }
     
@@ -171,6 +224,7 @@ struct LogView: View {
             year = "no month"
         }
         
-        return "\(month), \(day), \(year)"
+        return "\(month)-\(day)-\(year)"
     }
 }
+

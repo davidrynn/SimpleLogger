@@ -21,9 +21,10 @@
 		22CCA9F7283ACF160015FB43 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9F6283ACF160015FB43 /* Entry.swift */; };
 		22CCAA02283AD0540015FB43 /* LogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */; };
 		22CCAA03283AD0540015FB43 /* LogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */; };
-		22CCAA06283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */; };
-		22CCAA07283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */; };
 		22CCAA09283ADE850015FB43 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA08283ADE850015FB43 /* LogView.swift */; };
+		22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
+		22CCAA14283C71F80015FB43 /* EntryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA12283C71F80015FB43 /* EntryEntity+CoreDataClass.swift */; };
+		22CCAA15283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA13283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +62,10 @@
 		22CCA9F6283ACF160015FB43 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		22CCAA08283ADE850015FB43 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		22CCAA0C283C6DA70015FB43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		22CCAA12283C71F80015FB43 /* EntryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		22CCAA13283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,12 +155,13 @@
 		22CCA9D2283AC33F0015FB43 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				22CCAA04283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift */,
-				22CCAA05283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift */,
+				22CCAA12283C71F80015FB43 /* EntryEntity+CoreDataClass.swift */,
+				22CCAA13283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift */,
 				22CCAA00283AD0540015FB43 /* LogEntity+CoreDataClass.swift */,
 				22CCAA01283AD0540015FB43 /* LogEntity+CoreDataProperties.swift */,
 				22CCA9F4283ACEE70015FB43 /* Log.swift */,
 				22CCA9F6283ACF160015FB43 /* Entry.swift */,
+				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,15 +309,16 @@
 				22CCA9F7283ACF160015FB43 /* Entry.swift in Sources */,
 				22CCA9F5283ACEE70015FB43 /* Log.swift in Sources */,
 				22CCAA02283AD0540015FB43 /* LogEntity+CoreDataClass.swift in Sources */,
+				22CCAA15283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */,
 				22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */,
-				22CCAA07283AD4A10015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */,
-				22CCAA06283AD4A10015FB43 /* EntryEntity+CoreDataClass.swift in Sources */,
 				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
 				22BEFAE32839F5810081E75A /* DataController.swift in Sources */,
 				22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */,
 				22BEFAE6283AC06C0081E75A /* SimpleLogger.xcdatamodeld in Sources */,
 				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
+				22CCAA14283C71F80015FB43 /* EntryEntity+CoreDataClass.swift in Sources */,
 				22CCAA03283AD0540015FB43 /* LogEntity+CoreDataProperties.swift in Sources */,
+				22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

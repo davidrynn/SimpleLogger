@@ -23,7 +23,6 @@ struct MainRow: View {
             }
             .animation(didStart ? .easeIn(duration: 1).repeatForever() : .default, value: didStart)
             .buttonStyle(.bordered)
-            .background(didStart ? .red : .gray)
         }
         .padding()
     }

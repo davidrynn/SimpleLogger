@@ -3,6 +3,7 @@
     <entity name="EntryEntity" representedClassName="EntryEntity" syncable="YES">
         <attribute name="end" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="intervalStarted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="start" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="logData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LogEntity" inverseName="entryEntities" inverseEntity="LogEntity"/>
     </entity>
@@ -14,6 +15,6 @@
     </entity>
     <elements>
         <element name="LogEntity" positionX="-63" positionY="-18" width="128" height="89"/>
-        <element name="EntryEntity" positionX="-54" positionY="0" width="128" height="89"/>
+        <element name="EntryEntity" positionX="-54" positionY="0" width="128" height="104"/>
     </elements>
 </model>

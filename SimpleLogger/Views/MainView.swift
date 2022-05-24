@@ -19,7 +19,6 @@ struct MainView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
                 List {
                     ForEach(logs, id: \.self) { logEntity in
                         let log = Log(id: logEntity.id ?? UUID(), entries: logEntity.entries, name: logEntity.name ?? "no name", usesInterval: logEntity.usesIntervals)
@@ -45,22 +44,21 @@ struct MainView: View {
                         }
                     }
                     .onDelete(perform: delete)
-                }
             }
-            .navigationTitle("logs")
+            .navigationBarTitle("Logs")
             .toolbar {
                 ToolbarItem {
                     let destination = LogView(log: nil)
                     NavigationLink(destination: destination) {
                         Image(systemName: "plus")
-                    }                    
+                    }
                 }
             }
         }
-        
+        .navigationViewStyle(.stack)
     }
     
-    func delete(at offsets: IndexSet) {
+    private func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             moc.delete(logs[index])
         }
@@ -71,7 +69,7 @@ struct MainView: View {
         }
     }
     
-    func addEntry(_ log: Log) {
+    private func addEntry(_ log: Log) {
         let logEntity = logs.first { $0.id == log.id }
         let newEntry = EntryEntity(context: moc)
         newEntry.id = UUID()
