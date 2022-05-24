@@ -75,6 +75,8 @@ struct LogView: View {
                                 if let date = entry.start {
                                     Text(date, formatter: formatter)
                                     if let endDate = entry.end {
+                                        let seconds = Calendar.current.dateComponents([.second], from: date, to: endDate)
+                                        Text("Duration: \(seconds.value(for: .second) ?? 0) secs")
                                         Text(endDate, formatter: formatter)
                                     }
                                 }
@@ -227,4 +229,3 @@ struct LogView: View {
         return "\(month)-\(day)-\(year)"
     }
 }
-
