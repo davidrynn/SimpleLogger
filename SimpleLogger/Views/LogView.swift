@@ -19,6 +19,7 @@ struct LogView: View {
         }
     }
     let formatter: DateFormatter
+    let componentsFormatter: DateComponentsFormatter
     let isNew: Bool
     @State var currentEntry: EntryEntity?
     @State var isEditing: Bool = false
@@ -56,6 +57,9 @@ struct LogView: View {
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .long
         self.formatter = dateFormatter
+        let componentsFormatter = DateComponentsFormatter()
+        componentsFormatter.unitsStyle = .abbreviated
+        self.componentsFormatter = componentsFormatter
     }
     
     var body: some View {
@@ -75,8 +79,7 @@ struct LogView: View {
                                 if let date = entry.start {
                                     Text(date, formatter: formatter)
                                     if let endDate = entry.end {
-                                        let seconds = Calendar.current.dateComponents([.second], from: date, to: endDate)
-                                        Text("Duration: \(seconds.value(for: .second) ?? 0) secs")
+                                        Text(getDurationStrings(date, end: endDate))
                                         Text(endDate, formatter: formatter)
                                     }
                                 }
@@ -158,6 +161,11 @@ struct LogView: View {
         }
         log?.addToEntryEntities(newEntry)
         save()
+    }
+                                             
+    private func getDurationStrings(_ start: Date, end: Date) -> String {
+        let duration = Calendar.current.dateComponents([.day, .hour ,.minute, .second], from: start, to: end)
+        return componentsFormatter.string(from: duration) ?? "Error getting time"
     }
     
     private func endInterval() {
