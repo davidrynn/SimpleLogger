@@ -20,7 +20,7 @@ struct LogView: View {
     }
     let formatter: DateFormatter
     let componentsFormatter: DateComponentsFormatter
-    let isNew: Bool
+    @State var isNew: Bool
     @State var currentEntry: EntryEntity?
     @State var isEditing: Bool = false
     @State var usesIntervals: Bool
@@ -46,10 +46,10 @@ struct LogView: View {
                 return false
             }
             _currentEntry = State(initialValue: currentEntry as? EntryEntity)
-            isNew = false
+            _isNew = State(initialValue: false)
             _usesIntervals = State(initialValue: log.usesIntervals)
         } else {
-            isNew = true
+            _isNew = State(initialValue: true)
             _usesIntervals = State(initialValue: false)
         }
         _name = State(initialValue: log?.name ?? "")
@@ -64,9 +64,17 @@ struct LogView: View {
     
     var body: some View {
         VStack {
-            if (isNew && name.isEmpty) || isEditing {
+            if isNew || isEditing {
                 Form {
-                    TextField("Please enter new name", text: $name)
+                    TextField("Please enter new name", text: $name) {
+                        if isNew {
+                            createNewLog()
+                            isNew.toggle()
+                        } else {
+                            updateName()
+                        }
+                        save()
+                    }
                 }
             }
             
@@ -124,15 +132,15 @@ struct LogView: View {
                     Toggle(isOn: $isEditing) {
                         Text("Edit")
                     }
-                    .onChange(of: isEditing) { _ in
-                        saveName()
-                        save()
-                    }
                     .toggleStyle(.switch)
                 }
             }
         }
 
+    }
+    
+    private func updateName() {
+        log?.name = name
     }
     
     private func updateUseIntervals() {
