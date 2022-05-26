@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct MainRow: View {
-    let log: Log
-    var didLog: () -> (Bool)
+    let name: String
+    let count: Int
+    var startAnimating: () -> (Bool)
     @State var didStart = false
     var body: some View {
         HStack {
-            Text(log.name)
+            Text(name)
                 .truncationMode(.tail)
             Spacer()
-            Text("Entries: \(log.entries.count)")
+            Text("Entries: \(count)")
             Spacer()
             Button(didStart ? "logging..." : "Log") {
-                didStart = didLog()
+                didStart = startAnimating()
             }
             .animation(didStart ? .easeIn(duration: 1).repeatForever() : .default, value: didStart)
             .buttonStyle(.bordered)
@@ -30,9 +31,6 @@ struct MainRow: View {
 
 struct MainRow_Previews: PreviewProvider {
     static var previews: some View {
-        let log = Log(id: UUID(), entries: [], name: "Test", usesInterval: false)
-        MainRow(log: log, didLog: {
-            return false
-        })
+        MainRow(name: "Test", count: 2, startAnimating: {true})
     }
 }

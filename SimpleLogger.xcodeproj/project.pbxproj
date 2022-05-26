@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22A8020A283FE43E0002FFBE /* LogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80209283FE43E0002FFBE /* LogError.swift */; };
 		22BEFAB92839F42F0081E75A /* SimpleLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */; };
 		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
 		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		22A80209283FE43E0002FFBE /* LogError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogError.swift; sourceTree = "<group>"; };
 		22BEFAB52839F42F0081E75A /* SimpleLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLoggerApp.swift; sourceTree = "<group>"; };
 		22BEFABC2839F4310081E75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 		22BEFAB72839F42F0081E75A /* SimpleLogger */ = {
 			isa = PBXGroup;
 			children = (
+				22A80209283FE43E0002FFBE /* LogError.swift */,
 				22CCA9D3283AC3740015FB43 /* Views */,
 				22CCA9D2283AC33F0015FB43 /* Models */,
 				22BEFAB82839F42F0081E75A /* SimpleLoggerApp.swift */,
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22CCA9F7283ACF160015FB43 /* Entry.swift in Sources */,
+				22A8020A283FE43E0002FFBE /* LogError.swift in Sources */,
 				22CCA9F5283ACEE70015FB43 /* Log.swift in Sources */,
 				22CCAA02283AD0540015FB43 /* LogEntity+CoreDataClass.swift in Sources */,
 				22CCAA15283C71F80015FB43 /* EntryEntity+CoreDataProperties.swift in Sources */,

@@ -10,5 +10,6 @@ import Foundation
 struct Entry: Identifiable {
     let id: UUID
     let startDate: Date
-    let endDate: Date?
+    var endDate: Date?
+    var intervalStarted: Bool
 }

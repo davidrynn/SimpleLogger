@@ -27,6 +27,7 @@ struct LogView: View {
     @State var name: String
     @State var startDate: Date = Date()
     @State var stopDate: Date = Date()
+    @State var error: Error?
     var buttonText: String {
         if usesIntervals && currentEntry != nil {
             return "Stop"
@@ -76,6 +77,9 @@ struct LogView: View {
                         save()
                     }
                 }
+            }
+            if error != nil {
+                Text("Error: \(error.debugDescription)")
             }
             
             List {
@@ -205,8 +209,9 @@ struct LogView: View {
     private func save() {
         do {
             try moc.save()
+            self.error = nil
         } catch {
-            print(error)
+            self.error = LogError.CoreDataError.save
         }
     }
     

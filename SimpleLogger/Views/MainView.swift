@@ -14,26 +14,37 @@ struct MainView: View {
     @State var didStop = false
     @State var startTime = Date()
     @State var stopTime = Date()
-    @State var errorText = ""
     @State var animate = false
+    @State var error: Error?
     
     var body: some View {
         NavigationView {
+            VStack{
+                if error != nil {
+                    Text("Error: \(error.debugDescription)")
+                }
                 List {
-                    ForEach(logs, id: \.self) { logEntity in
-                        let log = Log(id: logEntity.id ?? UUID(), entries: logEntity.entries, name: logEntity.name ?? "no name", usesInterval: logEntity.usesIntervals)
-                        NavigationLink(destination: LogView(log: logEntity)) {
-                            MainRow(log: log) {
+                    ForEach(logs, id: \.self) { log in
+                        NavigationLink(destination: LogView(log: log)) {
+                            MainRow(name: log.name ?? "No Name", count: log.entryEntities?.count ?? 0) {
                                 startTime = Date()
-                                if log.usesInterval && !didStart {
-                                    didStart = true
+                                //if started animating, stop interval and stop animation
+                                if let startedEntryEntity = log.entryEntities?.first(where: { item in
+                                    if let entryEntity = item as? EntryEntity {
+                                        return entryEntity.intervalStarted == true
+                                    }
+                                    return false
+                                }) as? EntryEntity {
+                                    stopInterval(startedEntryEntity)
+                                    return false
+                                }
+                                // if already hasn't started but uses intervals
+                                else if log.usesIntervals {
+                                    addEntry(log, startInterval: true)
                                     return true
                                 }
-                                if log.usesInterval && didStart {
-                                    didStart = false
-                                    self.stopTime = Date()
-                                }
-                                addEntry(log)
+                                // otherwise just add entry
+                                addEntry(log, startInterval: false)
                                 return false
                             }
                             .onChange(of: didStart) { _ in
@@ -44,6 +55,7 @@ struct MainView: View {
                         }
                     }
                     .onDelete(perform: delete)
+                }
             }
             .navigationBarTitle("Logs")
             .toolbar {
@@ -65,21 +77,31 @@ struct MainView: View {
         do {
             try moc.save()
         } catch {
-            print(error)
+            self.error = LogError.CoreDataError.delete
         }
     }
     
-    private func addEntry(_ log: Log) {
-        let logEntity = logs.first { $0.id == log.id }
+    private func addEntry(_ logEntity: LogEntity, startInterval: Bool) {
         let newEntry = EntryEntity(context: moc)
         newEntry.id = UUID()
         newEntry.start = startTime
-        newEntry.end = stopTime
-        logEntity?.addToEntryEntities(newEntry)
+        newEntry.intervalStarted = startInterval
+        logEntity.addToEntryEntities(newEntry)
+        save()
+    }
+    
+    private func stopInterval(_ startedEntryEntity: EntryEntity) {
+        startedEntryEntity.end = Date()
+        startedEntryEntity.intervalStarted = false
+        save()
+    }
+    
+    private func save() {
         do {
             try moc.save()
+            self.error = nil
         } catch {
-            errorText = "unable to save"
+            self.error = LogError.CoreDataError.save
             return
         }
     }

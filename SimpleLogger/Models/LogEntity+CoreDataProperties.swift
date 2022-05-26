@@ -27,7 +27,7 @@ extension LogEntity {
         }
         return entryEntities.compactMap { entry in
             guard let start = entry.start, let entryId = entry.id else { return nil }
-            return Entry(id: entryId, startDate: start, endDate: entry.end)
+            return Entry(id: entryId, startDate: start, endDate: entry.end, intervalStarted: entry.intervalStarted)
         }.sorted { a, b in
             a.startDate > b.startDate
         }
