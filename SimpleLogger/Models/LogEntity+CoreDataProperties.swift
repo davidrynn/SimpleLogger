@@ -2,7 +2,7 @@
 //  LogEntity+CoreDataProperties.swift
 //  SimpleLogger
 //
-//  Created by David Rynn on 5/22/22.
+//  Created by David Rynn on 6/3/22.
 //
 //
 
@@ -17,30 +17,10 @@ extension LogEntity {
     }
 
     @NSManaged public var id: UUID?
-    @NSManaged public var usesIntervals: Bool
     @NSManaged public var name: String?
+    @NSManaged public var usesIntervals: Bool
+    @NSManaged public var index: Int64
     @NSManaged public var entryEntities: NSSet?
-    
-    var entries: [Entry] {
-        guard let entryEntities = entryEntities as? Set<EntryEntity> else {
-            return []
-        }
-        return entryEntities.compactMap { entry in
-            guard let start = entry.start, let entryId = entry.id else { return nil }
-            return Entry(id: entryId, startDate: start, endDate: entry.end, intervalStarted: entry.intervalStarted)
-        }.sorted { a, b in
-            a.startDate > b.startDate
-        }
-    }
-    
-    func createGrouping() -> [DateComponents: [EntryEntity]]{
-        guard let entries = entryEntities, let entryArray = Array(entries) as? [EntryEntity] else { return [:] }
-        let groupDic = Dictionary(grouping: entryArray) { entry -> DateComponents in
-            let dateComp = Calendar.current.dateComponents([.day, .year, .month], from: (entry.start)!)
-            return dateComp
-        }
-        return groupDic
-    }
 
 }
 

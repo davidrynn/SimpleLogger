@@ -16,4 +16,8 @@ enum LogError {
         case id, noLog, invalidEntity
     }
     
+    enum InvalidDate: Error {
+        case componentFormatter
+    }
+    
 }

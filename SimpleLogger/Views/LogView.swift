@@ -9,27 +9,29 @@ import SwiftUI
 
 struct LogView: View {
     @Environment(\.managedObjectContext) var moc
-    @State var log: LogEntity?
-    var logDictionary: [DateComponents : [EntryEntity]] {
-        get {
-            guard let dict = log?.createGrouping() else {
-                return [:]
-            }
-            return dict
+    @EnvironmentObject var dataController: DataController
+    @State var log: LogEntity
+    @State var presentingSheet = false
+    var animation: Animation {
+        if currentEntry != nil {
+            return Animation.linear(duration: 1).repeatForever()
+        } else {
+            return Animation.default
         }
+    }
+    var started: Bool {
+        return currentEntry != nil && usesIntervals
     }
     let formatter: DateFormatter
     let componentsFormatter: DateComponentsFormatter
-    @State var isNew: Bool
     @State var currentEntry: EntryEntity?
-    @State var isEditing: Bool = false
     @State var usesIntervals: Bool
     @State var name: String
     @State var startDate: Date = Date()
     @State var stopDate: Date = Date()
     @State var error: Error?
     var buttonText: String {
-        if usesIntervals && currentEntry != nil {
+        if started {
             return "Stop"
         } else if usesIntervals {
             return "Start"
@@ -37,8 +39,7 @@ struct LogView: View {
         return "Add"
     }
     
-    init(log: LogEntity?) {
-        if let log = log {
+    init(log: LogEntity) {
             _log = State(initialValue: log)
             let currentEntry = log.entryEntities?.first { item in
                 if let entry = item as? EntryEntity {
@@ -47,13 +48,8 @@ struct LogView: View {
                 return false
             }
             _currentEntry = State(initialValue: currentEntry as? EntryEntity)
-            _isNew = State(initialValue: false)
             _usesIntervals = State(initialValue: log.usesIntervals)
-        } else {
-            _isNew = State(initialValue: true)
-            _usesIntervals = State(initialValue: false)
-        }
-        _name = State(initialValue: log?.name ?? "")
+        _name = State(initialValue: log.name ?? "")
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .long
@@ -65,37 +61,26 @@ struct LogView: View {
     
     var body: some View {
         VStack {
-            if isNew || isEditing {
-                Form {
-                    TextField("Please enter new name", text: $name) {
-                        if isNew {
-                            createNewLog()
-                            isNew.toggle()
-                        } else {
-                            updateName()
-                        }
-                        save()
-                    }
-                }
-            }
             if error != nil {
                 Text("Error: \(error.debugDescription)")
             }
             
             List {
-                ForEach(logDictionary.sorted(by: { $0.key > $1.key }), id: \.key) { key, entries in
-                    Section(header: Text(getSectionText(key))) {
+                ForEach(log.createGrouping().sorted(by: { $0.key > $1.key }), id: \.key) { key, entries in
+                    Section(header: Text("\(key)     count: \(entries.count)")) {
                         let sorted = entries.sorted(by: { $0.start ?? Date() > $1.start ?? Date() })
                         ForEach(sorted, id: \.self) { entry in
-                            VStack {
-                                if let date = entry.start {
-                                    Text(date, formatter: formatter)
-                                    if let endDate = entry.end {
-                                        Text(getDurationStrings(date, end: endDate))
-                                        Text(endDate, formatter: formatter)
+                            NavigationLink(destination: EntryDetailsView(entry: entry), label:{
+                                VStack {
+                                    if let date = entry.start {
+                                        Text(date, formatter: formatter)
+                                        if let endDate = entry.end {
+                                            Text(getDurationStrings(date, end: endDate))
+                                            Text(endDate, formatter: formatter)
+                                        }
                                     }
                                 }
-                            }
+                            })
                         }
                         .onDelete(perform: { offsets in
                             let entriesToDelete = offsets.compactMap { index in
@@ -108,56 +93,52 @@ struct LogView: View {
             }
             
             Button {
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
                 startDate = Date()
                 if usesIntervals && currentEntry == nil {
                     startInterval()
                     return
-                } else if usesIntervals && currentEntry != nil {
+                } else if started {
                     endInterval()
                     return
                 }
                 add()
             } label: {
-                Text(currentEntry != nil && usesIntervals ? buttonText + "..." : buttonText)
-                    .animation(currentEntry != nil ? .easeIn(duration: 1).repeatForever() : .default, value: currentEntry)
+                Text(buttonText)
             }
+            .scaleEffect(started ? 0.9 : 1.0)
+            .opacity(started ? 0.5 : 1.0)
+            .animation(animation, value: started)
             .buttonStyle(.bordered)
             .navigationBarTitle(name, displayMode: .automatic)
             .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Toggle(isOn: $usesIntervals) {
-                        Text("Use Intervals")
+                ToolbarItemGroup() {
+                    Button("Edit") {
+                        presentingSheet = true
                     }
+                    .sheet(isPresented: $presentingSheet, content: {
+                        NavigationView {
+                            UpdateLogView(name: $name, useIntervals: $usesIntervals)
+                        }
+                    })
                     .onChange(of: usesIntervals) { _ in
-                        updateUseIntervals()
+                        update()
                     }
-                    .toggleStyle(.switch)
-                    Spacer()
-                    Toggle(isOn: $isEditing) {
-                        Text("Edit")
+                    .onChange(of: name) { _ in
+                        update()
                     }
                     .toggleStyle(.switch)
                 }
             }
         }
-
+        
     }
     
-    private func updateName() {
-        log?.name = name
-    }
-    
-    private func updateUseIntervals() {
-        log?.usesIntervals = usesIntervals
+    private func update() {
+        log.name = name
+        log.usesIntervals = usesIntervals
         save()
-    }
-    
-    private func createNewLog() {
-        let newLog = LogEntity(context: moc)
-        newLog.id = UUID()
-        newLog.name = name
-        newLog.usesIntervals = usesIntervals
-        self.log = newLog
     }
     
     private func startInterval() {
@@ -168,20 +149,17 @@ struct LogView: View {
         let newEntry = createNewEntry()
         newEntry.intervalStarted = true
         currentEntry = newEntry
-        if log == nil {
-            createNewLog()
-        }
-        log?.addToEntryEntities(newEntry)
+        log.addToEntryEntities(newEntry)
         save()
     }
-                                             
+    
     private func getDurationStrings(_ start: Date, end: Date) -> String {
         let duration = Calendar.current.dateComponents([.day, .hour ,.minute, .second], from: start, to: end)
         return componentsFormatter.string(from: duration) ?? "Error getting time"
     }
     
     private func endInterval() {
-        guard let currentEntry = currentEntry, let _ = log else {
+        guard let currentEntry = currentEntry else {
             return
         }
         currentEntry.intervalStarted = false
@@ -199,10 +177,7 @@ struct LogView: View {
     
     private func add() {
         let newEntry = createNewEntry()
-        if log == nil {
-            createNewLog()
-        }
-        log?.addToEntryEntities(newEntry)
+        log.addToEntryEntities(newEntry)
         save()
     }
     
@@ -217,13 +192,13 @@ struct LogView: View {
     
     private func delete(_ entries: [EntryEntity]) {
         entries.forEach { entry in
-            log?.removeFromEntryEntities(entry)
+            log.removeFromEntryEntities(entry)
         }
         save()
     }
     
     private func saveName() {
-        log?.name = name
+        log.name = name
         save()
     }
     
@@ -244,7 +219,7 @@ struct LogView: View {
         if let keyYear = dateComponents.year {
             year = String(keyYear)
         } else {
-            year = "no month"
+            year = "no year"
         }
         
         return "\(month)-\(day)-\(year)"

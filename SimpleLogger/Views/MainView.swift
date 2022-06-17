@@ -9,13 +9,19 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var logs: FetchedResults<LogEntity>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \LogEntity.index, ascending: true)],
+        animation: .default)
+    private var logs: FetchedResults<LogEntity>
+    @EnvironmentObject var dataController: DataController
+    @State private var showAddView = false
     @State var didStart = false
     @State var didStop = false
     @State var startTime = Date()
     @State var stopTime = Date()
     @State var animate = false
     @State var error: Error?
+    @State var intialName = "No Title"
+    @State var initialBool = false
     
     var body: some View {
         NavigationView {
@@ -26,16 +32,12 @@ struct MainView: View {
                 List {
                     ForEach(logs, id: \.self) { log in
                         NavigationLink(destination: LogView(log: log)) {
-                            MainRow(name: log.name ?? "No Name", count: log.entryEntities?.count ?? 0) {
+                            let startedEntry = startedEntry(log)
+                            MainRow(name: log.name ?? "No Name", count: log.entryEntities?.count ?? 0, didStart: startedEntry != nil) {
                                 startTime = Date()
                                 //if started animating, stop interval and stop animation
-                                if let startedEntryEntity = log.entryEntities?.first(where: { item in
-                                    if let entryEntity = item as? EntryEntity {
-                                        return entryEntity.intervalStarted == true
-                                    }
-                                    return false
-                                }) as? EntryEntity {
-                                    stopInterval(startedEntryEntity)
+                                if let startedEntry = startedEntry {
+                                    stopInterval(startedEntry)
                                     return false
                                 }
                                 // if already hasn't started but uses intervals
@@ -55,20 +57,65 @@ struct MainView: View {
                         }
                     }
                     .onDelete(perform: delete)
+                    .onMove(perform: moveItem)
                 }
             }
             .navigationBarTitle("Logs")
-            .toolbar {
-                ToolbarItem {
-                    let destination = LogView(log: nil)
-                    NavigationLink(destination: destination) {
-                        Image(systemName: "plus")
+            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
+                let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                impactMed.impactOccurred()
+                showAddView.toggle()
+            }, label: {
+                    Image(systemName: "plus")
+            })
+                .sheet(isPresented: $showAddView, content: {
+                    NavigationView {
+                        NewLogView()
                     }
-                }
-            }
+                })
+            )
         }
         .navigationViewStyle(.stack)
     }
+    
+    private func startedEntry(_ log: LogEntity) -> EntryEntity? {
+        return log.entryEntities?.first(where: { item in
+            if let entryEntity = item as? EntryEntity {
+                return entryEntity.intervalStarted
+            }
+            return false
+        }) as? EntryEntity
+    }
+    
+    private func moveItem(at sets:IndexSet, destination:Int){
+            let itemToMove = sets.first!
+            
+            if itemToMove < destination{
+                var startIndex = itemToMove + 1
+                let endIndex = destination - 1
+                var startOrder = logs[itemToMove].index
+                while startIndex <= endIndex{
+                    logs[startIndex].index = startOrder
+                    startOrder = startOrder + 1
+                    startIndex = startIndex + 1
+                }
+                logs[itemToMove].index = startOrder
+            }
+            else if destination < itemToMove{
+                var startIndex = destination
+                let endIndex = itemToMove - 1
+                var startOrder = logs[destination].index + 1
+                let newOrder = logs[destination].index
+                while startIndex <= endIndex{
+                    logs[startIndex].index = startOrder
+                    startOrder = startOrder + 1
+                    startIndex = startIndex + 1
+                }
+                logs[itemToMove].index = newOrder
+            }
+        save()
+    }
+     
     
     private func delete(at offsets: IndexSet) {
         offsets.forEach { index in
@@ -107,8 +154,8 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-    }
-}
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView()
+//    }
+//}

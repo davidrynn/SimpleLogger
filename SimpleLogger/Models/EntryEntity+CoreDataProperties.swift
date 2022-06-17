@@ -2,7 +2,7 @@
 //  EntryEntity+CoreDataProperties.swift
 //  SimpleLogger
 //
-//  Created by David Rynn on 5/23/22.
+//  Created by David Rynn on 5/31/22.
 //
 //
 
@@ -17,9 +17,10 @@ extension EntryEntity {
     }
 
     @NSManaged public var end: Date?
-    @NSManaged public var start: Date?
     @NSManaged public var id: UUID?
     @NSManaged public var intervalStarted: Bool
+    @NSManaged public var start: Date?
+    @NSManaged public var note: String?
     @NSManaged public var logData: LogEntity?
 
 }

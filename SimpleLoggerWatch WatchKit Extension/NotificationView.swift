@@ -1,0 +1,20 @@
+//
+//  NotificationView.swift
+//  SimpleLoggerWatch WatchKit Extension
+//
+//  Created by David Rynn on 5/27/22.
+//
+
+import SwiftUI
+
+struct NotificationView: View {
+    var body: some View {
+        Text("Hello, World!")
+    }
+}
+
+struct NotificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        NotificationView()
+    }
+}

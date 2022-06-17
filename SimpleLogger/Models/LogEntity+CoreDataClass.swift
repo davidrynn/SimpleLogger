@@ -2,7 +2,7 @@
 //  LogEntity+CoreDataClass.swift
 //  SimpleLogger
 //
-//  Created by David Rynn on 5/22/22.
+//  Created by David Rynn on 6/3/22.
 //
 //
 
