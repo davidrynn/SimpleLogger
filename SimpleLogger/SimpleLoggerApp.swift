@@ -1,17 +1,22 @@
 //
-//  SimpleLoggerApp.swift
-//  SimpleLogger
+//  SimplerLoggerApp.swift
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/22/22.
 //
 
 import SwiftUI
+import UIKit
+
+//let quickActionSettings = QuickActionService()
+//var shortcutItemToProcess: UIApplicationShortcutItem?
 
 @main
-struct SimpleLoggerApp: App {
+struct SimplerLoggerApp: App {
     @StateObject var dataController = DataController()
     @Environment(\.scenePhase) var scenePhase
-
+//    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -52,3 +57,23 @@ final class QuickActionService: ObservableObject {
         action = initialValue
     }
 }
+
+//
+//final class AppDelegate: NSObject, UIApplicationDelegate {
+//    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+//        if let shortcutItem = options.shortcutItem {
+//            shortcutItemToProcess = shortcutItem
+//        }
+//        
+//        let sceneConfiguration = UISceneConfiguration(name: "Custom Configuration", sessionRole: connectingSceneSession.role)
+//        sceneConfiguration.delegateClass = CustomSceneDelegate.self
+//        
+//        return sceneConfiguration
+//    }
+//}
+//
+//final class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
+//    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+//        shortcutItemToProcess = shortcutItem
+//    }
+//}

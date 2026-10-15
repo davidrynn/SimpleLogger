@@ -1,13 +1,13 @@
 //
-//  SimpleLoggerWatchUITestsLaunchTests.swift
-//  SimpleLoggerWatchUITests
+//  SimplerLoggerWatchUITestsLaunchTests.swift
+//  SimplerLoggerWatchUITests
 //
 //  Created by David Rynn on 5/27/22.
 //
 
 import XCTest
 
-class SimpleLoggerWatchUITestsLaunchTests: XCTestCase {
+class SimplerLoggerWatchUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

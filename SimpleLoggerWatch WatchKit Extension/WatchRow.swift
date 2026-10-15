@@ -1,6 +1,6 @@
 //
 //  WatchRow.swift
-//  SimpleLoggerWatch WatchKit Extension
+//  SimplerLoggerWatch WatchKit Extension
 //
 //  Created by David Rynn on 5/28/22.
 //

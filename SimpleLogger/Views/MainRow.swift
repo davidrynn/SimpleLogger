@@ -1,6 +1,6 @@
 //
 //  MainRow.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/22/22.
 //

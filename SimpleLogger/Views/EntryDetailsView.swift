@@ -1,6 +1,6 @@
 //
 //  LogDetailsView.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/29/22.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 struct EntryDetailsView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.dismiss) var dismiss
-    @State var entry: EntryEntity
+    @ObservedObject var entry: EntryEntity
     var showStopDate: Bool {
         return stopDate != nil
     }
@@ -22,8 +22,8 @@ struct EntryDetailsView: View {
     let componentsFormatter: DateComponentsFormatter
     
     init(entry: EntryEntity) {
-        
-        _entry = State(initialValue: entry)
+        self.entry = entry
+//        _entry = State(initialValue: entry)
         _startDate = State(initialValue: entry.start ?? Date())
         _stopDate = State(initialValue: entry.end)
         _note = State(initialValue: entry.note ?? "")

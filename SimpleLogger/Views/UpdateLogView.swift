@@ -1,15 +1,15 @@
 //
 //  UpdateLogView.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 6/9/22.
 //
 
 import SwiftUI
+import CoreData
 
 struct UpdateLogView: View {
     @Environment(\.dismiss) var dismiss
-    @Environment(\.managedObjectContext) var moc
     @Binding var name: String
     @Binding var useIntervals: Bool
     let defaultPadding = 10.0

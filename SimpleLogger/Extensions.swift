@@ -1,6 +1,6 @@
 //
 //  Extensions.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/23/22.
 //

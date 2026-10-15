@@ -1,6 +1,6 @@
 //
 //  NotificationController.swift
-//  SimpleLoggerWatch WatchKit Extension
+//  SimplerLoggerWatch WatchKit Extension
 //
 //  Created by David Rynn on 5/27/22.
 //

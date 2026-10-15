@@ -1,6 +1,6 @@
 //
 //  DataController.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/22/22.
 //
@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 
 class DataController: ObservableObject {
-    let container = NSPersistentContainer(name: "SimpleLogger")
+    let container = NSPersistentContainer(name: "SimplerLogger")
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \LogEntity.index, ascending: true)],
         animation: .default)
     private var logs: FetchedResults<LogEntity>

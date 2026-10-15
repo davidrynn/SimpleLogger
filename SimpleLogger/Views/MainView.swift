@@ -1,11 +1,12 @@
 //
 //  MainView.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/22/22.
 //
 
 import SwiftUI
+import CoreData
 
 struct MainView: View {
     @Environment(\.managedObjectContext) var moc
@@ -31,7 +32,8 @@ struct MainView: View {
                 }
                 List {
                     ForEach(logs, id: \.self) { log in
-                        NavigationLink(destination: LogView(log: log)) {
+                        let viewModel = LogViewModel(log: log, moc: moc)
+                        NavigationLink(destination: LogView(viewModel: viewModel)) {
                             let startedEntry = startedEntry(log)
                             MainRow(name: log.name ?? "No Name", count: log.entryEntities?.count ?? 0, didStart: startedEntry != nil) {
                                 startTime = Date()

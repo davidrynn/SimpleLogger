@@ -1,14 +1,14 @@
 //
-//  SimpleLoggerTests.swift
-//  SimpleLoggerTests
+//  SimplerLoggerTests.swift
+//  SimplerLoggerTests
 //
 //  Created by David Rynn on 5/22/22.
 //
 
 import XCTest
-@testable import SimpleLogger
+@testable import SimplerLogger
 
-class SimpleLoggerTests: XCTestCase {
+class SimplerLoggerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

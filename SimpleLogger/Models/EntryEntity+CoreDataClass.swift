@@ -1,6 +1,6 @@
 //
 //  EntryEntity+CoreDataClass.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/31/22.
 //

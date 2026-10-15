@@ -1,6 +1,6 @@
 //
 //  ComplicationController.swift
-//  SimpleLoggerWatch WatchKit Extension
+//  SimplerLoggerWatch WatchKit Extension
 //
 //  Created by David Rynn on 5/27/22.
 //
@@ -14,7 +14,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 
     func getComplicationDescriptors(handler: @escaping ([CLKComplicationDescriptor]) -> Void) {
         let descriptors = [
-            CLKComplicationDescriptor(identifier: "complication", displayName: "SimpleLogger", supportedFamilies: CLKComplicationFamily.allCases)
+            CLKComplicationDescriptor(identifier: "complication", displayName: "SimplerLogger", supportedFamilies: CLKComplicationFamily.allCases)
             // Multiple complication support can be added here with more descriptors
         ]
         

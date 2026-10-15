@@ -1,13 +1,13 @@
 //
-//  SimpleLoggerWatchUITests.swift
-//  SimpleLoggerWatchUITests
+//  SimplerLoggerWatchUITests.swift
+//  SimplerLoggerWatchUITests
 //
 //  Created by David Rynn on 5/27/22.
 //
 
 import XCTest
 
-class SimpleLoggerWatchUITests: XCTestCase {
+class SimplerLoggerWatchUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

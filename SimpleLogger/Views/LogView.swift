@@ -1,6 +1,6 @@
 //
 //  LogView.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 5/22/22.
 //
@@ -10,53 +10,60 @@ import SwiftUI
 struct LogView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
-    @State var log: LogEntity
+    @ObservedObject var viewModel: LogViewModel
+//    @ObservedObject var log: LogEntity
     @State var presentingSheet = false
     var animation: Animation {
-        if currentEntry != nil {
+        if started {
             return Animation.linear(duration: 1).repeatForever()
         } else {
             return Animation.default
         }
     }
-    var started: Bool {
-        return currentEntry != nil && usesIntervals
-    }
-    let formatter: DateFormatter
-    let componentsFormatter: DateComponentsFormatter
-    @State var currentEntry: EntryEntity?
-    @State var usesIntervals: Bool
-    @State var name: String
+    @State var started = false
+//    let formatter: DateFormatter
+//    let componentsFormatter: DateComponentsFormatter
+//    @State var currentEntry: EntryEntity
+//    @State var usesIntervals: Bool
+//    @State var name: String
     @State var startDate: Date = Date()
     @State var stopDate: Date = Date()
     @State var error: Error?
     var buttonText: String {
         if started {
             return "Stop"
-        } else if usesIntervals {
+        } else if viewModel.usesIntervals {
             return "Start"
         }
         return "Add"
     }
     
-    init(log: LogEntity) {
-            _log = State(initialValue: log)
-            let currentEntry = log.entryEntities?.first { item in
-                if let entry = item as? EntryEntity {
-                    return entry.intervalStarted
-                }
-                return false
-            }
-            _currentEntry = State(initialValue: currentEntry as? EntryEntity)
-            _usesIntervals = State(initialValue: log.usesIntervals)
-        _name = State(initialValue: log.name ?? "")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .long
-        self.formatter = dateFormatter
-        let componentsFormatter = DateComponentsFormatter()
-        componentsFormatter.unitsStyle = .abbreviated
-        self.componentsFormatter = componentsFormatter
+    init(viewModel: LogViewModel) {
+        self.viewModel = viewModel
+//            _log = State(initialValue: log)
+//        let currentEntry = log.entryEntities?.first { item in
+//            if let entry = item as? EntryEntity {
+//                return entry.intervalStarted
+//            }
+//            return false
+//        }
+//        // current entry is either the first one that's been started or new
+//        _currentEntry = State(initialValue: (currentEntry as? EntryEntity) ?? EntryEntity())
+//        if let _ = currentEntry, log.usesIntervals {
+//            _started = State(initialValue: true)
+//        } else {
+//            _started = State(initialValue: false)
+//        }
+////            _currentEntry = State(initialValue: currentEntry as? EntryEntity ?? EntryEntity())
+//            _usesIntervals = State(initialValue: log.usesIntervals)
+//        _name = State(initialValue: log.name ?? "")
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateStyle = .long
+//        dateFormatter.timeStyle = .long
+//        self.formatter = dateFormatter
+//        let componentsFormatter = DateComponentsFormatter()
+//        componentsFormatter.unitsStyle = .abbreviated
+//        self.componentsFormatter = componentsFormatter
     }
     
     var body: some View {
@@ -66,17 +73,17 @@ struct LogView: View {
             }
             
             List {
-                ForEach(log.createGrouping().sorted(by: { $0.key > $1.key }), id: \.key) { key, entries in
+                ForEach(viewModel.entriesGrouping.sorted(by: { $0.key > $1.key }), id: \.key) { key, entries in
                     Section(header: Text("\(key)     count: \(entries.count)")) {
                         let sorted = entries.sorted(by: { $0.start ?? Date() > $1.start ?? Date() })
                         ForEach(sorted, id: \.self) { entry in
                             NavigationLink(destination: EntryDetailsView(entry: entry), label:{
                                 VStack {
                                     if let date = entry.start {
-                                        Text(date, formatter: formatter)
+                                        Text(date, formatter: viewModel.formatter)
                                         if let endDate = entry.end {
-                                            Text(getDurationStrings(date, end: endDate))
-                                            Text(endDate, formatter: formatter)
+                                            Text(viewModel.getDurationStrings(date, end: endDate))
+                                            Text(endDate, formatter: viewModel.formatter)
                                         }
                                     }
                                 }
@@ -86,7 +93,7 @@ struct LogView: View {
                             let entriesToDelete = offsets.compactMap { index in
                                 return sorted[index]
                             }
-                            delete(entriesToDelete)
+                            viewModel.delete(entriesToDelete)
                         })
                     }
                 }
@@ -96,14 +103,14 @@ struct LogView: View {
                 let impactMed = UIImpactFeedbackGenerator(style: .medium)
                 impactMed.impactOccurred()
                 startDate = Date()
-                if usesIntervals && currentEntry == nil {
-                    startInterval()
+                if viewModel.usesIntervals && !started {
+                    viewModel.startInterval()
                     return
                 } else if started {
-                    endInterval()
+                    viewModel.endInterval()
                     return
                 }
-                add()
+                viewModel.add()
             } label: {
                 Text(buttonText)
             }
@@ -111,7 +118,7 @@ struct LogView: View {
             .opacity(started ? 0.5 : 1.0)
             .animation(animation, value: started)
             .buttonStyle(.bordered)
-            .navigationBarTitle(name, displayMode: .automatic)
+            .navigationBarTitle(viewModel.name, displayMode: .automatic)
             .toolbar {
                 ToolbarItemGroup() {
                     Button("Edit") {
@@ -119,14 +126,14 @@ struct LogView: View {
                     }
                     .sheet(isPresented: $presentingSheet, content: {
                         NavigationView {
-                            UpdateLogView(name: $name, useIntervals: $usesIntervals)
+                            UpdateLogView(name: viewModel.name, useIntervals: viewModel.usesIntervals)
                         }
                     })
-                    .onChange(of: usesIntervals) { _ in
-                        update()
+                    .onChange(of: viewModel.usesIntervals) { _ in
+                        viewModel.update()
                     }
-                    .onChange(of: name) { _ in
-                        update()
+                    .onChange(of: viewModel.name) { _ in
+                        viewModel.update()
                     }
                     .toggleStyle(.switch)
                 }
@@ -134,7 +141,7 @@ struct LogView: View {
         }
         
     }
-    
+/*
     private func update() {
         log.name = name
         log.usesIntervals = usesIntervals
@@ -142,14 +149,11 @@ struct LogView: View {
     }
     
     private func startInterval() {
-        guard currentEntry == nil else {
-            endInterval()
-            return
-        }
         let newEntry = createNewEntry()
         newEntry.intervalStarted = true
         currentEntry = newEntry
         log.addToEntryEntities(newEntry)
+        started = true
         save()
     }
     
@@ -159,13 +163,10 @@ struct LogView: View {
     }
     
     private func endInterval() {
-        guard let currentEntry = currentEntry else {
-            return
-        }
         currentEntry.intervalStarted = false
         currentEntry.end = Date()
         save()
-        self.currentEntry = nil
+        started = false
     }
     
     private func createNewEntry() -> EntryEntity {
@@ -201,7 +202,7 @@ struct LogView: View {
         log.name = name
         save()
     }
-    
+    */
     private func getSectionText(_ dateComponents: DateComponents) -> String {
         let day: String
         if let keyDay = dateComponents.day {

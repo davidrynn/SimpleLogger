@@ -1,6 +1,6 @@
 //
 //  NewLogView.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 6/8/22.
 //

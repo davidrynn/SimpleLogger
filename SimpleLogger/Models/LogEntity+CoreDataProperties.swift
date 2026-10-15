@@ -1,6 +1,6 @@
 //
 //  LogEntity+CoreDataProperties.swift
-//  SimpleLogger
+//  SimplerLogger
 //
 //  Created by David Rynn on 6/3/22.
 //
