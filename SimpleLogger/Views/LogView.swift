@@ -126,7 +126,7 @@ struct LogView: View {
                     }
                     .sheet(isPresented: $presentingSheet, content: {
                         NavigationView {
-                            UpdateLogView(name: viewModel.name, useIntervals: viewModel.usesIntervals)
+                            UpdateLogView(name: $viewModel.name, useIntervals: $viewModel.usesIntervals)
                         }
                     })
                     .onChange(of: viewModel.usesIntervals) { _ in
