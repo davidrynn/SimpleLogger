@@ -55,14 +55,18 @@ of Swift.
 
 Severity: 🔴 crash/data loss/won't build · 🟠 wrong behavior · 🟡 cleanup
 
-- 🔴 `LogView.swift`: passes `viewModel.name` and `viewModel.usesIntervals` to
-  `UpdateLogView`, which now takes `@Binding`. This most likely **doesn't compile**
-  (needs `$viewModel.name`). To be confirmed by a build.
+- 🔴 `LogView.swift:129`: passes `viewModel.name` and `viewModel.usesIntervals` to
+  `UpdateLogView`, which now takes `@Binding`. **Confirmed build error** (needs
+  `$viewModel.name`).
 - 🔴 `LogViewModel.add()`: `createNewEntry()` uses `startDate`, which is `nil`
   unless an interval was started earlier, so new entries can have a `nil` start.
   `LogEntity.createGrouping()` then force-unwraps `entry.start!` and **crashes**.
+  **Confirmed** (`Extensions.swift:42`). Because `MainView` builds a `LogViewModel`
+  for every row, the bad entry is saved and **the app crashes on every launch**
+  after that.
 - 🔴 `LogViewModel.init`: `EntryEntity()` is created without a context. That's an
-  invalid managed object and can crash if it's ever touched.
+  invalid managed object and can crash if it's ever touched. **Confirmed** at
+  runtime: `Failed to call designated initializer on NSManagedObject class 'EntryEntity'`.
 - 🔴 Deleting a log uses the Nullify rule, and `LogViewModel.delete` only removes
   entries from the relationship. Either way, **orphaned entries pile up** in the
   store. It should be Cascade plus `moc.delete`.
@@ -95,12 +99,32 @@ Severity: 🔴 crash/data loss/won't build · 🟠 wrong behavior · 🟡 cleanu
   `navigationBarTitle`, single-parameter `onChange`, `PreviewProvider`.
 - 🟡 Date section headers use the raw `yyyy-MM-dd` key instead of localized dates.
 
+## Design review
+
+The full write-up, with screenshots, is in
+[`docs/design-review-2026-10-15.md`](docs/design-review-2026-10-15.md).
+Its fixes are tracked as Phase 3 tasks below.
+
 ## Plan
 
 ### Phase 0: Stabilize the baseline
-- [ ] Commit the current WIP to a `revive-wip` branch as-is
-- [ ] Build both schemes with the current Xcode and record the errors and warnings here
-- [ ] Get the iOS app compiling and launching in the simulator (minimal fixes only)
+- [x] Commit the current WIP to a `revive-wip` branch as-is (7ccf763)
+- [x] Build with the current Xcode and record the errors and warnings here
+  - The `SimplerLogger` scheme (iPhone 17 simulator, iOS 27) also builds the embedded watch app.
+  - **2 errors**, both at `LogView.swift:129`: `UpdateLogView` is passed a `String`/`Bool`
+    where it expects `Binding<String>`/`Binding<Bool>`.
+  - **8 warnings:**
+    - Missing `import CoreData` in `NewLogView`, `EntryDetailsView`, `LogView` and the
+      watch `MainView`. In the watch `MainView` this becomes an error in Swift 6 mode.
+    - Deprecated `onChange(of:perform:)` in `SimpleLoggerApp` and the watch `MainView`.
+    - The retroactive `Comparable` conformance on `DateComponents` in `Extensions.swift`.
+- [x] Get the iOS app compiling and launching in the simulator (minimal fixes only)
+  - Fixed `LogView.swift:129` to pass `$viewModel.name`/`$viewModel.usesIntervals`.
+    It now builds with 4 warnings and launches on a fresh install.
+  - Smoke test: creating a log ✅, quick-add from a row ✅, opening a log ✅.
+    **Tapping Add inside a log crashes** (see the bugs list), and from then on
+    **the app crashes on every launch**.
+- [ ] Fix the Add crash and make grouping tolerate a `nil` start, so existing bad data can't brick the app
 - [ ] Answer D1–D8
 
 ### Phase 1: Project modernization
@@ -120,9 +144,17 @@ Severity: 🔴 crash/data loss/won't build · 🟠 wrong behavior · 🟡 cleanu
 ### Phase 3: iOS UI
 - [ ] Fix every 🔴/🟠 bug above
 - [ ] `NavigationStack`, modern toolbar APIs, `@Observable` state
-- [ ] Entry delete in the details view; live-updating grouped list
-- [ ] Localized dates/durations; a live running timer for open intervals
-- [ ] Empty states, error UI, accessibility (VoiceOver labels, Dynamic Type)
+- [ ] Prominent primary action (`.borderedProminent`, large, pinned to the bottom of the log screen)
+- [ ] Clear running state: color, a "Stop" label and a live elapsed time; respect Reduce Motion
+- [ ] "Today"/"Yesterday" section headers, short times, formatted durations
+- [ ] VoiceOver labels that include the log name and running state; Dynamic Type-safe row layout
+- [ ] Empty state (`ContentUnavailableView`); disable Done until the name is valid
+- [ ] Confirm before deleting logs and entries
+- [ ] Rebuild entry details: Start/End/Duration/Note sections, autosave, working Delete
+- [ ] New/Edit Log sheets: titles, name first with keyboard focus, Cancel on Edit, footer text
+- [ ] Main list edit mode: hide quick-add and chevron; working rename
+- [ ] Consistent wording and capitalization
+- [ ] Live-updating grouped list; error UI
 - [ ] Home-screen quick action (or remove it) (D8)
 
 ### Phase 4: Watch
@@ -142,3 +174,6 @@ Severity: 🔴 crash/data loss/won't build · 🟠 wrong behavior · 🟡 cleanu
 | Date | Summary |
 |------|---------|
 | 2026-10-15 | Read the whole codebase and wrote this spec. Nothing built or changed yet. |
+| 2026-10-15 | Committed the WIP to `revive-wip` (7ccf763). First build fails: 2 errors in `LogView.swift:129`, 8 warnings. |
+| 2026-10-15 | Fixed the build error; the app builds and launches. Smoke test: tapping Add in a log crashes, and the app then crashes on every launch. |
+| 2026-10-15 | Couldn't reproduce the reported constraint warning (the on-screen keyboard was unavailable to test). Did a design review of all iOS screens: `docs/design-review-2026-10-15.md`. |
