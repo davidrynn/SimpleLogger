@@ -10,7 +10,7 @@ import CoreData
 
 class LogViewModel: ObservableObject {
     let log: LogEntity
-    @Published var currentEntry: EntryEntity
+    @Published var currentEntry: EntryEntity?
     @Published var started: Bool
     @Published var name: String
     @Published var error: Error?
@@ -31,7 +31,7 @@ class LogViewModel: ObservableObject {
                 return entry.intervalStarted
             }
             return false
-        } as? EntryEntity ?? EntryEntity()
+        } as? EntryEntity
         // current entry is either the first one that's been started or new
         self.entriesGrouping = log.createGrouping()
         if log.usesIntervals {
@@ -72,8 +72,8 @@ class LogViewModel: ObservableObject {
     }
     
     func startInterval() {
-        let newEntry = createNewEntry()
         startDate = Date()
+        let newEntry = createNewEntry()
         newEntry.intervalStarted = true
         currentEntry = newEntry
         log.addToEntryEntities(newEntry)
@@ -83,20 +83,22 @@ class LogViewModel: ObservableObject {
     
     
     func endInterval() {
-        currentEntry.intervalStarted = false
-        currentEntry.end = Date()
+        currentEntry?.intervalStarted = false
+        currentEntry?.end = Date()
+        currentEntry = nil
         save()
         started = false
     }
     
     private func createNewEntry() -> EntryEntity {
         let newEntry = EntryEntity(context: moc)
-        newEntry.start = startDate
+        newEntry.start = startDate ?? Date()
         newEntry.id = UUID()
         return newEntry
     }
     
     func add() {
+        startDate = Date()
         let newEntry = createNewEntry()
         log.addToEntryEntities(newEntry)
         save()
@@ -106,6 +108,7 @@ class LogViewModel: ObservableObject {
         do {
             try moc.save()
             self.error = nil
+            entriesGrouping = log.createGrouping()
         } catch {
             self.error = LogError.CoreDataError.save
         }

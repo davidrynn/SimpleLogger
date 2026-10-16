@@ -3,7 +3,7 @@
 Living document for reviving SimplerLogger and shipping it to the App Store.
 Update the checkboxes and the session log as work progresses.
 
-_Started: 2026-10-15_
+_Started: 2026-10-15 · Decisions D1–D8 settled 2026-10-15_
 
 ## Goal
 
@@ -42,14 +42,14 @@ of Swift.
 
 | # | Decision | Recommendation | Status |
 |---|----------|----------------|--------|
-| D1 | Core Data or SwiftData | **SwiftData.** The model is tiny, and if the app has never shipped there's no user data to migrate. It removes the boilerplate and makes CloudKit sync about one line. | Open |
-| D2 | Minimum OS | **iOS 18 / watchOS 11.** This allows SwiftData, `@Observable` and modern navigation. Raise to 26 if Liquid Glass or newer APIs matter. | Open |
-| D3 | Phone ↔ watch sync | **CloudKit via SwiftData.** It's simplest and also gives backup and multi-device sync. WatchConnectivity is the alternative if iCloud should be avoided. | Open |
-| D4 | Watch target structure | **Migrate to a single-target watch app.** The WatchKit Extension layout is deprecated. | Open |
-| D5 | Complication | **Replace ClockKit with a WidgetKit widget** (e.g. a running timer or "tap to log"). This could also wait until after v1. | Open |
-| D6 | Naming | **"SimplerLogger" everywhere.** Rename the folders and targets to match. Check the App Store name is available. | Open |
-| D7 | Was v1 ever released under this bundle ID? | If yes, D1 needs a data migration path. | Open (ask David) |
-| D8 | v1 scope | Proposed for v1: logs, tap entries, interval entries, notes, editing, reordering, watch quick-log. Deferred: home-screen quick actions, export, stats/charts, notifications. | Open |
+| D1 | Core Data or SwiftData | **SwiftData.** No shipped users (D7), so there's nothing to migrate. | ✅ SwiftData |
+| D2 | Minimum OS | **iOS 18 / watchOS 11.** | ✅ iOS 18 / watchOS 11 |
+| D3 | Phone ↔ watch sync | **CloudKit via SwiftData.** Also gives backup and multi-device sync. | ✅ CloudKit |
+| D4 | Watch target structure | **Single-target watch app.** | ✅ Single target |
+| D5 | Complication | Delete the ClockKit template now; WidgetKit widget after v1. | ✅ Deferred to post-v1 |
+| D6 | Naming | **"SimplerLogger" everywhere.** Rename folders and targets. Still need to check App Store name availability. | ✅ SimplerLogger |
+| D7 | Was v1 ever released under this bundle ID? | Never released, so no migration path is needed. | ✅ Never released |
+| D8 | v1 scope | **In:** logs, tap entries, interval entries, notes, editing, reordering, watch quick-log. **Out (post-v1):** home-screen quick action (remove the registered one), export, stats/charts, notifications. | ✅ Decided |
 
 ## Known bugs and problems found in review
 
@@ -124,8 +124,13 @@ Its fixes are tracked as Phase 3 tasks below.
   - Smoke test: creating a log ✅, quick-add from a row ✅, opening a log ✅.
     **Tapping Add inside a log crashes** (see the bugs list), and from then on
     **the app crashes on every launch**.
-- [ ] Fix the Add crash and make grouping tolerate a `nil` start, so existing bad data can't brick the app
-- [ ] Answer D1–D8
+- [x] Fix the Add crash and make grouping tolerate a `nil` start, so existing bad data can't brick the app
+  - `add()`/`startInterval()` now stamp `start` with the current date (`startInterval` had the same bug: it set `startDate` after creating the entry).
+  - `createGrouping()` puts `nil`-start entries in a "No date" section instead of force-unwrapping.
+  - `currentEntry` is now optional, which removes the context-less `EntryEntity()`.
+  - `save()` refreshes `entriesGrouping`, so new entries appear immediately.
+  - Verified in the simulator on the store that held the bad data: it launches, Add works, and it relaunches cleanly.
+- [x] Answer D1–D8
 
 ### Phase 1: Project modernization
 - [ ] Finish the SimplerLogger rename (folders, targets, test bundle IDs) (D6)
@@ -155,11 +160,11 @@ Its fixes are tracked as Phase 3 tasks below.
 - [ ] Main list edit mode: hide quick-add and chevron; working rename
 - [ ] Consistent wording and capitalization
 - [ ] Live-updating grouped list; error UI
-- [ ] Home-screen quick action (or remove it) (D8)
+- [ ] Remove the unhandled home-screen quick action (D8: deferred past v1)
 
 ### Phase 4: Watch
 - [ ] Watch list backed by synced data; one-tap log/start/stop
-- [ ] WidgetKit complication (D5), if in v1
+- [ ] Delete the ClockKit complication template (D5: widget deferred past v1)
 
 ### Phase 5: Release prep
 - [ ] App icon in every required size; launch screen
@@ -177,3 +182,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-15 | Committed the WIP to `revive-wip` (7ccf763). First build fails: 2 errors in `LogView.swift:129`, 8 warnings. |
 | 2026-10-15 | Fixed the build error; the app builds and launches. Smoke test: tapping Add in a log crashes, and the app then crashes on every launch. |
 | 2026-10-15 | Couldn't reproduce the reported constraint warning (the on-screen keyboard was unavailable to test). Did a design review of all iOS screens: `docs/design-review-2026-10-15.md`. |
+| 2026-10-15 | Settled D1–D8 (all as recommended; v1 extra scope = watch quick-log only; never released). Fixed the Add crash and the launch crash from `nil`-start entries; verified in the simulator. |
