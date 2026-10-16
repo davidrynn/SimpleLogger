@@ -43,18 +43,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       shouldAutocreateTestPlan = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "22A80238284161910002FFBE"
-               BuildableName = "SimplerLoggerWatchUITests.xctest"
-               BlueprintName = "SimplerLoggerWatchUITests"
-               ReferencedContainer = "container:SimplerLogger.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"

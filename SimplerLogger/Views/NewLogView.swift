@@ -5,6 +5,7 @@
 //  Created by David Rynn on 6/8/22.
 //
 
+import CoreData
 import SwiftUI
 
 struct NewLogView: View {

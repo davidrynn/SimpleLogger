@@ -27,7 +27,7 @@ of Swift.
 - **Architecture:** Halfway through moving `LogView` logic into `LogViewModel`
   (there are large commented-out blocks). The same add/stop logic is duplicated
   in `MainView`, `LogViewModel`, `DataController` and the watch `MainView`.
-- **Watch:** Uses the old WatchKit Extension two-target layout. It has its own
+- **Watch:** ~~Uses the old WatchKit Extension two-target layout.~~ (Wrong: it was already a single target; only a folder was misnamed. Fixed in Phase 1.) It has its own
   `MainView`/`WatchRow`, but **no Core Data stack and no sync with the phone**,
   so it can't show any data. The ClockKit complication and notification
   controller are untouched template code.
@@ -133,10 +133,28 @@ Its fixes are tracked as Phase 3 tasks below.
 - [x] Answer D1–D8
 
 ### Phase 1: Project modernization
-- [ ] Finish the SimplerLogger rename (folders, targets, test bundle IDs) (D6)
-- [ ] Set one deployment target per platform (D2) and Swift 6 language mode
-- [ ] Convert the watch app to a single target (D4)
-- [ ] Delete dead code and template tests
+- [x] Finish the SimplerLogger rename (folders, targets, test bundle IDs) (D6)
+  - Folders are now `SimplerLogger`, `SimplerLoggerTests`, `SimplerLoggerUITests`, `SimplerLoggerWatch`; `SimplerLoggerApp.swift`.
+    Fixed `TEST_TARGET_NAME` (pointed at a nonexistent `SimpleLogger` target) and the watch display name.
+  - Still named `SimpleLogger.xcdatamodel` inside the model bundle; left alone because Phase 2 deletes it.
+- [x] Set one deployment target per platform (D2) and Swift 6 language mode
+  - iOS 18.0 / watchOS 11.0 set once at project level (target-level overrides removed); `SWIFT_VERSION = 6.0` for every target.
+    Verified in the build log. It compiled with no Swift 6 errors.
+- [x] Convert the watch app to a single target (D4)
+  - **It already was one.** `SimplerLoggerWatch` was a plain watchOS application (migrated in April 2024); only the
+    "WatchKit Extension" folder name was left. Merged it into `SimplerLoggerWatch/`.
+  - Deleted ClockKit/notification code, the complication asset set, the unused extension `Info.plist`, the push
+    payload, and the Complication/Notification schemes (D5).
+  - Deleted the `SimplerLoggerWatchTests` (no files; test host pointed at the extension that no longer exists) and
+    `SimplerLoggerWatchUITests` (template only) targets and the `SimplerLoggerWatchTests` scheme.
+- [x] Delete dead code and template tests
+  - Removed the `Log`/`Entry` structs, commented-out blocks, `getSectionText`, `saveName`, the `DateComponents`
+    `Comparable` conformance, `DataController`'s `@FetchRequest` and unused/stub methods, commented-out previews,
+    and the unhandled "New Entry" quick action (D8). Added the missing `import CoreData`s.
+  - Replaced the template unit test with `GroupingTests` (regression test for the `nil`-start crash). Kept the
+    UI launch test (made it `@MainActor` for Swift 6). Both pass.
+  - Remaining warnings: 4× deprecated `onChange(of:perform:)` (Phase 3). The test run logs Core Data's "multiple
+    NSEntityDescriptions claim LogEntity" because the test loads a second copy of the model; it goes away with SwiftData.
 
 ### Phase 2: Data layer
 - [ ] Implement the chosen persistence approach (D1) with one shared model/store used by iOS and watch
@@ -160,11 +178,11 @@ Its fixes are tracked as Phase 3 tasks below.
 - [ ] Main list edit mode: hide quick-add and chevron; working rename
 - [ ] Consistent wording and capitalization
 - [ ] Live-updating grouped list; error UI
-- [ ] Remove the unhandled home-screen quick action (D8: deferred past v1)
+- [x] Remove the unhandled home-screen quick action (D8: deferred past v1)
 
 ### Phase 4: Watch
 - [ ] Watch list backed by synced data; one-tap log/start/stop
-- [ ] Delete the ClockKit complication template (D5: widget deferred past v1)
+- [x] Delete the ClockKit complication template (D5: widget deferred past v1)
 
 ### Phase 5: Release prep
 - [ ] App icon in every required size; launch screen
@@ -183,3 +201,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-15 | Fixed the build error; the app builds and launches. Smoke test: tapping Add in a log crashes, and the app then crashes on every launch. |
 | 2026-10-15 | Couldn't reproduce the reported constraint warning (the on-screen keyboard was unavailable to test). Did a design review of all iOS screens: `docs/design-review-2026-10-15.md`. |
 | 2026-10-15 | Settled D1–D8 (all as recommended; v1 extra scope = watch quick-log only; never released). Fixed the Add crash and the launch crash from `nil`-start entries; verified in the simulator. |
+| 2026-10-15 | Phase 1 done: rename finished, iOS 18 / watchOS 11, Swift 6, watch debris and broken watch test targets removed, dead code removed, regression test added. Builds clean apart from 4 deprecation warnings; 2/2 tests pass. |

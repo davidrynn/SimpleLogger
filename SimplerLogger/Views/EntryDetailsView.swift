@@ -5,6 +5,7 @@
 //  Created by David Rynn on 5/29/22.
 //
 
+import CoreData
 import SwiftUI
 
 struct EntryDetailsView: View {
@@ -23,7 +24,6 @@ struct EntryDetailsView: View {
     
     init(entry: EntryEntity) {
         self.entry = entry
-//        _entry = State(initialValue: entry)
         _startDate = State(initialValue: entry.start ?? Date())
         _stopDate = State(initialValue: entry.end)
         _note = State(initialValue: entry.note ?? "")
@@ -93,11 +93,6 @@ struct EntryDetailsView: View {
     }
 }
 
-//struct EntryDetailsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        EntryDetailsView(entry: <#EntryEntity#>)
-//    }
-//}
 extension Optional where Wrapped == Date {
     var _bound: Date? {
         get {

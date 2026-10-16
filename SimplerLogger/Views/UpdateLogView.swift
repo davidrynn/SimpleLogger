@@ -38,9 +38,3 @@ struct UpdateLogView: View {
     }
 
 }
-
-//struct UpdateLogView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UpdateLogView()
-//    }
-//}

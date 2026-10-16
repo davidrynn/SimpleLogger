@@ -7,7 +7,8 @@
 
 import XCTest
 
-class SimplerLoggerUITestsLaunchTests: XCTestCase {
+@MainActor
+final class SimplerLoggerUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

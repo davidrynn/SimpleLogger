@@ -18,16 +18,6 @@ extension EntryEntity : Comparable {
 
 }
 
-extension DateComponents: Comparable {
-    public static func < (lhs: DateComponents, rhs: DateComponents) -> Bool {
-                if let lhsDay = lhs.day, let rhsDay = rhs.day {
-                    return lhsDay < rhsDay
-                }
-        return false
-    }
-
-}
-
 extension DateComponentsFormatter {
     func getDurationStrings(_ start: Date, end: Date) -> String? {
         let duration = Calendar.current.dateComponents([.day, .hour ,.minute, .second], from: start, to: end)

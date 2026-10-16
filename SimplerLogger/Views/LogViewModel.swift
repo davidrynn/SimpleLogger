@@ -39,7 +39,6 @@ class LogViewModel: ObservableObject {
         } else {
             self.started = false
         }
-//            _currentEntry = State(initialValue: currentEntry as? EntryEntity ?? EntryEntity())
         self.usesIntervals = log.usesIntervals
         self.name = log.name ?? ""
         let dateFormatter = DateFormatter()
@@ -114,9 +113,5 @@ class LogViewModel: ObservableObject {
         }
     }
     
-    private func saveName() {
-        log.name = name
-        save()
-    }
 
 }

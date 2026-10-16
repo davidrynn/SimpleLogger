@@ -5,13 +5,13 @@
 //  Created by David Rynn on 5/22/22.
 //
 
+import CoreData
 import SwiftUI
 
 struct LogView: View {
     @Environment(\.managedObjectContext) var moc
     @EnvironmentObject var dataController: DataController
     @ObservedObject var viewModel: LogViewModel
-//    @ObservedObject var log: LogEntity
     @State var presentingSheet = false
     var animation: Animation {
         if started {
@@ -21,11 +21,6 @@ struct LogView: View {
         }
     }
     @State var started = false
-//    let formatter: DateFormatter
-//    let componentsFormatter: DateComponentsFormatter
-//    @State var currentEntry: EntryEntity
-//    @State var usesIntervals: Bool
-//    @State var name: String
     @State var startDate: Date = Date()
     @State var stopDate: Date = Date()
     @State var error: Error?
@@ -40,30 +35,6 @@ struct LogView: View {
     
     init(viewModel: LogViewModel) {
         self.viewModel = viewModel
-//            _log = State(initialValue: log)
-//        let currentEntry = log.entryEntities?.first { item in
-//            if let entry = item as? EntryEntity {
-//                return entry.intervalStarted
-//            }
-//            return false
-//        }
-//        // current entry is either the first one that's been started or new
-//        _currentEntry = State(initialValue: (currentEntry as? EntryEntity) ?? EntryEntity())
-//        if let _ = currentEntry, log.usesIntervals {
-//            _started = State(initialValue: true)
-//        } else {
-//            _started = State(initialValue: false)
-//        }
-////            _currentEntry = State(initialValue: currentEntry as? EntryEntity ?? EntryEntity())
-//            _usesIntervals = State(initialValue: log.usesIntervals)
-//        _name = State(initialValue: log.name ?? "")
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateStyle = .long
-//        dateFormatter.timeStyle = .long
-//        self.formatter = dateFormatter
-//        let componentsFormatter = DateComponentsFormatter()
-//        componentsFormatter.unitsStyle = .abbreviated
-//        self.componentsFormatter = componentsFormatter
     }
     
     var body: some View {
@@ -140,89 +111,5 @@ struct LogView: View {
             }
         }
         
-    }
-/*
-    private func update() {
-        log.name = name
-        log.usesIntervals = usesIntervals
-        save()
-    }
-    
-    private func startInterval() {
-        let newEntry = createNewEntry()
-        newEntry.intervalStarted = true
-        currentEntry = newEntry
-        log.addToEntryEntities(newEntry)
-        started = true
-        save()
-    }
-    
-    private func getDurationStrings(_ start: Date, end: Date) -> String {
-        let duration = Calendar.current.dateComponents([.day, .hour ,.minute, .second], from: start, to: end)
-        return componentsFormatter.string(from: duration) ?? "Error getting time"
-    }
-    
-    private func endInterval() {
-        currentEntry.intervalStarted = false
-        currentEntry.end = Date()
-        save()
-        started = false
-    }
-    
-    private func createNewEntry() -> EntryEntity {
-        let newEntry = EntryEntity(context: moc)
-        newEntry.start = startDate
-        newEntry.id = UUID()
-        return newEntry
-    }
-    
-    private func add() {
-        let newEntry = createNewEntry()
-        log.addToEntryEntities(newEntry)
-        save()
-    }
-    
-    private func save() {
-        do {
-            try moc.save()
-            self.error = nil
-        } catch {
-            self.error = LogError.CoreDataError.save
-        }
-    }
-    
-    private func delete(_ entries: [EntryEntity]) {
-        entries.forEach { entry in
-            log.removeFromEntryEntities(entry)
-        }
-        save()
-    }
-    
-    private func saveName() {
-        log.name = name
-        save()
-    }
-    */
-    private func getSectionText(_ dateComponents: DateComponents) -> String {
-        let day: String
-        if let keyDay = dateComponents.day {
-            day = String(keyDay)
-        } else {
-            day = "no day"
-        }
-        let month: String
-        if let keyMonth = dateComponents.month {
-            month = String(keyMonth)
-        } else {
-            month = "no month"
-        }
-        let year: String
-        if let keyYear = dateComponents.year {
-            year = String(keyYear)
-        } else {
-            year = "no year"
-        }
-        
-        return "\(month)-\(day)-\(year)"
     }
 }
