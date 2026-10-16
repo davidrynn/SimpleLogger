@@ -7,34 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2290C0022EF0000000A1B2C3 /* GroupingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* GroupingTests.swift */; };
-		2250AB6A284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250AB68284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift */; };
-		2250AB6B284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250AB69284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift */; };
-		2250AB6C284AA6B400E3B72D /* LogEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250AB69284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift */; };
-		2250AB6D284AA6B900E3B72D /* LogEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2250AB68284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift */; };
-		228F9D862BC31C28000498B4 /* LogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228F9D852BC31C28000498B4 /* LogViewModel.swift */; };
-		22A8020A283FE43E0002FFBE /* LogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80209283FE43E0002FFBE /* LogError.swift */; };
+		2290C0062EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
+		2290C0072EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
+		2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
+		2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
+		2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */; };
 		22A80210284161900002FFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A8020F284161900002FFBE /* Assets.xcassets */; };
 		22A8021D284161900002FFBE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8021C284161900002FFBE /* MainView.swift */; };
 		22A80228284161910002FFBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A80227284161910002FFBE /* Preview Assets.xcassets */; };
 		22A80243284161910002FFBE /* SimplerLoggerWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		22A80252284295200002FFBE /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE22839F5810081E75A /* DataController.swift */; };
 		22A80253284295200002FFBE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
-		22A80257284295200002FFBE /* LogError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A80209283FE43E0002FFBE /* LogError.swift */; };
 		22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */; };
-		22A8025A284295720002FFBE /* SimplerLogger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE4283AC06C0081E75A /* SimplerLogger.xcdatamodeld */; };
 		22A8025C284298060002FFBE /* WatchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025B284298060002FFBE /* WatchRow.swift */; };
 		22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */; };
-		22A802612846E9810002FFBE /* EntryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025F2846E9810002FFBE /* EntryEntity+CoreDataClass.swift */; };
-		22A802622846E9810002FFBE /* EntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A802602846E9810002FFBE /* EntryEntity+CoreDataProperties.swift */; };
-		22A802632846EF1B0002FFBE /* EntryEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025F2846E9810002FFBE /* EntryEntity+CoreDataClass.swift */; };
-		22A802642846EF1B0002FFBE /* EntryEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A802602846E9810002FFBE /* EntryEntity+CoreDataProperties.swift */; };
 		22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */; };
 		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
 		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
 		22BEFAD62839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */; };
-		22BEFAE32839F5810081E75A /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE22839F5810081E75A /* DataController.swift */; };
-		22BEFAE6283AC06C0081E75A /* SimplerLogger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAE4283AC06C0081E75A /* SimplerLogger.xcdatamodeld */; };
 		22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE42850F25D00194826 /* NewLogView.swift */; };
 		22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE62851B1E500194826 /* UpdateLogView.swift */; };
 		22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9D4283AC3A30015FB43 /* MainView.swift */; };
@@ -82,20 +71,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2290C0012EF0000000A1B2C3 /* GroupingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupingTests.swift; sourceTree = "<group>"; };
+		2290C0042EF0000000A1B2C3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		2290C0052EF0000000A1B2C3 /* LogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStore.swift; sourceTree = "<group>"; };
+		2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreTests.swift; sourceTree = "<group>"; };
 		2250AB67284AA37200E3B72D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		2250AB68284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		2250AB69284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		228F9D852BC31C28000498B4 /* LogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogViewModel.swift; sourceTree = "<group>"; };
-		22A80209283FE43E0002FFBE /* LogError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogError.swift; sourceTree = "<group>"; };
 		22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLoggerWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A8020F284161900002FFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A8021C284161900002FFBE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		22A80227284161910002FFBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		22A8025B284298060002FFBE /* WatchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRow.swift; sourceTree = "<group>"; };
 		22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
-		22A8025F2846E9810002FFBE /* EntryEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		22A802602846E9810002FFBE /* EntryEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EntryEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		22BEFAB52839F42F0081E75A /* SimplerLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplerLoggerApp.swift; sourceTree = "<group>"; };
 		22BEFABC2839F4310081E75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,8 +88,6 @@
 		22BEFAC52839F4310081E75A /* SimplerLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFACF2839F4310081E75A /* SimplerLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplerLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		22BEFAE22839F5810081E75A /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SimpleLogger.xcdatamodel; sourceTree = "<group>"; };
 		22CA6FE42850F25D00194826 /* NewLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLogView.swift; sourceTree = "<group>"; };
 		22CA6FE62851B1E500194826 /* UpdateLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogView.swift; sourceTree = "<group>"; };
 		22CCA9D4283AC3A30015FB43 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -145,6 +128,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2290C0032EF0000000A1B2C3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */,
+				2290C0042EF0000000A1B2C3 /* Models.swift */,
+				2290C0052EF0000000A1B2C3 /* LogStore.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		22A8020E2841618F0002FFBE /* SimplerLoggerWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				2250AB67284AA37200E3B72D /* README.md */,
+				2290C0032EF0000000A1B2C3 /* Shared */,
 				22BEFAB72839F42F0081E75A /* SimplerLogger */,
 				22BEFAC82839F4310081E75A /* SimplerLoggerTests */,
 				22BEFAD22839F4310081E75A /* SimplerLoggerUITests */,
@@ -190,13 +184,8 @@
 		22BEFAB72839F42F0081E75A /* SimplerLogger */ = {
 			isa = PBXGroup;
 			children = (
-				22A80209283FE43E0002FFBE /* LogError.swift */,
 				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
 				22CCA9D3283AC3740015FB43 /* Views */,
-				22CCA9D2283AC33F0015FB43 /* Models */,
-				22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */,
-				22BEFAE22839F5810081E75A /* DataController.swift */,
-				22BEFAE4283AC06C0081E75A /* SimplerLogger.xcdatamodeld */,
 				22BEFABC2839F4310081E75A /* Assets.xcassets */,
 				22BEFABE2839F4310081E75A /* Preview Content */,
 			);
@@ -214,7 +203,7 @@
 		22BEFAC82839F4310081E75A /* SimplerLoggerTests */ = {
 			isa = PBXGroup;
 			children = (
-				2290C0012EF0000000A1B2C3 /* GroupingTests.swift */,
+				2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */,
 			);
 			path = SimplerLoggerTests;
 			sourceTree = "<group>";
@@ -227,24 +216,12 @@
 			path = SimplerLoggerUITests;
 			sourceTree = "<group>";
 		};
-		22CCA9D2283AC33F0015FB43 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				2250AB68284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift */,
-				2250AB69284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift */,
-				22A8025F2846E9810002FFBE /* EntryEntity+CoreDataClass.swift */,
-				22A802602846E9810002FFBE /* EntryEntity+CoreDataProperties.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		22CCA9D3283AC3740015FB43 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				22CCA9D4283AC3A30015FB43 /* MainView.swift */,
 				22CCA9EE283ACC800015FB43 /* MainRow.swift */,
 				22CCAA08283ADE850015FB43 /* LogView.swift */,
-				228F9D852BC31C28000498B4 /* LogViewModel.swift */,
 				22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */,
 				22CA6FE42850F25D00194826 /* NewLogView.swift */,
 				22CA6FE62851B1E500194826 /* UpdateLogView.swift */,
@@ -414,16 +391,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A80252284295200002FFBE /* DataController.swift in Sources */,
+				2290C0072EF0000000A1B2C3 /* Models.swift in Sources */,
+				2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */,
 				22A80253284295200002FFBE /* Extensions.swift in Sources */,
-				22A802642846EF1B0002FFBE /* EntryEntity+CoreDataProperties.swift in Sources */,
-				22A80257284295200002FFBE /* LogError.swift in Sources */,
-				2250AB6D284AA6B900E3B72D /* LogEntity+CoreDataClass.swift in Sources */,
-				22A8025A284295720002FFBE /* SimplerLogger.xcdatamodeld in Sources */,
-				2250AB6C284AA6B400E3B72D /* LogEntity+CoreDataProperties.swift in Sources */,
 				22A8021D284161900002FFBE /* MainView.swift in Sources */,
 				22A8025C284298060002FFBE /* WatchRow.swift in Sources */,
-				22A802632846EF1B0002FFBE /* EntryEntity+CoreDataClass.swift in Sources */,
 				22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -432,22 +404,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2290C0062EF0000000A1B2C3 /* Models.swift in Sources */,
+				2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */,
 				22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */,
 				22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */,
-				22A8020A283FE43E0002FFBE /* LogError.swift in Sources */,
 				22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */,
 				22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */,
-				228F9D862BC31C28000498B4 /* LogViewModel.swift in Sources */,
-				2250AB6A284AA6AF00E3B72D /* LogEntity+CoreDataClass.swift in Sources */,
 				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
-				22BEFAE32839F5810081E75A /* DataController.swift in Sources */,
 				22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */,
-				22BEFAE6283AC06C0081E75A /* SimplerLogger.xcdatamodeld in Sources */,
 				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
-				2250AB6B284AA6AF00E3B72D /* LogEntity+CoreDataProperties.swift in Sources */,
-				22A802612846E9810002FFBE /* EntryEntity+CoreDataClass.swift in Sources */,
 				22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */,
-				22A802622846E9810002FFBE /* EntryEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2290C0022EF0000000A1B2C3 /* GroupingTests.swift in Sources */,
+				2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +460,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimplerLoggerWatch/SimplerLoggerWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3KR65ZULS9;
@@ -522,6 +489,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimplerLoggerWatch/SimplerLoggerWatch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3KR65ZULS9;
@@ -667,12 +635,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = SimplerLogger/SimplerLogger.entitlements;
 				DEVELOPMENT_ASSET_PATHS = "\"SimplerLogger/Preview Content\"";
 				DEVELOPMENT_TEAM = 3KR65ZULS9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -696,12 +666,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = SimplerLogger/SimplerLogger.entitlements;
 				DEVELOPMENT_ASSET_PATHS = "\"SimplerLogger/Preview Content\"";
 				DEVELOPMENT_TEAM = 3KR65ZULS9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -842,18 +814,6 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		22BEFAE4283AC06C0081E75A /* SimplerLogger.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */,
-			);
-			currentVersion = 22BEFAE5283AC06C0081E75A /* SimpleLogger.xcdatamodel */;
-			path = SimplerLogger.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 22BEFAAD2839F42F0081E75A /* Project object */;
 }

@@ -1,6 +1,6 @@
 //
 //  WatchRow.swift
-//  SimplerLoggerWatch WatchKit Extension
+//  SimplerLoggerWatch
 //
 //  Created by David Rynn on 5/28/22.
 //
@@ -8,29 +8,20 @@
 import SwiftUI
 
 struct WatchRow: View {
-    let name: String
-    var startAnimating: () -> (Bool)
-    @State var didStart = false
+    let log: Log
+    let action: () -> Void
+
     var body: some View {
         HStack {
-            Text(name)
+            Text(log.name)
                 .truncationMode(.tail)
             Spacer()
-            Button(action: {
-                didStart = startAnimating()
-            }, label: {
-                didStart ? Image(systemName: "timer") : Image(systemName: "plus")
-            })
-            .animation(didStart ? .easeIn(duration: 1).repeatForever() : .default, value: didStart)
+            Button(action: action) {
+                Image(systemName: log.isRunning ? "timer" : "plus")
+            }
+            .animation(log.isRunning ? .easeIn(duration: 1).repeatForever() : .default, value: log.isRunning)
             .buttonStyle(.bordered)
         }
         .padding()
     }
 }
-
-struct WatchRow_Previews: PreviewProvider {
-    static var previews: some View {
-        WatchRow(name: "Test", startAnimating: {true})
-    }
-}
-

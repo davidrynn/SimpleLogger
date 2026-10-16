@@ -11,6 +11,27 @@ Ship SimplerLogger, a fast way to log "this happened" (a tap) or "this lasted
 this long" (start/stop interval) across any number of named logs, on iPhone,
 with a companion Apple Watch app.
 
+## Purpose and product principles
+
+SimplerLogger is a **very simple way to log something**: how many times you
+watered the plants, took a pill, or anything else, or how long something took.
+Every design decision should be checked against these:
+
+1. **The list is the app.** The main screen is a list of the things you track, and
+   each row has its own button. Logging from the list, without opening anything,
+   is the primary path.
+2. **One tap per log.** A tap log records "it happened, now". A timer log starts on
+   one tap and stops on the next. No forms, no confirmation, no required fields.
+3. **The same button everywhere.** The list row, the log's own screen and the watch
+   all perform the same action (`LogStore.primaryAction`) and show the same state.
+4. **Detail is optional.** Opening a log is for looking back and fixing things
+   (history by day, edit times, notes, delete), never required to log.
+5. **Say what it's for.** First launch explains the idea in one sentence and offers
+   to make the first log.
+
+Anything that adds steps to logging (categories, tags, required notes, extra
+screens) needs a strong reason, and probably belongs after v1.
+
 ## Current state (as of 2026-10-15)
 
 Originally written May–June 2022; `LogViewModel` added April 2024. ~1,300 lines
@@ -157,12 +178,28 @@ Its fixes are tracked as Phase 3 tasks below.
     NSEntityDescriptions claim LogEntity" because the test loads a second copy of the model; it goes away with SwiftData.
 
 ### Phase 2: Data layer
-- [ ] Implement the chosen persistence approach (D1) with one shared model/store used by iOS and watch
-- [ ] Put all mutations (add, start, stop, edit, delete, reorder) in one place; remove the duplicates
-- [ ] Cascade-delete entries; assign `index` correctly when creating a log
-- [ ] Model "an interval is open" in a way that can't get out of sync
+- [x] Implement the chosen persistence approach (D1) with one shared model/store used by iOS and watch
+  - SwiftData `Log` and `LogEntry` in `Shared/Models.swift`, compiled into both apps. Every property has a
+    default or is optional and nothing is unique, as CloudKit requires. Core Data model, entity classes,
+    `DataController` and `LogViewModel` deleted. The old Core Data store on test devices is simply ignored
+    (nothing shipped, D7).
+- [x] Put all mutations (add, start, stop, edit, delete, reorder) in one place; remove the duplicates
+  - `Shared/LogStore.swift` (`@MainActor`). `primaryAction(for:)` is the one button used by the list row,
+    the log screen and the watch row.
+  - Views ported to `@Query`/`modelContext`, so lists update live. That also fixed several 🟠 bugs: Start/Stop
+    state, list not updating, `MainRow` stale `@State`, Edit Log saving on every keystroke (now saves on Done),
+    and the trash button not deleting.
+- [x] Cascade-delete entries; assign `index` correctly when creating a log (new logs go to the end)
+- [x] Model "an interval is open" in a way that can't get out of sync
+  - `isRunning` is derived (`isInterval && end == nil`); there is no stored flag. Stop ends every running
+    entry, in case two synced devices each started one. Turning off "Use Intervals" stops a running timer.
 - [ ] Enable sync (D3)
-- [ ] Unit tests for the data layer (in-memory store)
+  - [x] CloudKit entitlements (container `iCloud.edu.davidrynn.SimplerLogger`, push) on both apps, plus the
+    iOS remote-notification background mode. The container uses `cloudKitDatabase: .automatic`.
+  - [ ] **David:** in Xcode, open Signing & Capabilities for both targets so automatic signing registers the
+    iCloud container and push capability on the developer account. Then test on two devices signed into iCloud.
+  - [ ] Before release: deploy the CloudKit schema to Production in the CloudKit Console.
+- [x] Unit tests for the data layer (in-memory store): 11 Swift Testing tests in `LogStoreTests`
 
 ### Phase 3: iOS UI
 - [ ] Fix every 🔴/🟠 bug above
@@ -172,7 +209,8 @@ Its fixes are tracked as Phase 3 tasks below.
 - [ ] "Today"/"Yesterday" section headers, short times, formatted durations
 - [ ] VoiceOver labels that include the log name and running state; Dynamic Type-safe row layout
 - [ ] Empty state (`ContentUnavailableView`); disable Done until the name is valid
-- [ ] Confirm before deleting logs and entries
+  - A plain-text empty state explaining the purpose was added in Phase 2; restyle it here and add a "Make your first log" button.
+- [ ] Confirm before deleting logs and entries (the entry trash button now deletes immediately)
 - [ ] Rebuild entry details: Start/End/Duration/Note sections, autosave, working Delete
 - [ ] New/Edit Log sheets: titles, name first with keyboard focus, Cancel on Edit, footer text
 - [ ] Main list edit mode: hide quick-add and chevron; working rename
@@ -202,3 +240,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-15 | Couldn't reproduce the reported constraint warning (the on-screen keyboard was unavailable to test). Did a design review of all iOS screens: `docs/design-review-2026-10-15.md`. |
 | 2026-10-15 | Settled D1–D8 (all as recommended; v1 extra scope = watch quick-log only; never released). Fixed the Add crash and the launch crash from `nil`-start entries; verified in the simulator. |
 | 2026-10-15 | Phase 1 done: rename finished, iOS 18 / watchOS 11, Swift 6, watch debris and broken watch test targets removed, dead code removed, regression test added. Builds clean apart from 4 deprecation warnings; 2/2 tests pass. |
+| 2026-10-16 | Phase 2: SwiftData + `LogStore` shared by iOS and watch, CloudKit entitlements, 11 data-layer tests (12 total pass). Smoke-tested on the simulator: create interval log, start from list, Running/Stop shown on log screen, stop (21s), trash deletes. Wrote down the product purpose and principles (from David) and rewrote the README. CloudKit still needs registering on the developer account. |

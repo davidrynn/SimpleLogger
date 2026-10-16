@@ -5,153 +5,77 @@
 //  Created by David Rynn on 5/22/22.
 //
 
+import SwiftData
 import SwiftUI
-import CoreData
 
 struct MainView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \LogEntity.index, ascending: true)],
-        animation: .default)
-    private var logs: FetchedResults<LogEntity>
-    @EnvironmentObject var dataController: DataController
+    @Environment(\.modelContext) private var context
+    @Query(sort: \Log.sortIndex) private var logs: [Log]
     @State private var showAddView = false
-    @State var didStart = false
-    @State var didStop = false
-    @State var startTime = Date()
-    @State var stopTime = Date()
-    @State var animate = false
-    @State var error: Error?
-    @State var intialName = "No Title"
-    @State var initialBool = false
-    
+    @State private var error: Error?
+
+    private var store: LogStore { LogStore(context: context) }
+
     var body: some View {
         NavigationView {
-            VStack{
-                if error != nil {
-                    Text("Error: \(error.debugDescription)")
+            VStack {
+                if let error {
+                    Text("Error: \(error.localizedDescription)")
                 }
-                List {
-                    ForEach(logs, id: \.self) { log in
-                        let viewModel = LogViewModel(log: log, moc: moc)
-                        NavigationLink(destination: LogView(viewModel: viewModel)) {
-                            let startedEntry = startedEntry(log)
-                            MainRow(name: log.name ?? "No Name", count: log.entryEntities?.count ?? 0, didStart: startedEntry != nil) {
-                                startTime = Date()
-                                //if started animating, stop interval and stop animation
-                                if let startedEntry = startedEntry {
-                                    stopInterval(startedEntry)
-                                    return false
-                                }
-                                // if already hasn't started but uses intervals
-                                else if log.usesIntervals {
-                                    addEntry(log, startInterval: true)
-                                    return true
-                                }
-                                // otherwise just add entry
-                                addEntry(log, startInterval: false)
-                                return false
-                            }
-                            .onChange(of: didStart) { _ in
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                    didStart ? (animate = true) : (animate = false)
-                                }
+                if logs.isEmpty {
+                    emptyState
+                } else {
+                    List {
+                        ForEach(logs) { log in
+                            NavigationLink(destination: LogView(log: log)) {
+                                MainRow(log: log) { perform { try store.primaryAction(for: log) } }
                             }
                         }
+                        .onDelete { offsets in
+                            perform { try offsets.map { logs[$0] }.forEach(store.delete) }
+                        }
+                        .onMove { source, destination in
+                            perform { try store.moveLogs(logs, fromOffsets: source, toOffset: destination) }
+                        }
                     }
-                    .onDelete(perform: delete)
-                    .onMove(perform: moveItem)
                 }
             }
             .navigationBarTitle("Logs")
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {
-                let impactMed = UIImpactFeedbackGenerator(style: .medium)
-                impactMed.impactOccurred()
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                 showAddView.toggle()
             }, label: {
-                    Image(systemName: "plus")
+                Image(systemName: "plus")
             })
-                .sheet(isPresented: $showAddView, content: {
-                    NavigationView {
-                        NewLogView()
-                    }
-                })
-            )
+            .sheet(isPresented: $showAddView) {
+                NavigationView {
+                    NewLogView()
+                }
+            })
         }
         .navigationViewStyle(.stack)
     }
-    
-    private func startedEntry(_ log: LogEntity) -> EntryEntity? {
-        return log.entryEntities?.first(where: { item in
-            if let entryEntity = item as? EntryEntity {
-                return entryEntity.intervalStarted
-            }
-            return false
-        }) as? EntryEntity
-    }
-    
-    private func moveItem(at sets:IndexSet, destination:Int){
-            let itemToMove = sets.first!
-            
-            if itemToMove < destination{
-                var startIndex = itemToMove + 1
-                let endIndex = destination - 1
-                var startOrder = logs[itemToMove].index
-                while startIndex <= endIndex{
-                    logs[startIndex].index = startOrder
-                    startOrder = startOrder + 1
-                    startIndex = startIndex + 1
-                }
-                logs[itemToMove].index = startOrder
-            }
-            else if destination < itemToMove{
-                var startIndex = destination
-                let endIndex = itemToMove - 1
-                var startOrder = logs[destination].index + 1
-                let newOrder = logs[destination].index
-                while startIndex <= endIndex{
-                    logs[startIndex].index = startOrder
-                    startOrder = startOrder + 1
-                    startIndex = startIndex + 1
-                }
-                logs[itemToMove].index = newOrder
-            }
-        save()
-    }
-     
-    
-    private func delete(at offsets: IndexSet) {
-        offsets.forEach { index in
-            moc.delete(logs[index])
+
+    private var emptyState: some View {
+        VStack(spacing: 12) {
+            Spacer()
+            Text("Log anything with one tap")
+                .font(.headline)
+            Text("Make a log for something you want to track, like watering the plants. Tap its button to record that it happened, or to start and stop a timer.")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+            Spacer()
         }
+        .padding()
+    }
+
+    private func perform(_ action: () throws -> Void) {
         do {
-            try moc.save()
+            try action()
+            error = nil
         } catch {
-            self.error = LogError.CoreDataError.delete
-        }
-    }
-    
-    private func addEntry(_ logEntity: LogEntity, startInterval: Bool) {
-        let newEntry = EntryEntity(context: moc)
-        newEntry.id = UUID()
-        newEntry.start = startTime
-        newEntry.intervalStarted = startInterval
-        logEntity.addToEntryEntities(newEntry)
-        save()
-    }
-    
-    private func stopInterval(_ startedEntryEntity: EntryEntity) {
-        startedEntryEntity.end = Date()
-        startedEntryEntity.intervalStarted = false
-        save()
-    }
-    
-    private func save() {
-        do {
-            try moc.save()
-            self.error = nil
-        } catch {
-            self.error = LogError.CoreDataError.save
-            return
+            self.error = error
         }
     }
 }

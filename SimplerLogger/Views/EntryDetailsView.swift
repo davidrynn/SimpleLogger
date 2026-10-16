@@ -1,62 +1,52 @@
 //
-//  LogDetailsView.swift
+//  EntryDetailsView.swift
 //  SimplerLogger
 //
 //  Created by David Rynn on 5/29/22.
 //
 
-import CoreData
+import SwiftData
 import SwiftUI
 
 struct EntryDetailsView: View {
-    @Environment(\.managedObjectContext) var moc
-    @Environment(\.dismiss) var dismiss
-    @ObservedObject var entry: EntryEntity
-    var showStopDate: Bool {
-        return stopDate != nil
-    }
-    @State var startDate: Date
-    @State var stopDate: Date?
-    @State var error: Error?
-    @State var note: String
-    let formatter: DateFormatter
-    let componentsFormatter: DateComponentsFormatter
-    
-    init(entry: EntryEntity) {
+    @Environment(\.modelContext) private var context
+    @Environment(\.dismiss) private var dismiss
+    let entry: LogEntry
+    @State private var startDate: Date
+    @State private var stopDate: Date?
+    @State private var note: String
+    @State private var error: Error?
+
+    private var store: LogStore { LogStore(context: context) }
+
+    init(entry: LogEntry) {
         self.entry = entry
-        _startDate = State(initialValue: entry.start ?? Date())
+        _startDate = State(initialValue: entry.start)
         _stopDate = State(initialValue: entry.end)
-        _note = State(initialValue: entry.note ?? "")
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .long
-        self.formatter = dateFormatter
-        let componentsFormatter = DateComponentsFormatter()
-        componentsFormatter.unitsStyle = .abbreviated
-        self.componentsFormatter = componentsFormatter
+        _note = State(initialValue: entry.note)
     }
-    
+
     var body: some View {
         List {
-            VStack{
-                if error != nil {
-                    Text("Error: \(error.debugDescription)")
+            VStack {
+                if let error {
+                    Text("Error: \(error.localizedDescription)")
                         .foregroundColor(.red)
                 }
-                DatePicker(selection: $startDate, in: ...Date(), displayedComponents: [ .date, .hourAndMinute]) {
+                DatePicker(selection: $startDate, in: ...Date(), displayedComponents: [.date, .hourAndMinute]) {
                     Text("Edit")
                 }
-                Text("Start time: \(startDate, formatter: formatter)")
-                if stopDate != nil {
-                    Text(componentsFormatter.getDurationStrings(startDate, end: stopDate.bound) ?? "Error: \(LogError.InvalidDate.componentFormatter)")
-                    
+                Text("Start time: \(startDate.formatted(date: .long, time: .standard))")
+                if let stop = stopDate {
+                    if let durationText = DateComponentsFormatter.duration.string(from: startDate, to: stop) {
+                        Text(durationText)
+                    }
                     DatePicker(selection: $stopDate.bound, in: ...Date(), displayedComponents: [.date, .hourAndMinute]) {
                         Text("Edit")
                     }
-                    Text("Stop time: \(formatter.string(from: stopDate.bound))")
+                    Text("Stop time: \(stop.formatted(date: .long, time: .standard))")
                 }
                 TextField("Note", text: $note) {
-                    entry.note = note
                     save()
                 }
             }
@@ -65,49 +55,41 @@ struct EntryDetailsView: View {
             ToolbarItem(placement: .automatic) {
                 HStack {
                     Button {
-                        dismiss()
+                        do {
+                            try store.delete([entry])
+                            dismiss()
+                        } catch {
+                            self.error = error
+                        }
                     } label: {
                         Image(systemName: "trash")
                     }
                     Button {
-                        save()
-                        dismiss()
+                        if save() { dismiss() }
                     } label: {
                         Text("done")
                     }
                 }
             }
         }
-        
     }
-    
-    func save() {
-        entry.start = startDate
-        entry.end = stopDate
+
+    @discardableResult
+    private func save() -> Bool {
         do {
-            try moc.save()
-            self.error = nil
+            try store.update(entry, start: startDate, end: stopDate, note: note)
+            error = nil
+            return true
         } catch {
             self.error = error
+            return false
         }
     }
 }
 
 extension Optional where Wrapped == Date {
-    var _bound: Date? {
-        get {
-            return self
-        }
-        set {
-            self = newValue
-        }
-    }
-    public var bound: Date {
-        get {
-            return _bound ?? Date()
-        }
-        set {
-            _bound = newValue
-        }
+    var bound: Date {
+        get { self ?? Date() }
+        set { self = newValue }
     }
 }
