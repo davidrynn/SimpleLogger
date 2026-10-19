@@ -9,30 +9,66 @@ import SwiftUI
 
 struct MainRow: View {
     let log: Log
+    let isEditing: Bool
     let action: () -> Void
 
-    private var isRunning: Bool { log.isRunning }
+    var body: some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(log.name)
+                    .font(.body)
+                if let running = log.runningEntry {
+                    // Text(_:style: .timer) counts up from the start and updates itself.
+                    Text("Running \(running.start, style: .timer)")
+                        .monospacedDigit()
+                        .foregroundStyle(.red)
+                } else {
+                    Text(log.summary())
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .font(.subheadline)
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if !isEditing {
+                LogActionButton(log: log, action: action)
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+/// The one button on every log (`LogStore.primaryAction`): add, start or stop.
+struct LogActionButton: View {
+    let log: Log
+    let action: () -> Void
+    @State private var taps = 0
 
     var body: some View {
-        HStack {
-            Text(log.name)
-                .truncationMode(.tail)
-            Spacer()
-            Text("Entries: \(log.entryCount)")
-            Spacer()
-            Button(action: {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                action()
-            }, label: {
-                Image(systemName: "plus.circle")
-                    .rotationEffect(Angle.degrees(isRunning ? 300 : 0))
-                    .animation(isRunning ? .linear(duration: 2.0).repeatForever(autoreverses: false) : .default, value: isRunning)
-            })
-            .opacity(isRunning ? 0.5 : 1.0)
-            .scaleEffect(isRunning ? 0.9 : 1.0)
-            .animation(isRunning ? .linear(duration: 1.0).repeatForever(autoreverses: true) : .default, value: isRunning)
-            .buttonStyle(.bordered)
+        Button {
+            taps += 1
+            action()
+        } label: {
+            Image(systemName: Self.symbol(for: log))
+                .font(.title3.weight(.semibold))
+                .frame(minWidth: 28, minHeight: 28)
+                .contentTransition(.symbolEffect(.replace))
         }
-        .padding()
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.circle)
+        .tint(log.isRunning ? .red : .accentColor)
+        .sensoryFeedback(.impact(weight: .medium), trigger: taps)
+        .accessibilityLabel(Self.accessibilityLabel(for: log))
+    }
+
+    static func symbol(for log: Log) -> String {
+        if log.isRunning { return "stop.fill" }
+        return log.usesIntervals ? "play.fill" : "plus"
+    }
+
+    static func accessibilityLabel(for log: Log) -> String {
+        if log.isRunning { return String(localized: "Stop \(log.name) timer") }
+        if log.usesIntervals { return String(localized: "Start \(log.name) timer") }
+        return String(localized: "Log \(log.name)")
     }
 }

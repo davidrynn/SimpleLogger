@@ -12,6 +12,8 @@
 		2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
 		2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
 		2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */; };
+		2290C00B2EF0000000A1B2C3 /* FormattingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C00A2EF0000000A1B2C3 /* FormattingTests.swift */; };
+		2290C00D2EF0000000A1B2C3 /* LoggingFlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C00C2EF0000000A1B2C3 /* LoggingFlowUITests.swift */; };
 		22A80210284161900002FFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A8020F284161900002FFBE /* Assets.xcassets */; };
 		22A8021D284161900002FFBE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8021C284161900002FFBE /* MainView.swift */; };
 		22A80228284161910002FFBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A80227284161910002FFBE /* Preview Assets.xcassets */; };
@@ -24,8 +26,7 @@
 		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
 		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
 		22BEFAD62839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */; };
-		22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE42850F25D00194826 /* NewLogView.swift */; };
-		22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE62851B1E500194826 /* UpdateLogView.swift */; };
+		22CA6FE52850F25D00194826 /* LogFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE42850F25D00194826 /* LogFormView.swift */; };
 		22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9D4283AC3A30015FB43 /* MainView.swift */; };
 		22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9EE283ACC800015FB43 /* MainRow.swift */; };
 		22CCAA09283ADE850015FB43 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA08283ADE850015FB43 /* LogView.swift */; };
@@ -74,6 +75,8 @@
 		2290C0042EF0000000A1B2C3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		2290C0052EF0000000A1B2C3 /* LogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStore.swift; sourceTree = "<group>"; };
 		2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreTests.swift; sourceTree = "<group>"; };
+		2290C00A2EF0000000A1B2C3 /* FormattingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormattingTests.swift; sourceTree = "<group>"; };
+		2290C00C2EF0000000A1B2C3 /* LoggingFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingFlowUITests.swift; sourceTree = "<group>"; };
 		2250AB67284AA37200E3B72D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLoggerWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A8020F284161900002FFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,8 +91,7 @@
 		22BEFAC52839F4310081E75A /* SimplerLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFACF2839F4310081E75A /* SimplerLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplerLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		22CA6FE42850F25D00194826 /* NewLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLogView.swift; sourceTree = "<group>"; };
-		22CA6FE62851B1E500194826 /* UpdateLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogView.swift; sourceTree = "<group>"; };
+		22CA6FE42850F25D00194826 /* LogFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFormView.swift; sourceTree = "<group>"; };
 		22CCA9D4283AC3A30015FB43 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		22CCA9EE283ACC800015FB43 /* MainRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRow.swift; sourceTree = "<group>"; };
 		22CCAA08283ADE850015FB43 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */,
+				2290C00A2EF0000000A1B2C3 /* FormattingTests.swift */,
 			);
 			path = SimplerLoggerTests;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */,
+				2290C00C2EF0000000A1B2C3 /* LoggingFlowUITests.swift */,
 			);
 			path = SimplerLoggerUITests;
 			sourceTree = "<group>";
@@ -223,8 +227,7 @@
 				22CCA9EE283ACC800015FB43 /* MainRow.swift */,
 				22CCAA08283ADE850015FB43 /* LogView.swift */,
 				22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */,
-				22CA6FE42850F25D00194826 /* NewLogView.swift */,
-				22CA6FE62851B1E500194826 /* UpdateLogView.swift */,
+				22CA6FE42850F25D00194826 /* LogFormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -406,8 +409,7 @@
 			files = (
 				2290C0062EF0000000A1B2C3 /* Models.swift in Sources */,
 				2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */,
-				22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */,
-				22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */,
+				22CA6FE52850F25D00194826 /* LogFormView.swift in Sources */,
 				22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */,
 				22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */,
 				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
@@ -422,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */,
+				2290C00B2EF0000000A1B2C3 /* FormattingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +433,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22BEFAD62839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift in Sources */,
+				2290C00D2EF0000000A1B2C3 /* LoggingFlowUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +646,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
+				INFOPLIST_FILE = SimplerLogger/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -673,7 +677,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
+				INFOPLIST_FILE = SimplerLogger/Info.plist;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

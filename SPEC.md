@@ -202,21 +202,48 @@ Its fixes are tracked as Phase 3 tasks below.
 - [x] Unit tests for the data layer (in-memory store): 11 Swift Testing tests in `LogStoreTests`
 
 ### Phase 3: iOS UI
-- [ ] Fix every 🔴/🟠 bug above
-- [ ] `NavigationStack`, modern toolbar APIs, `@Observable` state
-- [ ] Prominent primary action (`.borderedProminent`, large, pinned to the bottom of the log screen)
-- [ ] Clear running state: color, a "Stop" label and a live elapsed time; respect Reduce Motion
-- [ ] "Today"/"Yesterday" section headers, short times, formatted durations
-- [ ] VoiceOver labels that include the log name and running state; Dynamic Type-safe row layout
-- [ ] Empty state (`ContentUnavailableView`); disable Done until the name is valid
-  - A plain-text empty state explaining the purpose was added in Phase 2; restyle it here and add a "Make your first log" button.
-- [ ] Confirm before deleting logs and entries (the entry trash button now deletes immediately)
-- [ ] Rebuild entry details: Start/End/Duration/Note sections, autosave, working Delete
-- [ ] New/Edit Log sheets: titles, name first with keyboard focus, Cancel on Edit, footer text
-- [ ] Main list edit mode: hide quick-add and chevron; working rename
-- [ ] Consistent wording and capitalization
-- [ ] Live-updating grouped list; error UI
+- [x] Fix every 🔴/🟠 bug above (iOS ones; the watch's lack of data was fixed in Phase 2, its UI is Phase 4)
+- [x] `NavigationStack`, modern toolbar APIs, `@Observable` state
+  - `NavigationStack` with value-based `navigationDestination`; `toolbar`/`ToolbarItem`; `sensoryFeedback` replaces
+    `UIImpactFeedbackGenerator`. No `@Observable` types were needed: views read models through `@Query` and change
+    them through `LogStore`, so there's no view-model state left to observe.
+- [x] Prominent primary action (`.borderedProminent`, large, pinned to the bottom of the log screen)
+  - `safeAreaInset(edge: .bottom)` with a bar background. List rows use the same action as a filled circular button
+    (`LogActionButton`): ＋ for tap logs, ▶ for timers, red ■ while running.
+- [x] Clear running state: color, a "Stop" label and a live elapsed time; respect Reduce Motion
+  - Red "Running 0:14" under the name on the list, "Stop 0:14" on the log screen's button, live duration on the
+    entry. All `Text(_, style: .timer)`. The repeat-forever animations are gone; the only animation is the system
+    symbol replace, which follows Reduce Motion.
+- [x] "Today"/"Yesterday" section headers, short times, formatted durations
+  - Headers: "Today", "Yesterday", "Monday, Oct 12" (year added outside this year), with the day's entry count or
+    total time. Rows: "6:04 PM", "6:04 PM – 7:16 PM", "1h 12m". List rows show "3 today · last 6:04 PM",
+    "40m today" (timers) or "Last: Yesterday, 6:04 PM". Covered by `FormattingTests`.
+- [x] VoiceOver labels that include the log name and running state; Dynamic Type-safe row layout
+  - "Log Water plants", "Start Reading timer", "Stop Reading timer". Name and summary are stacked, so long names
+    wrap; checked at Accessibility Large.
+- [x] Empty state (`ContentUnavailableView`); disable Done until the name is valid
+  - "Log Anything with One Tap" with a "Make Your First Log" button. An empty log shows "No Entries Yet".
+- [x] Confirm before deleting logs and entries
+  - `confirmationDialog` on the row or button that triggers it (iOS 26 shows it as a popover pointing at its
+    anchor). Swipe actions don't use `role: .destructive`, which would remove the row before the answer. The log
+    dialog says how many entries go with it.
+- [x] Rebuild entry details: Start/End/Duration/Note sections, autosave, working Delete
+  - Every change saves as it's made through `LogStore`, reading the other fields from the entry so a timer stopped
+    elsewhere stays stopped. Date pickers are range-limited so the end can't precede the start. A running entry
+    shows a live duration and "Stop Now". Delete Entry is a separate red button, with confirmation.
+- [x] New/Edit Log sheets: titles, name first with keyboard focus, Cancel on Edit, footer text
+  - One `LogFormView` for both ("New Log"/"Edit Log"); nothing saves until Done. "Use Intervals" is now "Timer",
+    with a footer explaining it. Turning the timer off while one runs says it will stop.
+- [x] Main list edit mode: hide quick-add and chevron; working rename
+  - In edit mode a tap opens Edit Log. Rename is also on a leading swipe and the context menu.
+- [x] Consistent wording and capitalization
+- [x] Live-updating grouped list; error UI
+  - Errors are shown in an alert (`errorAlert`). A store that fails to open shows "Can't Open Your Logs" instead
+    of `fatalError`.
 - [x] Remove the unhandled home-screen quick action (D8: deferred past v1)
+- [x] UI tests for the core flows (`LoggingFlowUITests`): make a log and tap it from the list, timer start/stop,
+  deleting an entry and a log with confirmation. They launch with `-UITestInMemoryStore`, so they never touch
+  real data.
 
 ### Phase 4: Watch
 - [ ] Watch list backed by synced data; one-tap log/start/stop
@@ -227,7 +254,7 @@ Its fixes are tracked as Phase 3 tasks below.
 - [ ] Privacy manifest (`PrivacyInfo.xcprivacy`) and App Store privacy "nutrition label"
 - [ ] Privacy policy URL; support URL
 - [ ] Screenshots (iPhone + Watch), description, keywords
-- [ ] UI tests for the core flows
+- [x] UI tests for the core flows (done in Phase 3; add watch coverage in Phase 4 if practical)
 - [ ] TestFlight beta → fix → submit
 
 ## Session log
@@ -241,3 +268,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-15 | Settled D1–D8 (all as recommended; v1 extra scope = watch quick-log only; never released). Fixed the Add crash and the launch crash from `nil`-start entries; verified in the simulator. |
 | 2026-10-15 | Phase 1 done: rename finished, iOS 18 / watchOS 11, Swift 6, watch debris and broken watch test targets removed, dead code removed, regression test added. Builds clean apart from 4 deprecation warnings; 2/2 tests pass. |
 | 2026-10-16 | Phase 2: SwiftData + `LogStore` shared by iOS and watch, CloudKit entitlements, 11 data-layer tests (12 total pass). Smoke-tested on the simulator: create interval log, start from list, Running/Stop shown on log screen, stop (21s), trash deletes. Wrote down the product purpose and principles (from David) and rewrote the README. CloudKit still needs registering on the developer account. |
+| 2026-10-18 | Merged Phases 0–2 to `main` (PR #1). Phase 3 on `phase3-ios-ui`: rebuilt every iPhone screen against the design review (prominent one-tap button, live running state, Today/Yesterday, VoiceOver labels, confirmations, autosaving entry details, one New/Edit Log sheet, error alerts, no `fatalError`). 21/21 tests pass (6 formatting, 3 UI flow tests new), no warnings. Checked every screen from UI-test screenshots, including Accessibility Large text. |
