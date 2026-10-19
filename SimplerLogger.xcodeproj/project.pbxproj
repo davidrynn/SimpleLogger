@@ -1,0 +1,819 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2290C0062EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
+		2290C0072EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
+		2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
+		2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0052EF0000000A1B2C3 /* LogStore.swift */; };
+		2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */; };
+		22A80210284161900002FFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A8020F284161900002FFBE /* Assets.xcassets */; };
+		22A8021D284161900002FFBE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8021C284161900002FFBE /* MainView.swift */; };
+		22A80228284161910002FFBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A80227284161910002FFBE /* Preview Assets.xcassets */; };
+		22A80243284161910002FFBE /* SimplerLoggerWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		22A80253284295200002FFBE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
+		22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */; };
+		22A8025C284298060002FFBE /* WatchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025B284298060002FFBE /* WatchRow.swift */; };
+		22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */; };
+		22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */; };
+		22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABC2839F4310081E75A /* Assets.xcassets */; };
+		22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BEFABF2839F4310081E75A /* Preview Assets.xcassets */; };
+		22BEFAD62839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */; };
+		22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE42850F25D00194826 /* NewLogView.swift */; };
+		22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CA6FE62851B1E500194826 /* UpdateLogView.swift */; };
+		22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9D4283AC3A30015FB43 /* MainView.swift */; };
+		22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9EE283ACC800015FB43 /* MainRow.swift */; };
+		22CCAA09283ADE850015FB43 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA08283ADE850015FB43 /* LogView.swift */; };
+		22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		22A80241284161910002FFBE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22BEFAAD2839F42F0081E75A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22A8020C2841618F0002FFBE;
+			remoteInfo = SimplerLoggerWatch;
+		};
+		22BEFAC62839F4310081E75A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22BEFAAD2839F42F0081E75A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BEFAB42839F42F0081E75A;
+			remoteInfo = SimplerLogger;
+		};
+		22BEFAD02839F4310081E75A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 22BEFAAD2839F42F0081E75A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 22BEFAB42839F42F0081E75A;
+			remoteInfo = SimplerLogger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		22A8024B284161910002FFBE /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				22A80243284161910002FFBE /* SimplerLoggerWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2290C0042EF0000000A1B2C3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		2290C0052EF0000000A1B2C3 /* LogStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStore.swift; sourceTree = "<group>"; };
+		2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreTests.swift; sourceTree = "<group>"; };
+		2250AB67284AA37200E3B72D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLoggerWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22A8020F284161900002FFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22A8021C284161900002FFBE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		22A80227284161910002FFBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		22A8025B284298060002FFBE /* WatchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchRow.swift; sourceTree = "<group>"; };
+		22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryDetailsView.swift; sourceTree = "<group>"; };
+		22BEFAB52839F42F0081E75A /* SimplerLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplerLoggerApp.swift; sourceTree = "<group>"; };
+		22BEFABC2839F4310081E75A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		22BEFABF2839F4310081E75A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		22BEFAC52839F4310081E75A /* SimplerLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFACF2839F4310081E75A /* SimplerLoggerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplerLoggerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplerLoggerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		22CA6FE42850F25D00194826 /* NewLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLogView.swift; sourceTree = "<group>"; };
+		22CA6FE62851B1E500194826 /* UpdateLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateLogView.swift; sourceTree = "<group>"; };
+		22CCA9D4283AC3A30015FB43 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		22CCA9EE283ACC800015FB43 /* MainRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRow.swift; sourceTree = "<group>"; };
+		22CCAA08283ADE850015FB43 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		22CCAA0C283C6DA70015FB43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22A80212284161900002FFBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAB22839F42F0081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC22839F4310081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACC2839F4310081E75A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2290C0032EF0000000A1B2C3 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */,
+				2290C0042EF0000000A1B2C3 /* Models.swift */,
+				2290C0052EF0000000A1B2C3 /* LogStore.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		22A8020E2841618F0002FFBE /* SimplerLoggerWatch */ = {
+			isa = PBXGroup;
+			children = (
+				22A8021C284161900002FFBE /* MainView.swift */,
+				22A8025B284298060002FFBE /* WatchRow.swift */,
+				22A8020F284161900002FFBE /* Assets.xcassets */,
+				22A80226284161910002FFBE /* Preview Content */,
+			);
+			path = SimplerLoggerWatch;
+			sourceTree = "<group>";
+		};
+		22A80226284161910002FFBE /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				22A80227284161910002FFBE /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22BEFAAC2839F42F0081E75A = {
+			isa = PBXGroup;
+			children = (
+				2250AB67284AA37200E3B72D /* README.md */,
+				2290C0032EF0000000A1B2C3 /* Shared */,
+				22BEFAB72839F42F0081E75A /* SimplerLogger */,
+				22BEFAC82839F4310081E75A /* SimplerLoggerTests */,
+				22BEFAD22839F4310081E75A /* SimplerLoggerUITests */,
+				22A8020E2841618F0002FFBE /* SimplerLoggerWatch */,
+				22BEFAB62839F42F0081E75A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22BEFAB62839F42F0081E75A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAB52839F42F0081E75A /* SimplerLogger.app */,
+				22BEFAC52839F4310081E75A /* SimplerLoggerTests.xctest */,
+				22BEFACF2839F4310081E75A /* SimplerLoggerUITests.xctest */,
+				22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22BEFAB72839F42F0081E75A /* SimplerLogger */ = {
+			isa = PBXGroup;
+			children = (
+				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
+				22CCA9D3283AC3740015FB43 /* Views */,
+				22BEFABC2839F4310081E75A /* Assets.xcassets */,
+				22BEFABE2839F4310081E75A /* Preview Content */,
+			);
+			path = SimplerLogger;
+			sourceTree = "<group>";
+		};
+		22BEFABE2839F4310081E75A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFABF2839F4310081E75A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		22BEFAC82839F4310081E75A /* SimplerLoggerTests */ = {
+			isa = PBXGroup;
+			children = (
+				2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */,
+			);
+			path = SimplerLoggerTests;
+			sourceTree = "<group>";
+		};
+		22BEFAD22839F4310081E75A /* SimplerLoggerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				22BEFAD52839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift */,
+			);
+			path = SimplerLoggerUITests;
+			sourceTree = "<group>";
+		};
+		22CCA9D3283AC3740015FB43 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				22CCA9D4283AC3A30015FB43 /* MainView.swift */,
+				22CCA9EE283ACC800015FB43 /* MainRow.swift */,
+				22CCAA08283ADE850015FB43 /* LogView.swift */,
+				22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */,
+				22CA6FE42850F25D00194826 /* NewLogView.swift */,
+				22CA6FE62851B1E500194826 /* UpdateLogView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22A8020C2841618F0002FFBE /* SimplerLoggerWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22A80248284161910002FFBE /* Build configuration list for PBXNativeTarget "SimplerLoggerWatch" */;
+			buildPhases = (
+				22A8020B2841618F0002FFBE /* Resources */,
+				22A80211284161900002FFBE /* Sources */,
+				22A80212284161900002FFBE /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplerLoggerWatch;
+			productName = SimplerLoggerWatch;
+			productReference = 22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22BEFAB42839F42F0081E75A /* SimplerLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFAD92839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLogger" */;
+			buildPhases = (
+				22BEFAB12839F42F0081E75A /* Sources */,
+				22BEFAB22839F42F0081E75A /* Frameworks */,
+				22BEFAB32839F42F0081E75A /* Resources */,
+				22A8024B284161910002FFBE /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22A80242284161910002FFBE /* PBXTargetDependency */,
+			);
+			name = SimplerLogger;
+			productName = SimplerLogger;
+			productReference = 22BEFAB52839F42F0081E75A /* SimplerLogger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		22BEFAC42839F4310081E75A /* SimplerLoggerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFADC2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLoggerTests" */;
+			buildPhases = (
+				22BEFAC12839F4310081E75A /* Sources */,
+				22BEFAC22839F4310081E75A /* Frameworks */,
+				22BEFAC32839F4310081E75A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BEFAC72839F4310081E75A /* PBXTargetDependency */,
+			);
+			name = SimplerLoggerTests;
+			productName = SimplerLoggerTests;
+			productReference = 22BEFAC52839F4310081E75A /* SimplerLoggerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		22BEFACE2839F4310081E75A /* SimplerLoggerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22BEFADF2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLoggerUITests" */;
+			buildPhases = (
+				22BEFACB2839F4310081E75A /* Sources */,
+				22BEFACC2839F4310081E75A /* Frameworks */,
+				22BEFACD2839F4310081E75A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				22BEFAD12839F4310081E75A /* PBXTargetDependency */,
+			);
+			name = SimplerLoggerUITests;
+			productName = SimplerLoggerUITests;
+			productReference = 22BEFACF2839F4310081E75A /* SimplerLoggerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22BEFAAD2839F42F0081E75A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1330;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					22A8020C2841618F0002FFBE = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22BEFAB42839F42F0081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					22BEFAC42839F4310081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 22BEFAB42839F42F0081E75A;
+					};
+					22BEFACE2839F4310081E75A = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 22BEFAB42839F42F0081E75A;
+					};
+				};
+			};
+			buildConfigurationList = 22BEFAB02839F42F0081E75A /* Build configuration list for PBXProject "SimplerLogger" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 22BEFAAC2839F42F0081E75A;
+			productRefGroup = 22BEFAB62839F42F0081E75A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22BEFAB42839F42F0081E75A /* SimplerLogger */,
+				22BEFAC42839F4310081E75A /* SimplerLoggerTests */,
+				22BEFACE2839F4310081E75A /* SimplerLoggerUITests */,
+				22A8020C2841618F0002FFBE /* SimplerLoggerWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22A8020B2841618F0002FFBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22A80228284161910002FFBE /* Preview Assets.xcassets in Resources */,
+				22A80210284161900002FFBE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAB32839F42F0081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */,
+				22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC32839F4310081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACD2839F4310081E75A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22A80211284161900002FFBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2290C0072EF0000000A1B2C3 /* Models.swift in Sources */,
+				2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */,
+				22A80253284295200002FFBE /* Extensions.swift in Sources */,
+				22A8021D284161900002FFBE /* MainView.swift in Sources */,
+				22A8025C284298060002FFBE /* WatchRow.swift in Sources */,
+				22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAB12839F42F0081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2290C0062EF0000000A1B2C3 /* Models.swift in Sources */,
+				2290C0082EF0000000A1B2C3 /* LogStore.swift in Sources */,
+				22CA6FE72851B1E500194826 /* UpdateLogView.swift in Sources */,
+				22CA6FE52850F25D00194826 /* NewLogView.swift in Sources */,
+				22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */,
+				22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */,
+				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
+				22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */,
+				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
+				22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFAC12839F4310081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22BEFACB2839F4310081E75A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22BEFAD62839F4310081E75A /* SimplerLoggerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		22A80242284161910002FFBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22A8020C2841618F0002FFBE /* SimplerLoggerWatch */;
+			targetProxy = 22A80241284161910002FFBE /* PBXContainerItemProxy */;
+		};
+		22BEFAC72839F4310081E75A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BEFAB42839F42F0081E75A /* SimplerLogger */;
+			targetProxy = 22BEFAC62839F4310081E75A /* PBXContainerItemProxy */;
+		};
+		22BEFAD12839F4310081E75A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 22BEFAB42839F42F0081E75A /* SimplerLogger */;
+			targetProxy = 22BEFAD02839F4310081E75A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		22A80249284161910002FFBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimplerLoggerWatch/SimplerLoggerWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SimplerLogger;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.davidrynn.SimplerLogger;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLogger.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		22A8024A284161910002FFBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SimplerLoggerWatch/SimplerLoggerWatch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = SimplerLogger;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = edu.davidrynn.SimplerLogger;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLogger.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		22BEFAD72839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		22BEFAD82839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22BEFADA2839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = SimplerLogger/SimplerLogger.entitlements;
+				DEVELOPMENT_ASSET_PATHS = "\"SimplerLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22BEFADB2839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = SimplerLogger/SimplerLogger.entitlements;
+				DEVELOPMENT_ASSET_PATHS = "\"SimplerLogger/Preview Content\"";
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIBackgroundModes = "remote-notification";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLogger;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		22BEFADD2839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLoggerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplerLogger.app/SimplerLogger";
+			};
+			name = Debug;
+		};
+		22BEFADE2839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLoggerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplerLogger.app/SimplerLogger";
+			};
+			name = Release;
+		};
+		22BEFAE02839F4310081E75A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLoggerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SimplerLogger;
+			};
+			name = Debug;
+		};
+		22BEFAE12839F4310081E75A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3KR65ZULS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.davidrynn.SimplerLoggerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SimplerLogger;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22A80248284161910002FFBE /* Build configuration list for PBXNativeTarget "SimplerLoggerWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22A80249284161910002FFBE /* Debug */,
+				22A8024A284161910002FFBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFAB02839F42F0081E75A /* Build configuration list for PBXProject "SimplerLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFAD72839F4310081E75A /* Debug */,
+				22BEFAD82839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFAD92839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFADA2839F4310081E75A /* Debug */,
+				22BEFADB2839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFADC2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLoggerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFADD2839F4310081E75A /* Debug */,
+				22BEFADE2839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22BEFADF2839F4310081E75A /* Build configuration list for PBXNativeTarget "SimplerLoggerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22BEFAE02839F4310081E75A /* Debug */,
+				22BEFAE12839F4310081E75A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 22BEFAAD2839F42F0081E75A /* Project object */;
+}

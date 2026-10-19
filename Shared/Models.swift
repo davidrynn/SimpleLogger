@@ -1,0 +1,76 @@
+//
+//  Models.swift
+//  SimplerLogger
+//
+
+import Foundation
+import SwiftData
+
+// CloudKit sync requires every property to be optional or have a default,
+// no unique constraints, and optional relationships.
+
+@Model
+final class Log {
+    var name: String = ""
+    var usesIntervals: Bool = false
+    /// Position in the user's list of logs; lower comes first.
+    var sortIndex: Int = 0
+    var createdAt: Date = Date.now
+    @Relationship(deleteRule: .cascade, inverse: \LogEntry.log)
+    var entries: [LogEntry]? = []
+
+    init(name: String, usesIntervals: Bool = false, sortIndex: Int = 0) {
+        self.name = name
+        self.usesIntervals = usesIntervals
+        self.sortIndex = sortIndex
+    }
+}
+
+@Model
+final class LogEntry {
+    var start: Date = Date.now
+    /// Nil for a tap entry, or for an interval that is still running.
+    var end: Date?
+    var isInterval: Bool = false
+    var note: String = ""
+    var log: Log?
+
+    init(start: Date = .now, isInterval: Bool = false) {
+        self.start = start
+        self.isInterval = isInterval
+    }
+
+    /// Derived rather than stored, so it can't disagree with `end`.
+    var isRunning: Bool { isInterval && end == nil }
+
+    var duration: TimeInterval? { end.map { $0.timeIntervalSince(start) } }
+}
+
+extension Log {
+    var entryCount: Int { entries?.count ?? 0 }
+
+    var runningEntry: LogEntry? { entries?.first(where: \.isRunning) }
+
+    var isRunning: Bool { runningEntry != nil }
+
+    /// Entries grouped by calendar day: newest day first, newest entry first within a day.
+    func entriesByDay(calendar: Calendar = .current) -> [(day: Date, entries: [LogEntry])] {
+        let groups = Dictionary(grouping: entries ?? []) { calendar.startOfDay(for: $0.start) }
+        return groups
+            .map { (day: $0.key, entries: $0.value.sorted { $0.start > $1.start }) }
+            .sorted { $0.day > $1.day }
+    }
+}
+
+extension ModelContainer {
+    /// The app's container. Syncs through CloudKit when the iCloud entitlement is present.
+    static func simplerLogger(inMemory: Bool = false) throws -> ModelContainer {
+        let schema = Schema([Log.self, LogEntry.self])
+        let configuration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: inMemory,
+            cloudKitDatabase: inMemory ? .none : .automatic
+        )
+        return try ModelContainer(for: schema, configurations: configuration)
+    }
+}
