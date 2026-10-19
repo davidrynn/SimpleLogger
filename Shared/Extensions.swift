@@ -17,12 +17,14 @@ extension DateComponentsFormatter {
         return formatter
     }()
 
+    /// `interval` formatted with `duration`, or "" if it can't be formatted.
     static func durationText(_ interval: TimeInterval) -> String {
         duration.string(from: interval) ?? ""
     }
 }
 
 extension LogEntry {
+    /// "1h 12m" for a finished interval; nil for tap entries and running intervals.
     var durationText: String? {
         duration.map(DateComponentsFormatter.durationText)
     }

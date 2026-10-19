@@ -11,6 +11,7 @@ import SwiftUI
 struct WatchRow: View {
     let log: Log
     let action: () -> Void
+    /// Counts taps to trigger haptics. Keying them to the log's state would also buzz on synced changes.
     @State private var taps = 0
 
     var body: some View {

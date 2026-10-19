@@ -61,6 +61,7 @@ struct LogFormView: View {
         .errorAlert($error)
     }
 
+    /// Explains the Timer toggle, and warns when turning it off will stop a running timer.
     private var timerFooter: String {
         if let log, log.isRunning, !usesTimer {
             return String(localized: "The timer that's running now will stop when you tap Done.")
@@ -70,6 +71,7 @@ struct LogFormView: View {
             : String(localized: "Each tap records that it happened, with the time.")
     }
 
+    /// Saves through `LogStore` and closes the sheet; on failure the sheet stays open and shows the error.
     private func done() {
         guard isNameValid else { return }
         do {
