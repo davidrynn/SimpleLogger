@@ -126,3 +126,25 @@ struct LogStore {
         return trimmed
     }
 }
+
+#if DEBUG
+extension LogStore {
+    /// A few logs with history, for looking at screens (launch with `-SeedSampleData`).
+    func seedSampleData(now: Date = .now) throws {
+        let water = try createLog(named: "Water plants", usesIntervals: false)
+        for hoursAgo in [26.0, 3, 1] { try addEntry(to: water, at: now.addingTimeInterval(-hoursAgo * 3_600)) }
+
+        let reading = try createLog(named: "Reading", usesIntervals: true)
+        try startInterval(in: reading, at: now.addingTimeInterval(-5 * 3_600))
+        try stopInterval(in: reading, at: now.addingTimeInterval(-4.5 * 3_600))
+        try startInterval(in: reading, at: now.addingTimeInterval(-12 * 60))
+
+        let vitamins = try createLog(named: "Took vitamins", usesIntervals: false)
+        try addEntry(to: vitamins, at: now.addingTimeInterval(-25 * 3_600))
+
+        let walk = try createLog(named: "Walk", usesIntervals: true)
+        try startInterval(in: walk, at: now.addingTimeInterval(-28 * 3_600))
+        try stopInterval(in: walk, at: now.addingTimeInterval(-27.25 * 3_600))
+    }
+}
+#endif

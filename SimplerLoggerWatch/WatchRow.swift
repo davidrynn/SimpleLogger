@@ -7,21 +7,48 @@
 
 import SwiftUI
 
+/// The whole row is the log's button (`LogStore.primaryAction`), the biggest target the watch allows.
 struct WatchRow: View {
     let log: Log
     let action: () -> Void
+    @State private var taps = 0
 
     var body: some View {
-        HStack {
-            Text(log.name)
-                .truncationMode(.tail)
-            Spacer()
-            Button(action: action) {
-                Image(systemName: log.isRunning ? "timer" : "plus")
+        Button {
+            taps += 1
+            action()
+        } label: {
+            HStack(spacing: 8) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(log.name)
+                        .font(.headline)
+                    if let running = log.runningEntry {
+                        Text("Running \(running.start, style: .timer)")
+                            .monospacedDigit()
+                            .foregroundStyle(.red)
+                    } else {
+                        Text(log.summary(compact: true))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .font(.footnote)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                Image(systemName: log.actionSymbol)
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 32, height: 32)
+                    .background(log.isRunning ? Color.red : Color.accentColor, in: .circle)
+                    .contentTransition(.symbolEffect(.replace))
             }
-            .animation(log.isRunning ? .easeIn(duration: 1).repeatForever() : .default, value: log.isRunning)
-            .buttonStyle(.bordered)
+            .padding(.vertical, 4)
         }
-        .padding()
+        // Evaluated after the action, so it reflects the new state.
+        .sensoryFeedback(trigger: taps) { _, _ in
+            if log.isRunning { return .start }
+            return log.usesIntervals ? .stop : .success
+        }
+        .accessibilityLabel(log.actionLabel)
+        .accessibilityValue(log.isRunning ? Text("Running") : Text(log.summary()))
     }
 }

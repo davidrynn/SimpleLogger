@@ -14,8 +14,16 @@ struct SimplerLoggerApp: App {
 
     init() {
         // UI tests launch with this argument so they start from an empty store and never touch real data.
-        let inMemory = ProcessInfo.processInfo.arguments.contains("-UITestInMemoryStore")
-        container = Result { try .simplerLogger(inMemory: inMemory) }
+        let arguments = ProcessInfo.processInfo.arguments
+        let seedSampleData = arguments.contains("-SeedSampleData")
+        let inMemory = seedSampleData || arguments.contains("-UITestInMemoryStore")
+        container = Result {
+            let container = try ModelContainer.simplerLogger(inMemory: inMemory)
+            #if DEBUG
+            if seedSampleData { try LogStore(context: container.mainContext).seedSampleData() }
+            #endif
+            return container
+        }
     }
 
     var body: some Scene {

@@ -49,7 +49,7 @@ struct LogActionButton: View {
             taps += 1
             action()
         } label: {
-            Image(systemName: Self.symbol(for: log))
+            Image(systemName: log.actionSymbol)
                 .font(.title3.weight(.semibold))
                 .frame(minWidth: 28, minHeight: 28)
                 .contentTransition(.symbolEffect(.replace))
@@ -58,17 +58,6 @@ struct LogActionButton: View {
         .buttonBorderShape(.circle)
         .tint(log.isRunning ? .red : .accentColor)
         .sensoryFeedback(.impact(weight: .medium), trigger: taps)
-        .accessibilityLabel(Self.accessibilityLabel(for: log))
-    }
-
-    static func symbol(for log: Log) -> String {
-        if log.isRunning { return "stop.fill" }
-        return log.usesIntervals ? "play.fill" : "plus"
-    }
-
-    static func accessibilityLabel(for log: Log) -> String {
-        if log.isRunning { return String(localized: "Stop \(log.name) timer") }
-        if log.usesIntervals { return String(localized: "Start \(log.name) timer") }
-        return String(localized: "Log \(log.name)")
+        .accessibilityLabel(log.actionLabel)
     }
 }

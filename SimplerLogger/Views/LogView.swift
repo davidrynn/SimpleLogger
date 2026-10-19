@@ -109,7 +109,7 @@ struct LogView: View {
         .controlSize(.large)
         .tint(log.isRunning ? .red : .accentColor)
         .sensoryFeedback(.impact(weight: .medium), trigger: taps)
-        .accessibilityLabel(LogActionButton.accessibilityLabel(for: log))
+        .accessibilityLabel(log.actionLabel)
         .padding()
         .background(.bar)
     }
