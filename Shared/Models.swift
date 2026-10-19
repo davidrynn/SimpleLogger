@@ -53,6 +53,13 @@ extension Log {
 
     var isRunning: Bool { runningEntry != nil }
 
+    var latestEntry: LogEntry? { entries?.max { $0.start < $1.start } }
+
+    /// Entries that started on the same calendar day as `date`.
+    func entries(onSameDayAs date: Date, calendar: Calendar = .current) -> [LogEntry] {
+        (entries ?? []).filter { calendar.isDate($0.start, inSameDayAs: date) }
+    }
+
     /// Entries grouped by calendar day: newest day first, newest entry first within a day.
     func entriesByDay(calendar: Calendar = .current) -> [(day: Date, entries: [LogEntry])] {
         let groups = Dictionary(grouping: entries ?? []) { calendar.startOfDay(for: $0.start) }
@@ -60,6 +67,11 @@ extension Log {
             .map { (day: $0.key, entries: $0.value.sorted { $0.start > $1.start }) }
             .sorted { $0.day > $1.day }
     }
+}
+
+extension Sequence<LogEntry> {
+    /// Total time of the finished intervals; running and tap entries add nothing.
+    var totalDuration: TimeInterval { compactMap(\.duration).reduce(0, +) }
 }
 
 extension ModelContainer {

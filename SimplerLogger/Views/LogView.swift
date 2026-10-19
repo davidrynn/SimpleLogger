@@ -8,82 +8,145 @@
 import SwiftData
 import SwiftUI
 
+/// A log's history by day, with its primary action pinned to the bottom.
 struct LogView: View {
     @Environment(\.modelContext) private var context
     let log: Log
-    @State private var presentingSheet = false
+    @State private var showEditLog = false
+    @State private var entryToDelete: LogEntry?
+    @State private var taps = 0
     @State private var error: Error?
 
     private var store: LogStore { LogStore(context: context) }
-    private var started: Bool { log.isRunning }
-    private var buttonText: String {
-        if started { return "Stop" }
-        return log.usesIntervals ? "Start" : "Add"
-    }
 
     var body: some View {
-        VStack {
-            if let error {
-                Text("Error: \(error.localizedDescription)")
+        Group {
+            if log.entryCount == 0 {
+                ContentUnavailableView(
+                    "No Entries Yet",
+                    systemImage: log.usesIntervals ? "timer" : "checkmark.circle",
+                    description: Text(log.usesIntervals ? "Tap Start to time it." : "Tap Add to log it now.")
+                )
+            } else {
+                history
             }
+        }
+        .navigationTitle(log.name)
+        .navigationDestination(for: LogEntry.self) { EntryDetailsView(entry: $0) }
+        .toolbar {
+            Button("Edit") { showEditLog = true }
+        }
+        .safeAreaInset(edge: .bottom) { primaryButton }
+        .sheet(isPresented: $showEditLog) {
+            NavigationStack { LogFormView(log: log) }
+        }
+        .errorAlert($error)
+    }
 
-            List {
-                ForEach(log.entriesByDay(), id: \.day) { day, entries in
-                    Section(header: Text("\(day.formatted(date: .abbreviated, time: .omitted))     count: \(entries.count)")) {
-                        ForEach(entries) { entry in
-                            NavigationLink(destination: EntryDetailsView(entry: entry)) {
-                                VStack {
-                                    Text(entry.start.formatted(date: .long, time: .standard))
-                                    if let end = entry.end {
-                                        if let durationText = entry.durationText {
-                                            Text(durationText)
-                                        }
-                                        Text(end.formatted(date: .long, time: .standard))
-                                    } else if entry.isRunning {
-                                        Text("Running")
-                                    }
+    private var history: some View {
+        List {
+            ForEach(log.entriesByDay(), id: \.day) { day, entries in
+                Section {
+                    ForEach(entries) { entry in
+                        NavigationLink(value: entry) { EntryRow(entry: entry) }
+                            .swipeActions {
+                                Button("Delete", systemImage: "trash") { entryToDelete = entry }
+                                    .tint(.red)
+                            }
+                            // On the row, so the dialog points at the entry being deleted.
+                            .confirmationDialog(
+                                "Delete this entry?",
+                                isPresented: Binding(
+                                    get: { entryToDelete == entry },
+                                    set: { if !$0 { entryToDelete = nil } }
+                                ),
+                                titleVisibility: .visible
+                            ) {
+                                Button("Delete Entry", role: .destructive) {
+                                    perform { try store.delete([entry]) }
                                 }
                             }
-                        }
-                        .onDelete { offsets in
-                            perform { try store.delete(offsets.map { entries[$0] }) }
-                        }
                     }
-                }
-            }
-
-            Button {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                perform { try store.primaryAction(for: log) }
-            } label: {
-                Text(buttonText)
-            }
-            .scaleEffect(started ? 0.9 : 1.0)
-            .opacity(started ? 0.5 : 1.0)
-            .animation(started ? .linear(duration: 1).repeatForever() : .default, value: started)
-            .buttonStyle(.bordered)
-            .navigationBarTitle(log.name, displayMode: .automatic)
-            .toolbar {
-                ToolbarItemGroup {
-                    Button("Edit") {
-                        presentingSheet = true
-                    }
-                    .sheet(isPresented: $presentingSheet) {
-                        NavigationView {
-                            UpdateLogView(log: log)
-                        }
+                } header: {
+                    HStack {
+                        Text(day.dayTitle())
+                        Spacer()
+                        dayTotal(entries)
                     }
                 }
             }
         }
+    }
+
+    private func dayTotal(_ entries: [LogEntry]) -> Text {
+        let total = entries.totalDuration
+        if log.usesIntervals, total > 0 { return Text(DateComponentsFormatter.durationText(total)) }
+        return Text("^[\(entries.count) entry](inflect: true)")
+    }
+
+    private var primaryButton: some View {
+        Button {
+            taps += 1
+            perform { try store.primaryAction(for: log) }
+        } label: {
+            Group {
+                if let running = log.runningEntry {
+                    Label {
+                        Text("Stop  \(running.start, style: .timer)").monospacedDigit()
+                    } icon: {
+                        Image(systemName: "stop.fill")
+                    }
+                } else if log.usesIntervals {
+                    Label("Start", systemImage: "play.fill")
+                } else {
+                    Label("Add", systemImage: "plus")
+                }
+            }
+            .font(.headline)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
+        .tint(log.isRunning ? .red : .accentColor)
+        .sensoryFeedback(.impact(weight: .medium), trigger: taps)
+        .accessibilityLabel(LogActionButton.accessibilityLabel(for: log))
+        .padding()
+        .background(.bar)
     }
 
     private func perform(_ action: () throws -> Void) {
         do {
             try action()
-            error = nil
         } catch {
             self.error = error
         }
+    }
+}
+
+private struct EntryRow: View {
+    let entry: LogEntry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(entry.timeText)
+                Spacer()
+                if entry.isRunning {
+                    Text("Running \(entry.start, style: .timer)")
+                        .monospacedDigit()
+                        .foregroundStyle(.red)
+                } else if let durationText = entry.durationText {
+                    Text(durationText)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            if !entry.note.isEmpty {
+                Text(entry.note)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+        }
+        .accessibilityElement(children: .combine)
     }
 }
