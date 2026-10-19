@@ -246,7 +246,17 @@ Its fixes are tracked as Phase 3 tasks below.
   real data.
 
 ### Phase 4: Watch
-- [ ] Watch list backed by synced data; one-tap log/start/stop
+- [x] Watch list backed by synced data; one-tap log/start/stop
+  - The watch reads the same SwiftData/CloudKit store through the shared `Shared/` code; nothing watch-specific
+    syncs. Every row is one big button (`LogStore.primaryAction`) showing the name, a short summary ("2 today",
+    "Last: Yesterday") or a red live "Running 12:05", and the ＋/▶/■ symbol. Haptics: success for a tap, start/stop
+    for timers. VoiceOver reads "Log Water plants", "Stop Reading timer" with the full summary as its value.
+  - Logs are made and edited on iPhone only (D8: watch quick-log). With no logs the watch says "Make a log on your
+    iPhone and it shows up here." That depends on CloudKit sync, which still needs the container registered (Phase 2).
+  - Verified on a watchOS 11.1 simulator (Series 10, 46mm) with `-SeedSampleData`: tap log, stop and restart a
+    timer, empty state. Large text couldn't be checked: the watchOS 11.1 simulator runtime doesn't support changing it.
+  - Set the watch accent color (it was unset, so buttons were gray). `Extensions.swift` moved to `Shared/`.
+- [ ] **David:** try it on a real watch once sync is on: log from the watch, see it on the phone, and back.
 - [x] Delete the ClockKit complication template (D5: widget deferred past v1)
 
 ### Phase 5: Release prep
@@ -269,3 +279,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-15 | Phase 1 done: rename finished, iOS 18 / watchOS 11, Swift 6, watch debris and broken watch test targets removed, dead code removed, regression test added. Builds clean apart from 4 deprecation warnings; 2/2 tests pass. |
 | 2026-10-16 | Phase 2: SwiftData + `LogStore` shared by iOS and watch, CloudKit entitlements, 11 data-layer tests (12 total pass). Smoke-tested on the simulator: create interval log, start from list, Running/Stop shown on log screen, stop (21s), trash deletes. Wrote down the product purpose and principles (from David) and rewrote the README. CloudKit still needs registering on the developer account. |
 | 2026-10-18 | Merged Phases 0–2 to `main` (PR #1). Phase 3 on `phase3-ios-ui`: rebuilt every iPhone screen against the design review (prominent one-tap button, live running state, Today/Yesterday, VoiceOver labels, confirmations, autosaving entry details, one New/Edit Log sheet, error alerts, no `fatalError`). 21/21 tests pass (6 formatting, 3 UI flow tests new), no warnings. Checked every screen from UI-test screenshots, including Accessibility Large text. |
+| 2026-10-19 | Merged Phase 3 (PR #2). Phase 4 on `phase4-watch`: rebuilt the watch list as one-tap rows sharing the iPhone's action, symbols, labels and summaries; set its accent color; added a DEBUG `-SeedSampleData` launch argument. Checked on a watchOS 11.1 simulator. 22/22 tests pass, no warnings. |

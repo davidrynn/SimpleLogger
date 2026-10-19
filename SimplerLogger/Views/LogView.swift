@@ -13,7 +13,9 @@ struct LogView: View {
     @Environment(\.modelContext) private var context
     let log: Log
     @State private var showEditLog = false
+    /// Set to ask for confirmation before deleting this entry.
     @State private var entryToDelete: LogEntry?
+    /// Counts taps on the primary button to trigger haptics (see `LogActionButton`).
     @State private var taps = 0
     @State private var error: Error?
 
@@ -78,12 +80,14 @@ struct LogView: View {
         }
     }
 
+    /// A section header's trailing text: total time for timer logs, otherwise the entry count.
     private func dayTotal(_ entries: [LogEntry]) -> Text {
         let total = entries.totalDuration
         if log.usesIntervals, total > 0 { return Text(DateComponentsFormatter.durationText(total)) }
         return Text("^[\(entries.count) entry](inflect: true)")
     }
 
+    /// The log's primary action as a full-width button over the bottom of the list; red with elapsed time while running.
     private var primaryButton: some View {
         Button {
             taps += 1
@@ -109,11 +113,12 @@ struct LogView: View {
         .controlSize(.large)
         .tint(log.isRunning ? .red : .accentColor)
         .sensoryFeedback(.impact(weight: .medium), trigger: taps)
-        .accessibilityLabel(LogActionButton.accessibilityLabel(for: log))
+        .accessibilityLabel(log.actionLabel)
         .padding()
         .background(.bar)
     }
 
+    /// Runs a store call and shows any error in an alert.
     private func perform(_ action: () throws -> Void) {
         do {
             try action()
@@ -123,6 +128,7 @@ struct LogView: View {
     }
 }
 
+/// One entry in a log's history: its time, its duration or a live timer, and its note.
 private struct EntryRow: View {
     let entry: LogEntry
 

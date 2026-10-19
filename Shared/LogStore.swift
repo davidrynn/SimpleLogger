@@ -6,6 +6,7 @@
 import Foundation
 import SwiftData
 
+/// Validation failures from `LogStore`, with messages fit to show the user.
 enum LogError: LocalizedError {
     case emptyName
     case endBeforeStart
@@ -25,6 +26,8 @@ struct LogStore {
 
     // MARK: Logs
 
+    /// Makes a log at the end of the list. The name is trimmed.
+    /// - Throws: `LogError.emptyName` if the name is blank.
     @discardableResult
     func createLog(named name: String, usesIntervals: Bool) throws -> Log {
         let name = try validated(name)
@@ -36,6 +39,8 @@ struct LogStore {
         return log
     }
 
+    /// Renames a log and sets whether it's a timer. Turning the timer off stops one that's running.
+    /// - Throws: `LogError.emptyName` if the name is blank.
     func update(_ log: Log, name: String, usesIntervals: Bool) throws {
         log.name = try validated(name)
         if log.usesIntervals && !usesIntervals {
@@ -64,6 +69,7 @@ struct LogStore {
     // MARK: Entries
 
     /// The single button on every log: stop the running interval, start one, or add a tap entry.
+    /// - Returns: The entry added or started, or nil when it stopped a timer.
     @discardableResult
     func primaryAction(for log: Log, at date: Date = .now) throws -> LogEntry? {
         if log.isRunning {
@@ -73,6 +79,7 @@ struct LogStore {
         return log.usesIntervals ? try startInterval(in: log, at: date) : try addEntry(to: log, at: date)
     }
 
+    /// Records a tap entry: "it happened" at `date`.
     @discardableResult
     func addEntry(to log: Log, at date: Date = .now) throws -> LogEntry {
         try insertEntry(in: log, start: date, isInterval: false)
@@ -85,11 +92,14 @@ struct LogStore {
         return try insertEntry(in: log, start: date, isInterval: true)
     }
 
+    /// Ends every running interval in the log at `date` (or at its start, if `date` is earlier).
     func stopInterval(in log: Log, at date: Date = .now) throws {
         stopRunningEntries(in: log, at: date)
         try context.save()
     }
 
+    /// Replaces an entry's times and note. Passing a nil `end` for an interval reopens it.
+    /// - Throws: `LogError.endBeforeStart` if `end` is before `start`.
     func update(_ entry: LogEntry, start: Date, end: Date?, note: String) throws {
         if let end, end < start { throw LogError.endBeforeStart }
         entry.start = start
@@ -105,6 +115,7 @@ struct LogStore {
 
     // MARK: Private
 
+    /// Inserts before linking to the log, so SwiftData tracks the relationship on both sides.
     private func insertEntry(in log: Log, start: Date, isInterval: Bool) throws -> LogEntry {
         let entry = LogEntry(start: start, isInterval: isInterval)
         context.insert(entry)
@@ -126,3 +137,25 @@ struct LogStore {
         return trimmed
     }
 }
+
+#if DEBUG
+extension LogStore {
+    /// A few logs with history, for looking at screens (launch with `-SeedSampleData`).
+    func seedSampleData(now: Date = .now) throws {
+        let water = try createLog(named: "Water plants", usesIntervals: false)
+        for hoursAgo in [26.0, 3, 1] { try addEntry(to: water, at: now.addingTimeInterval(-hoursAgo * 3_600)) }
+
+        let reading = try createLog(named: "Reading", usesIntervals: true)
+        try startInterval(in: reading, at: now.addingTimeInterval(-5 * 3_600))
+        try stopInterval(in: reading, at: now.addingTimeInterval(-4.5 * 3_600))
+        try startInterval(in: reading, at: now.addingTimeInterval(-12 * 60))
+
+        let vitamins = try createLog(named: "Took vitamins", usesIntervals: false)
+        try addEntry(to: vitamins, at: now.addingTimeInterval(-25 * 3_600))
+
+        let walk = try createLog(named: "Walk", usesIntervals: true)
+        try startInterval(in: walk, at: now.addingTimeInterval(-28 * 3_600))
+        try stopInterval(in: walk, at: now.addingTimeInterval(-27.25 * 3_600))
+    }
+}
+#endif

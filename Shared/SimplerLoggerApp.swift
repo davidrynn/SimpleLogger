@@ -8,14 +8,27 @@
 import SwiftData
 import SwiftUI
 
+/// The entry point for both the iPhone and watch apps; each target supplies its own `MainView`.
+///
+/// Launch arguments: `-UITestInMemoryStore` starts empty in memory; `-SeedSampleData` (Debug only) starts in
+/// memory with sample logs.
 @main
 struct SimplerLoggerApp: App {
+    /// A failure is kept, not thrown, so the app can explain it rather than crash.
     private let container: Result<ModelContainer, Error>
 
     init() {
         // UI tests launch with this argument so they start from an empty store and never touch real data.
-        let inMemory = ProcessInfo.processInfo.arguments.contains("-UITestInMemoryStore")
-        container = Result { try .simplerLogger(inMemory: inMemory) }
+        let arguments = ProcessInfo.processInfo.arguments
+        let seedSampleData = arguments.contains("-SeedSampleData")
+        let inMemory = seedSampleData || arguments.contains("-UITestInMemoryStore")
+        container = Result {
+            let container = try ModelContainer.simplerLogger(inMemory: inMemory)
+            #if DEBUG
+            if seedSampleData { try LogStore(context: container.mainContext).seedSampleData() }
+            #endif
+            return container
+        }
     }
 
     var body: some Scene {

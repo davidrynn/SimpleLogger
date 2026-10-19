@@ -60,4 +60,12 @@ struct FormattingTests {
         try store.addEntry(to: log, at: now.addingTimeInterval(-86_400))
         #expect(log.summary(now: now, calendar: calendar).hasPrefix("Last: Yesterday, "))
     }
+
+    @Test func compactSummaryDropsTheTime() throws {
+        let log = try store.createLog(named: "Water", usesIntervals: false)
+        try store.addEntry(to: log, at: now.addingTimeInterval(-86_400))
+        #expect(log.summary(now: now, calendar: calendar, compact: true) == "Last: Yesterday")
+        try store.addEntry(to: log, at: now)
+        #expect(log.summary(now: now, calendar: calendar, compact: true) == "1 today")
+    }
 }

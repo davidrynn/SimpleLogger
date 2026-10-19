@@ -136,6 +136,7 @@
 				22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */,
 				2290C0042EF0000000A1B2C3 /* Models.swift */,
 				2290C0052EF0000000A1B2C3 /* LogStore.swift */,
+				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -186,7 +187,6 @@
 		22BEFAB72839F42F0081E75A /* SimplerLogger */ = {
 			isa = PBXGroup;
 			children = (
-				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
 				22CCA9D3283AC3740015FB43 /* Views */,
 				22BEFABC2839F4310081E75A /* Assets.xcassets */,
 				22BEFABE2839F4310081E75A /* Preview Content */,

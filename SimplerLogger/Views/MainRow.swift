@@ -7,9 +7,12 @@
 
 import SwiftUI
 
+/// A row in the main list: the log's name, a summary or live timer, and its one-tap button.
 struct MainRow: View {
     let log: Log
+    /// Hides the button in edit mode, so a stray tap there can't log anything.
     let isEditing: Bool
+    /// The log's primary action, run when the button is tapped.
     let action: () -> Void
 
     var body: some View {
@@ -42,6 +45,7 @@ struct MainRow: View {
 struct LogActionButton: View {
     let log: Log
     let action: () -> Void
+    /// Counts taps to trigger haptics. Keying them to the log's state would also buzz on synced changes.
     @State private var taps = 0
 
     var body: some View {
@@ -49,7 +53,7 @@ struct LogActionButton: View {
             taps += 1
             action()
         } label: {
-            Image(systemName: Self.symbol(for: log))
+            Image(systemName: log.actionSymbol)
                 .font(.title3.weight(.semibold))
                 .frame(minWidth: 28, minHeight: 28)
                 .contentTransition(.symbolEffect(.replace))
@@ -58,17 +62,6 @@ struct LogActionButton: View {
         .buttonBorderShape(.circle)
         .tint(log.isRunning ? .red : .accentColor)
         .sensoryFeedback(.impact(weight: .medium), trigger: taps)
-        .accessibilityLabel(Self.accessibilityLabel(for: log))
-    }
-
-    static func symbol(for log: Log) -> String {
-        if log.isRunning { return "stop.fill" }
-        return log.usesIntervals ? "play.fill" : "plus"
-    }
-
-    static func accessibilityLabel(for log: Log) -> String {
-        if log.isRunning { return String(localized: "Stop \(log.name) timer") }
-        if log.usesIntervals { return String(localized: "Start \(log.name) timer") }
-        return String(localized: "Log \(log.name)")
+        .accessibilityLabel(log.actionLabel)
     }
 }

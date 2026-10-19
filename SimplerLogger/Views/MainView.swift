@@ -8,12 +8,16 @@
 import SwiftData
 import SwiftUI
 
+/// The iPhone's home screen: the list of logs, each with its one-tap button. Logging from here is the main path.
 struct MainView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Log.sortIndex) private var logs: [Log]
+    /// Owned here, not left to `EditButton`, so the rows can see it and hide their buttons.
     @State private var editMode: EditMode = .inactive
     @State private var showNewLog = false
+    /// Set to show the Edit Log sheet for this log.
     @State private var logToEdit: Log?
+    /// Set to ask for confirmation before deleting this log.
     @State private var logToDelete: Log?
     @State private var error: Error?
 
@@ -117,6 +121,7 @@ struct MainView: View {
         }
     }
 
+    /// Runs a store call and shows any error in an alert.
     private func perform(_ action: () throws -> Void) {
         do {
             try action()
