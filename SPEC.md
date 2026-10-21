@@ -260,12 +260,35 @@ Its fixes are tracked as Phase 3 tasks below.
 - [x] Delete the ClockKit complication template (D5: widget deferred past v1)
 
 ### Phase 5: Release prep
-- [ ] App icon in every required size; launch screen
-- [ ] Privacy manifest (`PrivacyInfo.xcprivacy`) and App Store privacy "nutrition label"
-- [ ] Privacy policy URL; support URL
-- [ ] Screenshots (iPhone + Watch), description, keywords
+- [x] App icon in every required size; launch screen
+  - Both apps already had a full icon set (1024 px marketing icon, no alpha). The launch screen is the
+    generated plain one, which suits an app that opens straight to its list. Optional later: dark and tinted
+    icon variants.
+- [x] iPhone-only for v1 (decided 2026-10-19): `TARGETED_DEVICE_FAMILY = 1`, so no iPad layout review or iPad
+  screenshots. iPads can still run it in compatibility mode.
+- [x] Export compliance: `ITSAppUsesNonExemptEncryption = NO` on both apps, so uploads skip the question.
+- [x] Privacy manifest (`Shared/PrivacyInfo.xcprivacy`, in both apps) and App Store privacy "nutrition label"
+  - No tracking, no collected data, no required-reason APIs. Label: **Data Not Collected**.
+- [x] Privacy policy URL; support URL
+  - `docs/privacy.md`, `docs/support.md`, `docs/index.md` for GitHub Pages (decided 2026-10-19). Contact is
+    GitHub Issues; no email is published.
+- [x] Screenshots (iPhone + Watch), description, keywords
+  - `docs/app-store/README.md`: name, subtitle, keywords, description, promo text, categories, age rating,
+    review notes, and how to regenerate the screenshots. Screenshots in `docs/app-store/screenshots/`:
+    4 for iPhone 6.9" (1320×2868), from the `AppStoreScreenshots` UI test (skipped unless `SCREENSHOT_DIR` is
+    set), and 1 for Apple Watch (416×496).
 - [x] UI tests for the core flows (done in Phase 3; add watch coverage in Phase 4 if practical)
-- [ ] TestFlight beta → fix → submit
+- [ ] TestFlight beta → fix → submit. Everything below needs David's Apple accounts:
+  1. **GitHub:** Settings → Pages → Deploy from a branch → `main` / `/docs`. Check the privacy and support
+     URLs load.
+  2. **Xcode → Signing & Capabilities**, both targets: let automatic signing register the iCloud container
+     `iCloud.edu.davidrynn.SimplerLogger` and push (from Phase 2).
+  3. **Real devices:** run on an iPhone and paired watch signed into iCloud. Log on each and see it appear on
+     the other. Check large text on the watch.
+  4. **CloudKit Console:** deploy the schema to Production (after a build has created it in Development).
+  5. **App Store Connect:** create the app record; this is where the name "SimplerLogger" is checked (D6).
+     Fill it in from `docs/app-store/README.md`.
+  6. **Xcode → Product → Archive → Distribute → TestFlight.** Test, fix, then submit for review.
 
 ## Session log
 
@@ -280,3 +303,4 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-16 | Phase 2: SwiftData + `LogStore` shared by iOS and watch, CloudKit entitlements, 11 data-layer tests (12 total pass). Smoke-tested on the simulator: create interval log, start from list, Running/Stop shown on log screen, stop (21s), trash deletes. Wrote down the product purpose and principles (from David) and rewrote the README. CloudKit still needs registering on the developer account. |
 | 2026-10-18 | Merged Phases 0–2 to `main` (PR #1). Phase 3 on `phase3-ios-ui`: rebuilt every iPhone screen against the design review (prominent one-tap button, live running state, Today/Yesterday, VoiceOver labels, confirmations, autosaving entry details, one New/Edit Log sheet, error alerts, no `fatalError`). 21/21 tests pass (6 formatting, 3 UI flow tests new), no warnings. Checked every screen from UI-test screenshots, including Accessibility Large text. |
 | 2026-10-19 | Merged Phase 3 (PR #2). Phase 4 on `phase4-watch`: rebuilt the watch list as one-tap rows sharing the iPhone's action, symbols, labels and summaries; set its accent color; added a DEBUG `-SeedSampleData` launch argument. Checked on a watchOS 11.1 simulator. 22/22 tests pass, no warnings. |
+| 2026-10-19 | Merged Phase 4 (PR #3), including a doc-comment pass (new standing rule from David). Phase 5 on `phase5-release`: iPhone-only, export-compliance key, privacy manifest, GitHub Pages privacy/support pages, App Store listing kit, iPhone and watch screenshots. 22 tests pass (1 skipped: screenshots), Release build clean. Remaining Phase 5 steps need David's accounts. |
