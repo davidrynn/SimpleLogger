@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  SimplerLogger's privacy manifest, shared by the iPhone and watch apps.
+  No tracking and no data collected: logs live on the device and in the user's own private
+  iCloud database, which the developer can't read. The app's code calls none of the
+  required-reason APIs (UserDefaults, file timestamps, boot time, disk space, keyboards).
+  Update this if that changes.
+-->
+<plist version="1.0">
+<dict>
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array/>
+</dict>
+</plist>

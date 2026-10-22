@@ -19,31 +19,29 @@ struct WatchRow: View {
             taps += 1
             action()
         } label: {
-            HStack(spacing: 8) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(log.name)
-                        .font(.headline)
-                    if let running = log.runningEntry {
-                        Text("Running \(running.start, style: .timer)")
-                            .monospacedDigit()
-                            .foregroundStyle(.red)
-                    } else {
-                        Text(log.summary(compact: true))
-                            .foregroundStyle(.secondary)
-                    }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(log.name)
+                    .font(.headline)
+                if let running = log.runningEntry {
+                    Text("Running \(running.start, style: .timer)")
+                        .monospacedDigit()
+                        .foregroundStyle(.red)
+                } else {
+                    Text(log.summary(compact: true))
+                        .foregroundStyle(.secondary)
                 }
-                .font(.footnote)
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-                Image(systemName: log.actionSymbol)
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 32, height: 32)
-                    .background(log.isRunning ? Color.red : Color.accentColor, in: .circle)
-                    .contentTransition(.symbolEffect(.replace))
             }
+            .font(.footnote)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.vertical, 4)
         }
+        // The cap presses down when any part of the row is tapped.
+        .buttonStyle(TallyCapRowButtonStyle(
+            symbol: log.actionSymbol,
+            symbolColor: log.isRunning ? .tallyRunning : .tallyInk,
+            diameter: 34,
+            capEdge: .trailing
+        ))
         // Evaluated after the action, so it reflects the new state.
         .sensoryFeedback(trigger: taps) { _, _ in
             if log.isRunning { return .start }
