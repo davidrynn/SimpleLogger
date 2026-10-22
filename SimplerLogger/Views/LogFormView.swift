@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-/// The New Log and Edit Log sheets. Nothing is saved until Done.
+/// The New Counter and Edit Counter sheets. Nothing is saved until Done.
 struct LogFormView: View {
     @Environment(\.modelContext) private var context
     @Environment(\.dismiss) private var dismiss
@@ -18,6 +18,7 @@ struct LogFormView: View {
     @State private var usesTimer: Bool
     @State private var error: Error?
     @FocusState private var nameFocused: Bool
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     init(log: Log?) {
         self.log = log
@@ -40,12 +41,23 @@ struct LogFormView: View {
                 }
             }
             Section {
-                Toggle("Timer", isOn: $usesTimer)
+                if dynamicTypeSize.isAccessibilitySize {
+                    // A segment can't wrap its title, so at these sizes the choices become rows.
+                    eachTapPicker.pickerStyle(.inline)
+                } else {
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Each tap")
+                        eachTapPicker
+                            .labelsHidden()
+                            .pickerStyle(.segmented)
+                    }
+                    .padding(.vertical, 4)
+                }
             } footer: {
                 Text(timerFooter)
             }
         }
-        .navigationTitle(log == nil ? "New Log" : "Edit Log")
+        .navigationTitle(log == nil ? "New Counter" : "Edit Counter")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .cancellationAction) {
@@ -61,14 +73,22 @@ struct LogFormView: View {
         .errorAlert($error)
     }
 
-    /// Explains the Timer toggle, and warns when turning it off will stop a running timer.
+    /// Whether a tap counts or starts and stops a timer (`usesIntervals`).
+    private var eachTapPicker: some View {
+        Picker("Each tap", selection: $usesTimer) {
+            Text("Counts it").tag(false)
+            Text("Starts or stops a timer").tag(true)
+        }
+    }
+
+    /// Explains the Each tap choice, and warns when turning it off will stop a running timer.
     private var timerFooter: String {
         if let log, log.isRunning, !usesTimer {
             return String(localized: "The timer that's running now will stop when you tap Done.")
         }
         return usesTimer
             ? String(localized: "One tap starts a timer and the next tap stops it.")
-            : String(localized: "Each tap records that it happened, with the time.")
+            : String(localized: "Each tap counts it once, with the time.")
     }
 
     /// Saves through `LogStore` and closes the sheet; on failure the sheet stays open and shows the error.

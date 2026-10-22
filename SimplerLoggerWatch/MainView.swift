@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-/// The watch is for logging: every row is one tap. Logs are made and edited on iPhone.
+/// The watch is for counting: every row is one tap. Counters are made and edited on iPhone.
 struct MainView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Log.sortIndex) private var logs: [Log]
@@ -19,9 +19,9 @@ struct MainView: View {
             Group {
                 if logs.isEmpty {
                     ContentUnavailableView(
-                        "No Logs Yet",
+                        "No Counters Yet",
                         systemImage: "checkmark.circle",
-                        description: Text("Make a log on your iPhone and it shows up here.")
+                        description: Text("Make a counter on your iPhone and it shows up here.")
                     )
                 } else {
                     List(logs) { log in
@@ -35,7 +35,7 @@ struct MainView: View {
                     }
                 }
             }
-            .navigationTitle("Logs")
+            .navigationTitle("Counters")
         }
         .errorAlert($error)
     }

@@ -53,10 +53,10 @@ extension Date {
 }
 
 extension Log {
-    /// The secondary line under a log's name in the list, such as "3 today · last 6:04 PM".
+    /// The secondary line under a counter's name in the list, such as "3 today · last 6:04 PM".
     /// `compact` drops the time, for the watch: "3 today", "Last: Yesterday".
     func summary(now: Date = .now, calendar: Calendar = .current, compact: Bool = false) -> String {
-        guard let latest = latestEntry else { return String(localized: "No entries yet") }
+        guard let latest = latestEntry else { return String(localized: "Nothing counted yet") }
         let today = entries(onSameDayAs: now, calendar: calendar)
         let lastDay = latest.start.dayTitle(now: now, calendar: calendar)
         let lastTime = latest.start.formatted(date: .omitted, time: .shortened)
@@ -72,7 +72,7 @@ extension Log {
 }
 
 extension Log {
-    /// The primary action's symbol: add, start or stop.
+    /// The primary action's symbol: count, start or stop.
     var actionSymbol: String {
         if isRunning { return "stop.fill" }
         return usesIntervals ? "play.fill" : "plus"
@@ -82,6 +82,6 @@ extension Log {
     var actionLabel: String {
         if isRunning { return String(localized: "Stop \(name) timer") }
         if usesIntervals { return String(localized: "Start \(name) timer") }
-        return String(localized: "Log \(name)")
+        return String(localized: "Count \(name)")
     }
 }

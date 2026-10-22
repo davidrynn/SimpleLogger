@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2290C0142EF0000000A1B2C3 /* TallyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyStyle.swift */; };
+		2290C0152EF0000000A1B2C3 /* TallyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyStyle.swift */; };
+		2290C01C2EF0000000A1B2C3 /* TallyPress1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0162EF0000000A1B2C3 /* TallyPress1.caf */; };
+		2290C01D2EF0000000A1B2C3 /* TallyPress2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0172EF0000000A1B2C3 /* TallyPress2.caf */; };
+		2290C01E2EF0000000A1B2C3 /* TallyPress3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0182EF0000000A1B2C3 /* TallyPress3.caf */; };
+		2290C01F2EF0000000A1B2C3 /* TallyRelease1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */; };
+		2290C0202EF0000000A1B2C3 /* TallyRelease2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */; };
+		2290C0212EF0000000A1B2C3 /* TallyRelease3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */; };
 		2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */; };
 		2290C0062EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
 		2290C0072EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
@@ -75,6 +83,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2290C0132EF0000000A1B2C3 /* TallyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyStyle.swift; sourceTree = "<group>"; };
+		2290C0162EF0000000A1B2C3 /* TallyPress1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress1.caf; sourceTree = "<group>"; };
+		2290C0172EF0000000A1B2C3 /* TallyPress2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress2.caf; sourceTree = "<group>"; };
+		2290C0182EF0000000A1B2C3 /* TallyPress3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress3.caf; sourceTree = "<group>"; };
+		2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease1.caf; sourceTree = "<group>"; };
+		2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease2.caf; sourceTree = "<group>"; };
+		2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease3.caf; sourceTree = "<group>"; };
 		2250AB67284AA37200E3B72D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreTests.swift; sourceTree = "<group>"; };
 		2290C0042EF0000000A1B2C3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -142,6 +157,13 @@
 				2290C0042EF0000000A1B2C3 /* Models.swift */,
 				2290C0052EF0000000A1B2C3 /* LogStore.swift */,
 				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
+				2290C0132EF0000000A1B2C3 /* TallyStyle.swift */,
+				2290C0162EF0000000A1B2C3 /* TallyPress1.caf */,
+				2290C0172EF0000000A1B2C3 /* TallyPress2.caf */,
+				2290C0182EF0000000A1B2C3 /* TallyPress3.caf */,
+				2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */,
+				2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */,
+				2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */,
 				2290C00E2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy */,
 			);
 			path = Shared;
@@ -379,6 +401,12 @@
 				22BEFAC02839F4310081E75A /* Preview Assets.xcassets in Resources */,
 				22BEFABD2839F4310081E75A /* Assets.xcassets in Resources */,
 				2290C0102EF0000000A1B2C3 /* PrivacyInfo.xcprivacy in Resources */,
+				2290C01C2EF0000000A1B2C3 /* TallyPress1.caf in Resources */,
+				2290C01D2EF0000000A1B2C3 /* TallyPress2.caf in Resources */,
+				2290C01E2EF0000000A1B2C3 /* TallyPress3.caf in Resources */,
+				2290C01F2EF0000000A1B2C3 /* TallyRelease1.caf in Resources */,
+				2290C0202EF0000000A1B2C3 /* TallyRelease2.caf in Resources */,
+				2290C0212EF0000000A1B2C3 /* TallyRelease3.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +434,7 @@
 				2290C0072EF0000000A1B2C3 /* Models.swift in Sources */,
 				2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */,
 				22A80253284295200002FFBE /* Extensions.swift in Sources */,
+				2290C0142EF0000000A1B2C3 /* TallyStyle.swift in Sources */,
 				22A8021D284161900002FFBE /* MainView.swift in Sources */,
 				22A8025C284298060002FFBE /* WatchRow.swift in Sources */,
 				22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */,
@@ -425,6 +454,7 @@
 				22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */,
 				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
 				22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */,
+				2290C0152EF0000000A1B2C3 /* TallyStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

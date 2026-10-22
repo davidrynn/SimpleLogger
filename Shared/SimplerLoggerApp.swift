@@ -50,9 +50,9 @@ private struct StoreUnavailableView: View {
 
     var body: some View {
         ContentUnavailableView {
-            Label("Can't Open Your Logs", systemImage: "exclamationmark.triangle")
+            Label("Can't Open Your Counters", systemImage: "exclamationmark.triangle")
         } description: {
-            Text("Your logs couldn't be loaded. Restart the app, and if that doesn't help, check that there's free storage space.\n\n\(error.localizedDescription)")
+            Text("Your counters couldn't be loaded. Restart the app, and if that doesn't help, check that there's free storage space.\n\n\(error.localizedDescription)")
         }
     }
 }

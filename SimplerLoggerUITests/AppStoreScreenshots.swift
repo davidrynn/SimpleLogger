@@ -6,7 +6,8 @@
 import XCTest
 
 /// Captures the App Store screenshots from sample data. Skipped unless `SCREENSHOT_DIR` is set, so normal
-/// test runs don't pay for it. See `docs/app-store/README.md` for the command.
+/// test runs don't pay for it. See `docs/app-store/README.md` for the command. `SCREENSHOT_LAUNCH_ARGS`
+/// (space-separated) adds launch arguments, such as a content size category for checking Large text.
 @MainActor
 final class AppStoreScreenshots: XCTestCase {
     func testCaptureScreenshots() throws {
@@ -14,7 +15,9 @@ final class AppStoreScreenshots: XCTestCase {
             throw XCTSkip("Set SCREENSHOT_DIR (TEST_RUNNER_SCREENSHOT_DIR for xcodebuild) to capture screenshots.")
         }
         let app = XCUIApplication()
-        app.launchArguments = ["-SeedSampleData"]
+        let extraArguments = ProcessInfo.processInfo.environment["SCREENSHOT_LAUNCH_ARGS"]?
+            .split(separator: " ").map(String.init) ?? []
+        app.launchArguments = ["-SeedSampleData"] + extraArguments
         app.launch()
 
         /// Waits for animations to finish, then saves the screen as `<directory>/<name>.png`.
@@ -35,9 +38,9 @@ final class AppStoreScreenshots: XCTestCase {
         try capture("3-history")
         app.navigationBars.buttons["BackButton"].tap()
 
-        app.buttons["New Log"].tap()
+        app.buttons["New Counter"].tap()
         app.textFields["Name"].typeText("Took a walk")
-        app.switches["Timer"].coordinate(withNormalizedOffset: CGVector(dx: 0.9, dy: 0.5)).tap()
-        try capture("4-new-log")
+        app.buttons["Starts or stops a timer"].tap()
+        try capture("4-new-counter")
     }
 }

@@ -290,6 +290,61 @@ Its fixes are tracked as Phase 3 tasks below.
      Fill it in from `docs/app-store/README.md`.
   6. **Xcode → Product → Archive → Distribute → TestFlight.** Test, fix, then submit for review.
 
+### Tally counter look and "Counter" wording (branch `tally-theme`)
+Decided 2026-10-21 from the mockups at https://claude.ai/artifact/Yb5R1ejPq85dBnbP8tBFNB.
+- [x] Accents only (not a full metal theme): the one-tap button is a flat, raised metal cap (`TallyCap`), and
+  today's count shows in a dark window of white drum digits (`CountWindow`), both in `Shared/TallyStyle.swift`.
+  On the list, the log screen (big cap at the bottom, window at the top showing the live timer while running),
+  first launch (`TallyIllustration`) and the watch rows. Lists, forms, type and dark mode stay system-native.
+- [x] Wording: a log is a **counter**; its button is **Count** (VoiceOver "Count Water plants"); the list is
+  **Counters**; New Log is a text **New** button so the only + on screen is the one that counts; the Timer
+  switch became **Each tap: Counts it / Starts or stops a timer** (inline at accessibility sizes); day totals
+  say "2 counts". "Entry" stays in the entry screen. Internal types (`Log`, `LogEntry`) are unchanged.
+- [x] Support page, App Store kit (subtitle now "Count anything with one tap"), README and screenshots updated.
+- [x] App Store listing chosen for search (2026-10-21): name **Simpler Counter: Tally Clicker**, subtitle
+  **One-tap habit tracker & timer**, keywords and the reasoning in `docs/app-store/README.md`. No US app
+  has the name (iTunes Search API); close ones exist ("Tally - Simple Counter", "Simple Counter+").
+- [ ] Reserve the name by creating the App Store Connect record (David).
+- [ ] Rename the app to **SimplerCounter** on the Home Screen (`CFBundleDisplayName`, iPhone and watch) and in
+  the README, support page and site. Internal names (`SimplerLogger` targets, bundle IDs) stay.
+- [x] Clicks like a real counter: one click as the cap goes down, one as it comes up (`TallyClick`). The second
+  waits for the finger to lift, but never comes sooner than 0.2 s after the first (`minimumGap`), so a quick
+  tap still gives two distinct clicks and holding the cap gives only the first until release.
+  iPhone: a heavy haptic then a light one, each with a short sound (three takes each,
+  `Shared/TallyPress1-3.caf` and `TallyRelease1-3.caf`), played as system sounds so the silent switch mutes them.
+  The sounds are cut from a real recording, "Tally Counter" by revdrmr (https://freesound.org/s/664698/, CC0),
+  by `scripts/cut_tally_clicks.py`; synthesized clicks sounded fake and were dropped. Level: the press's loudest
+  10 ms is -26 dBFS, between iOS's classic keyboard click (-22.6) and current keyboard tap (-32.9). Watch: a click
+  haptic on press; the release keeps its start/stop/success haptic. Replaces the old one-tap haptic.
+- [x] Removed the long-press menu (Edit/Delete) on list rows (2026-10-22): holding the cap opened it. Swipe left to
+  delete and swipe right to edit stay, as does Edit mode.
+- [x] Holding a cap on the list now counts (2026-10-22). Outside Edit mode, `.onMove` let a held row start a drag,
+  which cancelled the cap's press after about 0.2 s: nothing counted, and the second click came early. Reordering
+  is now Edit mode only. UI test `testHoldingTheCapCountsOnRelease` holds the cap for 1.5 s on the list and the
+  counter screen.
+- [x] Cap redrawn with even, front-on light (2026-10-22): no top highlight or offset side, a soft shadow all
+  round, and pressed it shrinks slightly and darkens. A dimmer face in dark mode, where the old shading looked odd.
+- [ ] Try the clicks on a real iPhone and watch (the simulator has no haptics) and tune the sounds if needed.
+- [ ] App icon in the tally style (flat cap and window, not photo-real).
+
+### Phase 6 (after v1): Voice — Siri, Shortcuts and a mic button
+Planned 2026-10-21, not started. Not in the first release. Everything stays on the device, so the privacy label
+stays **Data Not Collected**; no cloud AI (it would need a server for the API key, cost per request, and a
+different label).
+- [ ] **6a. App Intents (about a day).** A "Create Counter" intent (name, and counts or times) and a "Count"
+  intent (picks an existing counter; counts, or starts/stops its timer through `LogStore.primaryAction`).
+  Gives Siri ("Count Workout in SimplerCounter"), Shortcuts, Spotlight and the Action button. App Shortcuts
+  phrases so they work without setup. Works on iOS 18; Siri with Apple Intelligence handles looser wording.
+- [ ] **6b. In-app mic (about 2–4 days).** A mic button on the list: on-device speech recognition turns
+  "create a counter to track every time I workout" into text, then Apple's on-device Foundation Models
+  turn it into a name and counts-or-times (guided generation into a fixed struct), e.g. "Workout", counts;
+  "how long I practice piano" → "Piano practice", timer. The result opens in the New Counter sheet to check
+  before saving; nothing is saved straight from speech.
+  - Foundation Models needs iOS 26+ and an Apple Intelligence iPhone (15 Pro or newer) with it turned on.
+    Elsewhere, hide the mic or put the spoken text into the name field.
+  - Adds microphone and speech-recognition permission prompts (usage strings in Info.plist).
+  - Handle: unclear speech, "cancel", a name that already exists, the model being unavailable. Test on a device.
+
 ## Session log
 
 | Date | Summary |
@@ -304,3 +359,5 @@ Its fixes are tracked as Phase 3 tasks below.
 | 2026-10-18 | Merged Phases 0–2 to `main` (PR #1). Phase 3 on `phase3-ios-ui`: rebuilt every iPhone screen against the design review (prominent one-tap button, live running state, Today/Yesterday, VoiceOver labels, confirmations, autosaving entry details, one New/Edit Log sheet, error alerts, no `fatalError`). 21/21 tests pass (6 formatting, 3 UI flow tests new), no warnings. Checked every screen from UI-test screenshots, including Accessibility Large text. |
 | 2026-10-19 | Merged Phase 3 (PR #2). Phase 4 on `phase4-watch`: rebuilt the watch list as one-tap rows sharing the iPhone's action, symbols, labels and summaries; set its accent color; added a DEBUG `-SeedSampleData` launch argument. Checked on a watchOS 11.1 simulator. 22/22 tests pass, no warnings. |
 | 2026-10-19 | Merged Phase 4 (PR #3), including a doc-comment pass (new standing rule from David). Phase 5 on `phase5-release`: iPhone-only, export-compliance key, privacy manifest, GitHub Pages privacy/support pages, App Store listing kit, iPhone and watch screenshots. 22 tests pass (1 skipped: screenshots), Release build clean. Remaining Phase 5 steps need David's accounts. |
+| 2026-10-21 | Phase 5 pushed and PR #4 opened (with Xcode's recommended project settings). On `tally-theme`: mocked up a tally-counter look and new wording, David chose accents only and approved "Counter"/"Count"; built both on iPhone and watch, updated docs and App Store screenshots. Checked light, dark, Accessibility XXXL and the watch. 22 tests pass (1 skipped: screenshots). Checked name availability and picked the App Store name, subtitle and keywords for search. Added press and release clicks (haptic and sound) to the cap; redid the sounds and made the press haptic heavy, the release light. Planned Phase 6 (voice) for after v1. Swapped in click sounds cut from a CC0 recording of a real counter. |
+| 2026-10-22 | Timed the second click from the first touch (0.2 s) instead of the release; removed the long-press menu on list rows. Then: second click waits for the real release (0.2 s minimum), clicks 8 dB quieter (measured against iOS system sounds), cap redrawn with even light for dark mode. Found holding a list cap didn't count (drag-to-reorder took the touch); reorder is now Edit mode only, with a UI test. 23 tests pass (1 skipped). |

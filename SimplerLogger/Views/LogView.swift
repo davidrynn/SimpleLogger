@@ -8,15 +8,13 @@
 import SwiftData
 import SwiftUI
 
-/// A log's history by day, with its primary action pinned to the bottom.
+/// A counter's history by day, under today's count in a tally window, with its primary action pinned to the bottom.
 struct LogView: View {
     @Environment(\.modelContext) private var context
     let log: Log
     @State private var showEditLog = false
     /// Set to ask for confirmation before deleting this entry.
     @State private var entryToDelete: LogEntry?
-    /// Counts taps on the primary button to trigger haptics (see `LogActionButton`).
-    @State private var taps = 0
     @State private var error: Error?
 
     private var store: LogStore { LogStore(context: context) }
@@ -25,9 +23,9 @@ struct LogView: View {
         Group {
             if log.entryCount == 0 {
                 ContentUnavailableView(
-                    "No Entries Yet",
+                    "Nothing Counted Yet",
                     systemImage: log.usesIntervals ? "timer" : "checkmark.circle",
-                    description: Text(log.usesIntervals ? "Tap Start to time it." : "Tap Add to log it now.")
+                    description: Text(log.usesIntervals ? "Tap Start to time it." : "Tap Count to count it now.")
                 )
             } else {
                 history
@@ -47,6 +45,7 @@ struct LogView: View {
 
     private var history: some View {
         List {
+            countHeader
             ForEach(log.entriesByDay(), id: \.day) { day, entries in
                 Section {
                     ForEach(entries) { entry in
@@ -80,39 +79,63 @@ struct LogView: View {
         }
     }
 
-    /// A section header's trailing text: total time for timer logs, otherwise the entry count.
+    /// Today's count in a tally window, or the running timer, with the summary under it.
+    private var countHeader: some View {
+        VStack(spacing: 10) {
+            if let running = log.runningEntry {
+                TimelineView(.periodic(from: running.start, by: 1)) { context in
+                    CountWindow(text: CountWindow.timerText(context.date.timeIntervalSince(running.start)), size: .large)
+                }
+                // The time is already in the window, the entry row and the Stop button.
+                Text("Running")
+                    .foregroundStyle(.red)
+            } else {
+                CountWindow(text: CountWindow.countText(log.entries(onSameDayAs: .now).count), size: .large)
+                Text(log.summary())
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .font(.subheadline)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 4)
+        .listRowBackground(Color.clear)
+    }
+
+    /// A section header's trailing text: total time for timers, otherwise how many counts.
     private func dayTotal(_ entries: [LogEntry]) -> Text {
         let total = entries.totalDuration
         if log.usesIntervals, total > 0 { return Text(DateComponentsFormatter.durationText(total)) }
-        return Text("^[\(entries.count) entry](inflect: true)")
+        return Text("^[\(entries.count) count](inflect: true)")
     }
 
-    /// The log's primary action as a full-width button over the bottom of the list; red with elapsed time while running.
+    /// The counter's primary action as a big tally cap over the bottom of the list, named beside it;
+    /// red with elapsed time while running. The cap clicks as it's pressed and released.
     private var primaryButton: some View {
         Button {
-            taps += 1
             perform { try store.primaryAction(for: log) }
         } label: {
             Group {
                 if let running = log.runningEntry {
-                    Label {
-                        Text("Stop  \(running.start, style: .timer)").monospacedDigit()
-                    } icon: {
-                        Image(systemName: "stop.fill")
-                    }
+                    Text("Stop  \(running.start, style: .timer)")
+                        .monospacedDigit()
+                        .foregroundStyle(.red)
                 } else if log.usesIntervals {
-                    Label("Start", systemImage: "play.fill")
+                    Text("Start")
                 } else {
-                    Label("Add", systemImage: "plus")
+                    Text("Count")
                 }
             }
             .font(.headline)
-            .frame(maxWidth: .infinity)
+            .foregroundStyle(.primary)
         }
-        .buttonStyle(.borderedProminent)
-        .controlSize(.large)
-        .tint(log.isRunning ? .red : .accentColor)
-        .sensoryFeedback(.impact(weight: .medium), trigger: taps)
+        .buttonStyle(TallyCapRowButtonStyle(
+            symbol: log.actionSymbol,
+            symbolColor: log.isRunning ? .tallyRunning : .tallyInk,
+            diameter: 64,
+            capEdge: .leading,
+            spacing: 16
+        ))
+        .frame(maxWidth: .infinity)
         .accessibilityLabel(log.actionLabel)
         .padding()
         .background(.bar)

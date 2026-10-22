@@ -13,7 +13,7 @@ enum LogError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .emptyName: "A log needs a name."
+        case .emptyName: "A counter needs a name."
         case .endBeforeStart: "The end time can't be before the start time."
         }
     }

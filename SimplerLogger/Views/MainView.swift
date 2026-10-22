@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-/// The iPhone's home screen: the list of logs, each with its one-tap button. Logging from here is the main path.
+/// The iPhone's home screen: the list of counters, each with its one-tap button. Counting from here is the main path.
 struct MainView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Log.sortIndex) private var logs: [Log]
@@ -33,14 +33,17 @@ struct MainView: View {
                     list
                 }
             }
-            .navigationTitle("Logs")
+            .navigationTitle("Counters")
             .navigationDestination(for: Log.self) { LogView(log: $0) }
             .toolbar {
                 if !logs.isEmpty {
                     ToolbarItem(placement: .topBarLeading) { EditButton() }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    Button("New Log", systemImage: "plus") { showNewLog = true }
+                    // Text, not a +, so the only + on the screen is the one that counts.
+                    Button("New") { showNewLog = true }
+                        .fontWeight(.semibold)
+                        .accessibilityLabel("New Counter")
                 }
             }
             .environment(\.editMode, $editMode)
@@ -69,29 +72,24 @@ struct MainView: View {
                     .swipeActions(edge: .leading) {
                         Button("Edit", systemImage: "pencil") { logToEdit = log }
                     }
-                    .contextMenu {
-                        Button("Edit", systemImage: "pencil") { logToEdit = log }
-                        Button("Delete", systemImage: "trash", role: .destructive) { logToDelete = log }
-                    }
                     // On the row, so the dialog points at the log being deleted.
                     .confirmationDialog(
                         "Delete “\(log.name)”?",
                         isPresented: Binding(get: { logToDelete == log }, set: { if !$0 { logToDelete = nil } }),
                         titleVisibility: .visible
                     ) {
-                        Button("Delete Log", role: .destructive) {
+                        Button("Delete Counter", role: .destructive) {
                             perform { try store.delete(log) }
                         }
                     } message: {
-                        Text(log.entryCount == 0 ? "It has no entries." : "This also deletes its ^[\(log.entryCount) entry](inflect: true).")
+                        Text(log.entryCount == 0 ? "Nothing has been counted yet." : "This also deletes its ^[\(log.entryCount) count](inflect: true).")
                     }
             }
             .onDelete { offsets in
                 logToDelete = offsets.first.map { logs[$0] }
             }
-            .onMove { source, destination in
-                perform { try store.moveLogs(logs, fromOffsets: source, toOffset: destination) }
-            }
+            // Only while editing: otherwise holding a row starts a drag, which cancels a held cap.
+            .onMove(perform: moveAction)
         }
     }
 
@@ -104,7 +102,7 @@ struct MainView: View {
         if isEditing {
             Button { logToEdit = log } label: { mainRow }
                 .foregroundStyle(.primary)
-                .accessibilityHint("Edits the log's name and settings")
+                .accessibilityHint("Edits the counter's name and settings")
         } else {
             NavigationLink(value: log) { mainRow }
         }
@@ -112,12 +110,23 @@ struct MainView: View {
 
     private var emptyState: some View {
         ContentUnavailableView {
-            Label("Log Anything with One Tap", systemImage: "checkmark.circle")
+            VStack(spacing: 28) {
+                TallyIllustration()
+                Text("Count Anything with One Tap")
+            }
         } description: {
-            Text("Make a log for something you want to track, like watering the plants. Tap its button to record that it happened, or to start and stop a timer.")
+            Text("Make a counter for something you want to keep track of, like watering the plants. Tap its button to count it, or to start and stop a timer.")
         } actions: {
-            Button("Make Your First Log") { showNewLog = true }
+            Button("Make Your First Counter") { showNewLog = true }
                 .buttonStyle(.borderedProminent)
+        }
+    }
+
+    /// Reordering, only in edit mode (see `list`).
+    private var moveAction: ((IndexSet, Int) -> Void)? {
+        guard isEditing else { return nil }
+        return { source, destination in
+            perform { try store.moveLogs(logs, fromOffsets: source, toOffset: destination) }
         }
     }
 
