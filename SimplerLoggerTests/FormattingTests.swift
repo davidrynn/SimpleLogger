@@ -35,7 +35,7 @@ struct FormattingTests {
 
     @Test func summaryForAnEmptyLog() throws {
         let log = try store.createLog(named: "Water", usesIntervals: false)
-        #expect(log.summary(now: now, calendar: calendar) == "No entries yet")
+        #expect(log.summary(now: now, calendar: calendar) == "Nothing counted yet")
     }
 
     @Test func summaryCountsTodaysTaps() throws {
