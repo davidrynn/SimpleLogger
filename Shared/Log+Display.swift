@@ -1,27 +1,11 @@
 //
-//  Extensions.swift
+//  Log+Display.swift
 //  SimplerLogger
 //
 //  Created by David Rynn on 5/23/22.
 //
 
 import Foundation
-
-extension DateComponentsFormatter {
-    /// "1h 12m", "45s": the two largest units, abbreviated.
-    static let duration: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .abbreviated
-        formatter.allowedUnits = [.day, .hour, .minute, .second]
-        formatter.maximumUnitCount = 2
-        return formatter
-    }()
-
-    /// `interval` formatted with `duration`, or "" if it can't be formatted.
-    static func durationText(_ interval: TimeInterval) -> String {
-        duration.string(from: interval) ?? ""
-    }
-}
 
 extension LogEntry {
     /// "1h 12m" for a finished interval; nil for tap entries and running intervals.
@@ -34,21 +18,6 @@ extension LogEntry {
         let startText = start.formatted(date: .omitted, time: .shortened)
         guard let end else { return startText }
         return "\(startText) – \(end.formatted(date: .omitted, time: .shortened))"
-    }
-}
-
-extension Date {
-    /// "Today", "Yesterday", "Monday, Oct 12", or "Oct 12, 2025" outside the current year.
-    func dayTitle(now: Date = .now, calendar: Calendar = .current) -> String {
-        if calendar.isDate(self, inSameDayAs: now) { return String(localized: "Today") }
-        if let yesterday = calendar.date(byAdding: .day, value: -1, to: now),
-           calendar.isDate(self, inSameDayAs: yesterday) {
-            return String(localized: "Yesterday")
-        }
-        if calendar.isDate(self, equalTo: now, toGranularity: .year) {
-            return formatted(.dateTime.weekday(.wide).month(.abbreviated).day())
-        }
-        return formatted(.dateTime.month(.abbreviated).day().year())
     }
 }
 
@@ -69,9 +38,7 @@ extension Log {
         }
         return compact ? String(localized: "\(today.count) today") : String(localized: "\(today.count) today · last \(lastTime)")
     }
-}
 
-extension Log {
     /// The primary action's symbol: count, start or stop.
     var actionSymbol: String {
         if isRunning { return "stop.fill" }
