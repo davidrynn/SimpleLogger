@@ -2,16 +2,16 @@
 title: Privacy Policy
 ---
 
-# SimplerLogger Privacy Policy
+# SimplerCounter Privacy Policy
 
 _Effective October 19, 2026_
 
-SimplerLogger is made by David Rynn. This policy covers the SimplerLogger apps for
+SimplerCounter is made by David Rynn. This policy covers the SimplerCounter apps for
 iPhone and Apple Watch.
 
 ## The short version
 
-SimplerLogger doesn't collect any data. The developer can't see your logs.
+SimplerCounter doesn't collect any data. The developer can't see your logs.
 
 ## What the app stores, and where
 
@@ -36,7 +36,7 @@ Nothing is sent to the developer or to anyone else.
 
 Deleting a log in the app deletes it and its entries on all of your devices. Deleting
 the app removes the data stored on that device. To remove the iCloud copy, go to
-**Settings → [your name] → iCloud → Manage Account Storage**, choose SimplerLogger,
+**Settings → [your name] → iCloud → Manage Account Storage**, choose SimplerCounter,
 and delete its data.
 
 ## Children

@@ -119,6 +119,6 @@ TEST_RUNNER_SCREENSHOT_DIR="$OUT" xcodebuild test -project SimplerLogger.xcodepr
 Watch: build the `SimplerLoggerWatch` scheme for a watch simulator, install it, then
 
 ```sh
-xcrun simctl launch $WATCH edu.davidrynn.SimplerLogger.watchkitapp -SeedSampleData
+xcrun simctl launch $WATCH edu.davidrynn.SimplerCounter.watchkitapp -SeedSampleData
 xcrun simctl io $WATCH screenshot docs/app-store/screenshots/watch-46mm/1-list.png
 ```

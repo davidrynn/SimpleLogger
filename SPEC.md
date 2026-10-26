@@ -68,7 +68,7 @@ of Swift.
 | D3 | Phone ↔ watch sync | **CloudKit via SwiftData.** Also gives backup and multi-device sync. | ✅ CloudKit |
 | D4 | Watch target structure | **Single-target watch app.** | ✅ Single target |
 | D5 | Complication | Delete the ClockKit template now; WidgetKit widget after v1. | ✅ Deferred to post-v1 |
-| D6 | Naming | **"SimplerLogger" everywhere.** Rename folders and targets. Still need to check App Store name availability. | ✅ SimplerLogger |
+| D6 | Naming | **"SimplerLogger" everywhere.** Rename folders and targets. Still need to check App Store name availability. | ✅ SimplerLogger internally. Users see **SimplerCounter** (2026-10-26): App Store name "Simpler Counter: Tally Clicker", bundle IDs `edu.davidrynn.SimplerCounter` (+ `.watchkitapp`). Targets, schemes and the iCloud container keep SimplerLogger. |
 | D7 | Was v1 ever released under this bundle ID? | Never released, so no migration path is needed. | ✅ Never released |
 | D8 | v1 scope | **In:** logs, tap entries, interval entries, notes, editing, reordering, watch quick-log. **Out (post-v1):** home-screen quick action (remove the registered one), export, stats/charts, notifications. | ✅ Decided |
 
@@ -199,6 +199,8 @@ Its fixes are tracked as Phase 3 tasks below.
   - [ ] **David:** in Xcode, open Signing & Capabilities for both targets so automatic signing registers the
     iCloud container and push capability on the developer account. Then test on two devices signed into iCloud.
   - [ ] Before release: deploy the CloudKit schema to Production in the CloudKit Console.
+    - 2026-10-26: `CD_Log` and `CD_LogEntry` exist in Development (from runs on David's iPhone). Check every
+      field is there, then **Deploy Schema Changes…** at the bottom of the console's sidebar.
 - [x] Unit tests for the data layer (in-memory store): 11 Swift Testing tests in `LogStoreTests`
 
 ### Phase 3: iOS UI
@@ -293,7 +295,7 @@ Its fixes are tracked as Phase 3 tasks below.
 ### Tally counter look and "Counter" wording (branch `tally-theme`)
 Decided 2026-10-21 from the mockups at https://claude.ai/artifact/Yb5R1ejPq85dBnbP8tBFNB.
 - [x] Accents only (not a full metal theme): the one-tap button is a flat, raised metal cap (`TallyCap`), and
-  today's count shows in a dark window of white drum digits (`CountWindow`), both in `Shared/TallyStyle.swift`.
+  today's count shows in a dark window of white drum digits (`CountWindow`), in `Shared/Tally/` (split one concept per file on 2026-10-25: `TallyCap`, `TallyClick`, `CountWindow`, `TallyIllustration`, `Color+Tally`).
   On the list, the log screen (big cap at the bottom, window at the top showing the live timer while running),
   first launch (`TallyIllustration`) and the watch rows. Lists, forms, type and dark mode stay system-native.
 - [x] Wording: a log is a **counter**; its button is **Count** (VoiceOver "Count Water plants"); the list is
@@ -305,8 +307,10 @@ Decided 2026-10-21 from the mockups at https://claude.ai/artifact/Yb5R1ejPq85dBn
   **One-tap habit tracker & timer**, keywords and the reasoning in `docs/app-store/README.md`. No US app
   has the name (iTunes Search API); close ones exist ("Tally - Simple Counter", "Simple Counter+").
 - [ ] Reserve the name by creating the App Store Connect record (David).
-- [ ] Rename the app to **SimplerCounter** on the Home Screen (`CFBundleDisplayName`, iPhone and watch) and in
-  the README, support page and site. Internal names (`SimplerLogger` targets, bundle IDs) stay.
+- [x] Renamed the app to **SimplerCounter** on the Home Screen (`CFBundleDisplayName`, iPhone and watch) and in
+  the README, support page, privacy policy and site (2026-10-26). David also moved the bundle IDs to
+  `edu.davidrynn.SimplerCounter` and `.watchkitapp`; the watch's `WKCompanionAppBundleIdentifier` follows. The
+  targets, schemes and iCloud container `iCloud.edu.davidrynn.SimplerLogger` keep the old name.
 - [x] Clicks like a real counter: one click as the cap goes down, one as it comes up (`TallyClick`). The second
   waits for the finger to lift, but never comes sooner than 0.2 s after the first (`minimumGap`), so a quick
   tap still gives two distinct clicks and holding the cap gives only the first until release.
@@ -325,7 +329,9 @@ Decided 2026-10-21 from the mockups at https://claude.ai/artifact/Yb5R1ejPq85dBn
 - [x] Cap redrawn with even, front-on light (2026-10-22): no top highlight or offset side, a soft shadow all
   round, and pressed it shrinks slightly and darkens. A dimmer face in dark mode, where the old shading looked odd.
 - [ ] Try the clicks on a real iPhone and watch (the simulator has no haptics) and tune the sounds if needed.
-- [ ] App icon in the tally style (flat cap and window, not photo-real).
+- [x] App icon in the tally style (2026-10-26): the flat cap with a + above a window reading "0001", on the accent
+  blue. iPhone and watch (parts smaller, clear of the round mask), every size, no alpha. Rendered by
+  `scripts/render_app_icon.swift` with the app's own colors. **David:** judge it on the Home Screen.
 
 ### Phase 6 (after v1): Voice — Siri, Shortcuts and a mic button
 Planned 2026-10-21, not started. Not in the first release. Everything stays on the device, so the privacy label
@@ -361,3 +367,5 @@ different label).
 | 2026-10-19 | Merged Phase 4 (PR #3), including a doc-comment pass (new standing rule from David). Phase 5 on `phase5-release`: iPhone-only, export-compliance key, privacy manifest, GitHub Pages privacy/support pages, App Store listing kit, iPhone and watch screenshots. 22 tests pass (1 skipped: screenshots), Release build clean. Remaining Phase 5 steps need David's accounts. |
 | 2026-10-21 | Phase 5 pushed and PR #4 opened (with Xcode's recommended project settings). On `tally-theme`: mocked up a tally-counter look and new wording, David chose accents only and approved "Counter"/"Count"; built both on iPhone and watch, updated docs and App Store screenshots. Checked light, dark, Accessibility XXXL and the watch. 22 tests pass (1 skipped: screenshots). Checked name availability and picked the App Store name, subtitle and keywords for search. Added press and release clicks (haptic and sound) to the cap; redid the sounds and made the press haptic heavy, the release light. Planned Phase 6 (voice) for after v1. Swapped in click sounds cut from a CC0 recording of a real counter. |
 | 2026-10-22 | Timed the second click from the first touch (0.2 s) instead of the release; removed the long-press menu on list rows. Then: second click waits for the real release (0.2 s minimum), clicks 8 dB quieter (measured against iOS system sounds), cap redrawn with even light for dark mode. Found holding a list cap didn't count (drag-to-reorder took the touch); reorder is now Edit mode only, with a UI test. 23 tests pass (1 skipped). |
+| 2026-10-25 | Split `TallyStyle.swift` into `Shared/Tally/` (5 files) and `Extensions.swift` into `Log+Display`, `Date+DayTitle` and `DateComponentsFormatter+Duration`; code moved unchanged. PR #6 landed on `tally-theme` after #5 had merged, so it reached `main` through #7. 18 unit tests pass, watch builds. |
+| 2026-10-26 | Home Screen name SimplerCounter on iPhone and watch, with David's new bundle IDs (watch companion ID fixed to match); README and site renamed. New tally-style app icon from `scripts/render_app_icon.swift`. CloudKit schema is in Development; Production deploy is next. On-device runs: LLDB was slow/crashing because the iOS 27.0.1 device symbols hadn't finished copying; workaround is Run with "Debug executable" off. |

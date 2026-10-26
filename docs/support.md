@@ -2,7 +2,7 @@
 title: Support
 ---
 
-# SimplerLogger Support
+# SimplerCounter Support
 
 ## How it works
 
@@ -18,7 +18,7 @@ title: Support
 
 **My watch doesn't show my counters.**
 Syncing between iPhone and Apple Watch uses iCloud. Check that both are signed in to
-the same Apple Account, that iCloud is turned on for SimplerLogger (**Settings →
+the same Apple Account, that iCloud is turned on for SimplerCounter (**Settings →
 [your name] → iCloud**, under apps using iCloud), and that both have a network
 connection. Changes can take a minute to arrive.
 
