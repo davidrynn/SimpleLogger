@@ -1,8 +1,8 @@
 ---
-title: SimplerLogger
+title: SimplerCounter
 ---
 
-# SimplerLogger
+# SimplerCounter
 
 **Count anything with one tap.** Count how many times you watered the plants or took a
 pill, or time how long you read. Make a list of the things you track, then tap a

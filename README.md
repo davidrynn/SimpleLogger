@@ -1,4 +1,4 @@
-# SimplerLogger
+# SimplerCounter
 
 The simplest way to count that something happened, or time how long it took.
 
@@ -15,9 +15,11 @@ Apple Watch through iCloud.
 
 ## Development
 
-- Xcode project: `SimplerLogger.xcodeproj` (schemes `SimplerLogger` and `SimplerLoggerWatch`)
+- Xcode project: `SimplerLogger.xcodeproj` (schemes `SimplerLogger` and `SimplerLoggerWatch`). The app was
+  called SimplerLogger; targets, schemes and the iCloud container keep that name. The bundle IDs are
+  `edu.davidrynn.SimplerCounter` and `edu.davidrynn.SimplerCounter.watchkitapp`.
 - iOS 18 / watchOS 11, Swift 6, SwiftData with CloudKit
-- `Shared/` is compiled into both apps: the models (`Models.swift`) and every data change (`LogStore.swift`)
+- `Shared/` is compiled into both apps: the models (`Models.swift`), every data change (`LogStore.swift`) and the tally look (`Tally/`)
 - Release plan and status: [`SPEC.md`](SPEC.md)
 
 Credits: the click sounds are cut from ["Tally Counter" by revdrmr](https://freesound.org/s/664698/) (CC0).
