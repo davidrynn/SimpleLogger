@@ -7,14 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2290C0142EF0000000A1B2C3 /* TallyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyStyle.swift */; };
-		2290C0152EF0000000A1B2C3 /* TallyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyStyle.swift */; };
-		2290C01C2EF0000000A1B2C3 /* TallyPress1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0162EF0000000A1B2C3 /* TallyPress1.caf */; };
-		2290C01D2EF0000000A1B2C3 /* TallyPress2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0172EF0000000A1B2C3 /* TallyPress2.caf */; };
-		2290C01E2EF0000000A1B2C3 /* TallyPress3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0182EF0000000A1B2C3 /* TallyPress3.caf */; };
-		2290C01F2EF0000000A1B2C3 /* TallyRelease1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */; };
-		2290C0202EF0000000A1B2C3 /* TallyRelease2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */; };
-		2290C0212EF0000000A1B2C3 /* TallyRelease3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */; };
+		1DE74F0881270A13266FE317 /* TallyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7A799417B3C706D5C01A8 /* TallyIllustration.swift */; };
 		2290C0022EF0000000A1B2C3 /* LogStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */; };
 		2290C0062EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
 		2290C0072EF0000000A1B2C3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0042EF0000000A1B2C3 /* Models.swift */; };
@@ -25,11 +18,19 @@
 		2290C00F2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2290C00E2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy */; };
 		2290C0102EF0000000A1B2C3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2290C00E2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy */; };
 		2290C0122EF0000000A1B2C3 /* AppStoreScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0112EF0000000A1B2C3 /* AppStoreScreenshots.swift */; };
+		2290C0142EF0000000A1B2C3 /* TallyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyCap.swift */; };
+		2290C0152EF0000000A1B2C3 /* TallyCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2290C0132EF0000000A1B2C3 /* TallyCap.swift */; };
+		2290C01C2EF0000000A1B2C3 /* TallyPress1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0162EF0000000A1B2C3 /* TallyPress1.caf */; };
+		2290C01D2EF0000000A1B2C3 /* TallyPress2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0172EF0000000A1B2C3 /* TallyPress2.caf */; };
+		2290C01E2EF0000000A1B2C3 /* TallyPress3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0182EF0000000A1B2C3 /* TallyPress3.caf */; };
+		2290C01F2EF0000000A1B2C3 /* TallyRelease1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */; };
+		2290C0202EF0000000A1B2C3 /* TallyRelease2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */; };
+		2290C0212EF0000000A1B2C3 /* TallyRelease3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */; };
 		22A80210284161900002FFBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A8020F284161900002FFBE /* Assets.xcassets */; };
 		22A8021D284161900002FFBE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8021C284161900002FFBE /* MainView.swift */; };
 		22A80228284161910002FFBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22A80227284161910002FFBE /* Preview Assets.xcassets */; };
 		22A80243284161910002FFBE /* SimplerLoggerWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		22A80253284295200002FFBE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
+		22A80253284295200002FFBE /* Log+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Log+Display.swift */; };
 		22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */; };
 		22A8025C284298060002FFBE /* WatchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025B284298060002FFBE /* WatchRow.swift */; };
 		22A8025E28444D4D0002FFBE /* EntryDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A8025D28444D4D0002FFBE /* EntryDetailsView.swift */; };
@@ -41,7 +42,18 @@
 		22CCA9D5283AC3A30015FB43 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9D4283AC3A30015FB43 /* MainView.swift */; };
 		22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCA9EE283ACC800015FB43 /* MainRow.swift */; };
 		22CCAA09283ADE850015FB43 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA08283ADE850015FB43 /* LogView.swift */; };
-		22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Extensions.swift */; };
+		22CCAA0D283C6DA70015FB43 /* Log+Display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CCAA0C283C6DA70015FB43 /* Log+Display.swift */; };
+		3C28A5FB51BAF99840920E91 /* CountWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A66C18F5E11AD620F69AA5 /* CountWindow.swift */; };
+		46ACEF6688E0E1E5D3A41A73 /* CountWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A66C18F5E11AD620F69AA5 /* CountWindow.swift */; };
+		73B1E2238FC20BA602B232CD /* Date+DayTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7F28D70E9EAA5B003A821 /* Date+DayTitle.swift */; };
+		8D45223A87F7C5937E4A897D /* Color+Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C14C2CCBDFDBFD65D52DD0B /* Color+Tally.swift */; };
+		A4458FD2C8D6C0E0092E7583 /* TallyIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC7A799417B3C706D5C01A8 /* TallyIllustration.swift */; };
+		A46F23064D8D58850A34A0ED /* TallyClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC8CF2D22EACAE83072EFD /* TallyClick.swift */; };
+		B3EFD898CCB4782B338962BB /* TallyClick.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFAC8CF2D22EACAE83072EFD /* TallyClick.swift */; };
+		BDEA7F1AFBB7045E427215D2 /* Date+DayTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C7F28D70E9EAA5B003A821 /* Date+DayTitle.swift */; };
+		C273983835471BF3420851AA /* DateComponentsFormatter+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F5FE60489B7666C6CCB2C /* DateComponentsFormatter+Duration.swift */; };
+		EAA23D3E6100C315A980D78E /* DateComponentsFormatter+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415F5FE60489B7666C6CCB2C /* DateComponentsFormatter+Duration.swift */; };
+		F480F5D7771DD7C24FE44F63 /* Color+Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C14C2CCBDFDBFD65D52DD0B /* Color+Tally.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,13 +95,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2290C0132EF0000000A1B2C3 /* TallyStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyStyle.swift; sourceTree = "<group>"; };
-		2290C0162EF0000000A1B2C3 /* TallyPress1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress1.caf; sourceTree = "<group>"; };
-		2290C0172EF0000000A1B2C3 /* TallyPress2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress2.caf; sourceTree = "<group>"; };
-		2290C0182EF0000000A1B2C3 /* TallyPress3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress3.caf; sourceTree = "<group>"; };
-		2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease1.caf; sourceTree = "<group>"; };
-		2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease2.caf; sourceTree = "<group>"; };
-		2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease3.caf; sourceTree = "<group>"; };
 		2250AB67284AA37200E3B72D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2290C0012EF0000000A1B2C3 /* LogStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogStoreTests.swift; sourceTree = "<group>"; };
 		2290C0042EF0000000A1B2C3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -98,6 +103,13 @@
 		2290C00C2EF0000000A1B2C3 /* LoggingFlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingFlowUITests.swift; sourceTree = "<group>"; };
 		2290C00E2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		2290C0112EF0000000A1B2C3 /* AppStoreScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreScreenshots.swift; sourceTree = "<group>"; };
+		2290C0132EF0000000A1B2C3 /* TallyCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TallyCap.swift; sourceTree = "<group>"; };
+		2290C0162EF0000000A1B2C3 /* TallyPress1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress1.caf; sourceTree = "<group>"; };
+		2290C0172EF0000000A1B2C3 /* TallyPress2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress2.caf; sourceTree = "<group>"; };
+		2290C0182EF0000000A1B2C3 /* TallyPress3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyPress3.caf; sourceTree = "<group>"; };
+		2290C0192EF0000000A1B2C3 /* TallyRelease1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease1.caf; sourceTree = "<group>"; };
+		2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease2.caf; sourceTree = "<group>"; };
+		2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TallyRelease3.caf; sourceTree = "<group>"; };
 		22A8020D2841618F0002FFBE /* SimplerLoggerWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplerLoggerWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22A8020F284161900002FFBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22A8021C284161900002FFBE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -115,7 +127,13 @@
 		22CCA9D4283AC3A30015FB43 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		22CCA9EE283ACC800015FB43 /* MainRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRow.swift; sourceTree = "<group>"; };
 		22CCAA08283ADE850015FB43 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
-		22CCAA0C283C6DA70015FB43 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		22CCAA0C283C6DA70015FB43 /* Log+Display.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log+Display.swift"; sourceTree = "<group>"; };
+		3FC7A799417B3C706D5C01A8 /* TallyIllustration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TallyIllustration.swift; sourceTree = "<group>"; };
+		415F5FE60489B7666C6CCB2C /* DateComponentsFormatter+Duration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "DateComponentsFormatter+Duration.swift"; sourceTree = "<group>"; };
+		65C7F28D70E9EAA5B003A821 /* Date+DayTitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Date+DayTitle.swift"; sourceTree = "<group>"; };
+		8C14C2CCBDFDBFD65D52DD0B /* Color+Tally.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Color+Tally.swift"; sourceTree = "<group>"; };
+		A9A66C18F5E11AD620F69AA5 /* CountWindow.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CountWindow.swift; sourceTree = "<group>"; };
+		AFAC8CF2D22EACAE83072EFD /* TallyClick.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TallyClick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +174,8 @@
 				22BEFAB82839F42F0081E75A /* SimplerLoggerApp.swift */,
 				2290C0042EF0000000A1B2C3 /* Models.swift */,
 				2290C0052EF0000000A1B2C3 /* LogStore.swift */,
-				22CCAA0C283C6DA70015FB43 /* Extensions.swift */,
-				2290C0132EF0000000A1B2C3 /* TallyStyle.swift */,
+				22CCAA0C283C6DA70015FB43 /* Log+Display.swift */,
+				A940812B6AB99CD7BBC68BE0 /* Tally */,
 				2290C0162EF0000000A1B2C3 /* TallyPress1.caf */,
 				2290C0172EF0000000A1B2C3 /* TallyPress2.caf */,
 				2290C0182EF0000000A1B2C3 /* TallyPress3.caf */,
@@ -165,6 +183,8 @@
 				2290C01A2EF0000000A1B2C3 /* TallyRelease2.caf */,
 				2290C01B2EF0000000A1B2C3 /* TallyRelease3.caf */,
 				2290C00E2EF0000000A1B2C3 /* PrivacyInfo.xcprivacy */,
+				415F5FE60489B7666C6CCB2C /* DateComponentsFormatter+Duration.swift */,
+				65C7F28D70E9EAA5B003A821 /* Date+DayTitle.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -259,6 +279,19 @@
 				22CA6FE42850F25D00194826 /* LogFormView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A940812B6AB99CD7BBC68BE0 /* Tally */ = {
+			isa = PBXGroup;
+			children = (
+				2290C0132EF0000000A1B2C3 /* TallyCap.swift */,
+				8C14C2CCBDFDBFD65D52DD0B /* Color+Tally.swift */,
+				AFAC8CF2D22EACAE83072EFD /* TallyClick.swift */,
+				A9A66C18F5E11AD620F69AA5 /* CountWindow.swift */,
+				3FC7A799417B3C706D5C01A8 /* TallyIllustration.swift */,
+			);
+			name = Tally;
+			path = Tally;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,11 +466,17 @@
 			files = (
 				2290C0072EF0000000A1B2C3 /* Models.swift in Sources */,
 				2290C0092EF0000000A1B2C3 /* LogStore.swift in Sources */,
-				22A80253284295200002FFBE /* Extensions.swift in Sources */,
-				2290C0142EF0000000A1B2C3 /* TallyStyle.swift in Sources */,
+				22A80253284295200002FFBE /* Log+Display.swift in Sources */,
+				2290C0142EF0000000A1B2C3 /* TallyCap.swift in Sources */,
 				22A8021D284161900002FFBE /* MainView.swift in Sources */,
 				22A8025C284298060002FFBE /* WatchRow.swift in Sources */,
 				22A80258284295200002FFBE /* SimplerLoggerApp.swift in Sources */,
+				8D45223A87F7C5937E4A897D /* Color+Tally.swift in Sources */,
+				B3EFD898CCB4782B338962BB /* TallyClick.swift in Sources */,
+				3C28A5FB51BAF99840920E91 /* CountWindow.swift in Sources */,
+				1DE74F0881270A13266FE317 /* TallyIllustration.swift in Sources */,
+				C273983835471BF3420851AA /* DateComponentsFormatter+Duration.swift in Sources */,
+				73B1E2238FC20BA602B232CD /* Date+DayTitle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,8 +492,14 @@
 				22CCAA09283ADE850015FB43 /* LogView.swift in Sources */,
 				22BEFAB92839F42F0081E75A /* SimplerLoggerApp.swift in Sources */,
 				22CCA9EF283ACC800015FB43 /* MainRow.swift in Sources */,
-				22CCAA0D283C6DA70015FB43 /* Extensions.swift in Sources */,
-				2290C0152EF0000000A1B2C3 /* TallyStyle.swift in Sources */,
+				22CCAA0D283C6DA70015FB43 /* Log+Display.swift in Sources */,
+				2290C0152EF0000000A1B2C3 /* TallyCap.swift in Sources */,
+				F480F5D7771DD7C24FE44F63 /* Color+Tally.swift in Sources */,
+				A46F23064D8D58850A34A0ED /* TallyClick.swift in Sources */,
+				46ACEF6688E0E1E5D3A41A73 /* CountWindow.swift in Sources */,
+				A4458FD2C8D6C0E0092E7583 /* TallyIllustration.swift in Sources */,
+				EAA23D3E6100C315A980D78E /* DateComponentsFormatter+Duration.swift in Sources */,
+				BDEA7F1AFBB7045E427215D2 /* Date+DayTitle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
